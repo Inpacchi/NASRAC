@@ -1,0 +1,58 @@
+@import '../../../src/styles';
+
+.dropdown-toggle, .dropdown-item {
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#next-race-jumbotron {
+  position: relative;
+  background: #232931;
+  -webkit-box-shadow: 0 75px 94px -66px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 0 75px 94px -66px rgba(0, 0, 0, 0.66);
+  box-shadow: 0 75px 94px -66px rgba(0, 0, 0, 0.66);
+  @include border-radius(5px);
+  margin-top: -60px;
+}
+
+#next-race-jumbotron .race-logo {
+  max-height: 200px;
+  max-width: 200px;
+}
+
+#next-race-jumbotron .text {
+  h3 {
+    font-size: 24px;
+    color: #fff;
+  }
+  span {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+#timer {
+  .time {
+    width: 25%;
+    font-size: 20px;
+    font-weight: 600;
+    border-left: 1px solid rgba(255,255,255,.2);
+    color: #ffffff;
+    &:first-child {
+       border-left: transparent;
+     }
+
+    span {
+      font-size: 14px;
+      display: block;
+      color: #ffffff;
+      font-weight: 300;
+    }
+  }
+}

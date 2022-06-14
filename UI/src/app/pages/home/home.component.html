@@ -1,0 +1,98 @@
+<!-- Navbar -->
+<div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#"/></svg>
+      <span class="fs-4">NASRAC</span>
+    </a>
+
+    <ul *ngIf="loggedIn" class="nav nav-pills">
+      <li class="nav-item">
+        <a href="#" class="nav-link" aria-current="page">Home</a>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a class="nav-link dropdown-toggle" dropdownToggle>Garage</a>
+        <div class="dropdown-menu" role="menu" *dropdownMenu>
+          <a class="dropdown-item">Office</a>
+          <a class="dropdown-item">Season Stats</a>
+          <a class="dropdown-item">Career Stats</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a class="nav-link dropdown-toggle" dropdownToggle>League</a>
+        <div class="dropdown-menu" role="menu" *dropdownMenu>
+          <a class="dropdown-item">Race Replay</a>
+          <a class="dropdown-item">Race Results</a>
+          <a class="dropdown-item">Schedule</a>
+          <a class="dropdown-item">Standings</a>
+          <a class="dropdown-item">History</a>
+          <a class="dropdown-item">Drivers</a>
+          <a class="dropdown-item">Teams</a>
+          <a class="dropdown-item">Tracks</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Forums</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Logout</a>
+      </li>
+    </ul>
+
+    <ul *ngIf="!loggedIn" class="nav nav-pills">
+      <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Sign In</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Register</a></li>
+    </ul>
+  </header>
+</div>
+
+<!-- Hero -->
+<div class="container col-xxl-8 px-4 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img src="assets/low-poly-stockcars.jpg" class="d-block mx-lg-auto img-fluid" alt="Low Poly Stockcars" loading="lazy">
+    </div>
+    <div class="col-lg-6">
+      <h1 class="display-5 fw-bold lh-1 mb-3">
+        <u>N</u>orth
+        <u>A</u>merican<br>
+        <u>S</u>tockcar
+        <u>R</u>acing<br>
+        <u>A</u>nalytics
+        <u>C</u>ompetition<br>
+      </h1>
+      <p class="lead">
+        NASRAC is <b>the</b> free premier online multiplayer stockcar management game. Create a driver, sign with a team and drive
+        your way to the top! Or, take the reigns of a team and leave a lasting legacy that no one can touch.
+        Inspired by the NASRAC originally developed by Kevin Minelli.
+      </p>
+      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Get started!</button>
+    </div>
+  </div>
+</div>
+
+<!-- Season Jumbotron -->
+<div class="container">
+  <div id="next-race-jumbotron" class="p-3">
+    <div class="row align-items-center">
+      <div class="col-6 col-md-3 col-lg-3 race-logo">
+        <img class="img-fluid" [src]="raceLogoUrl" alt="Race Logo"/>
+      </div>
+      <div class="col-6 col-md-9 col-lg-4">
+        <div class="text">
+          <h3>{{premierSeriesName}}</h3>
+          <span>Race {{currentRaceNumber}} of {{totalRaces}}: {{raceName}}</span>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-5 mx-lg-auto">
+          <div id="timer" class="d-flex mt-sm-4 mt-4 mx-md-5 mb-2">
+            <div class="time ps-lg-2">{{days}} <span>Days</span></div>
+            <div class="time ps-lg-2 ps-sm-2 ps-2">{{hours}} <span>Hours</span></div>
+            <div class="time ps-lg-2 ps-sm-2 ps-2">{{minutes}} <span>Minutes</span></div>
+            <div class="time ps-lg-2 ps-sm-2 ps-2">{{seconds}} <span>Seconds</span></div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
