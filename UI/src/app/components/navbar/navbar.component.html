@@ -1,0 +1,49 @@
+<div class="container">
+  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32">
+        <use xlink:href="#"/>
+      </svg>
+      <span class="fs-4">NASRAC</span>
+    </a>
+
+    <ul *ngIf="loggedIn" class="nav nav-pills">
+      <li class="nav-item">
+        <a href="#" class="nav-link" aria-current="page">Home</a>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a class="nav-link dropdown-toggle" dropdownToggle>Garage</a>
+        <div class="dropdown-menu" role="menu" *dropdownMenu>
+          <a class="dropdown-item">Office</a>
+          <a class="dropdown-item">Season Stats</a>
+          <a class="dropdown-item">Career Stats</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a class="nav-link dropdown-toggle" dropdownToggle>League</a>
+        <div class="dropdown-menu" role="menu" *dropdownMenu>
+          <a class="dropdown-item">Race Replay</a>
+          <a class="dropdown-item">Race Results</a>
+          <a class="dropdown-item">Schedule</a>
+          <a class="dropdown-item">Standings</a>
+          <a class="dropdown-item">History</a>
+          <a class="dropdown-item">Drivers</a>
+          <a class="dropdown-item">Teams</a>
+          <a class="dropdown-item">Tracks</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Forums</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link">Logout</a>
+      </li>
+    </ul>
+
+    <ul *ngIf="!loggedIn" class="nav nav-pills">
+      <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Sign In</a></li>
+      <li class="nav-item"><a href="#" class="nav-link">Register</a></li>
+    </ul>
+  </header>
+</div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import {OwlOptions} from 'ngx-owl-carousel-o';
+
 import {Race} from '../../models/race';
 
 @Component({
@@ -8,7 +10,7 @@ import {Race} from '../../models/race';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public loggedIn = true;
+  public loggedIn = false;
   public days: number = 0;
   public hours: number = 0;
   public minutes: number = 0;
