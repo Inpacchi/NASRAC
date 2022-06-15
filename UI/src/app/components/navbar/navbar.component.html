@@ -1,7 +1,7 @@
 <div class="container">
   <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
     <a routerLink="" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-      <img src="assets/site-logos/journal/logo-paladins-gradient.png" alt=""/>
+      <img src="assets/site-logos/logo-paladins-gradient.png" alt=""/>
     </a>
 
     <ul *ngIf="loggedIn" class="nav nav-pills">
@@ -38,9 +38,21 @@
     </ul>
 
     <ul *ngIf="!loggedIn" class="nav nav-pills">
-      <li class="nav-item"><a routerLink="/" routerLinkActive="active" class="nav-link">Home</a></li>
-      <li class="nav-item"><a routerLink="/login" routerLinkActive="active" class="nav-link">Sign In</a></li>
-      <li class="nav-item"><a routerLink="/register" routerLinkActive="active" class="nav-link">Register</a></li>
+      <li class="nav-item">
+        <a routerLink="" routerLinkActive="active" class="nav-link">
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/login" routerLinkActive="active" class="nav-link">
+          Sign In
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="/register" routerLinkActive="active" class="nav-link">
+          Register
+        </a>
+      </li>
     </ul>
   </header>
 </div>
