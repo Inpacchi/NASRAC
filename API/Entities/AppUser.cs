@@ -1,8 +1,7 @@
+using Microsoft.AspNetCore.Identity;
+
 namespace API.Entities;
 
-public class AppUser
+public class AppUser : IdentityUser<int>
 {
-    public int Id { get; set; }
-
-    public string Username { get; set; }
 }
