@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {CarouselModule} from 'ngx-owl-carousel-o';
+import {ToastrModule} from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +28,10 @@ import { LoginComponent } from './pages/login/login.component';
     HttpClientModule,
     BrowserAnimationsModule,
     BsDropdownModule,
-    CarouselModule
+    CarouselModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
