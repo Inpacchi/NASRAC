@@ -1,98 +1,221 @@
-<!-- Navbar -->
-<div class="container">
-  <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#"/></svg>
-      <span class="fs-4">NASRAC</span>
-    </a>
+<div class="animate__animated animate__lightSpeedInLeft">
+  <!-- Navbar -->
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32">
+          <use xlink:href="#"/>
+        </svg>
+        <span class="fs-4">NASRAC</span>
+      </a>
 
-    <ul *ngIf="loggedIn" class="nav nav-pills">
-      <li class="nav-item">
-        <a href="#" class="nav-link" aria-current="page">Home</a>
-      </li>
-      <li class="nav-item dropdown" dropdown>
-        <a class="nav-link dropdown-toggle" dropdownToggle>Garage</a>
-        <div class="dropdown-menu" role="menu" *dropdownMenu>
-          <a class="dropdown-item">Office</a>
-          <a class="dropdown-item">Season Stats</a>
-          <a class="dropdown-item">Career Stats</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown" dropdown>
-        <a class="nav-link dropdown-toggle" dropdownToggle>League</a>
-        <div class="dropdown-menu" role="menu" *dropdownMenu>
-          <a class="dropdown-item">Race Replay</a>
-          <a class="dropdown-item">Race Results</a>
-          <a class="dropdown-item">Schedule</a>
-          <a class="dropdown-item">Standings</a>
-          <a class="dropdown-item">History</a>
-          <a class="dropdown-item">Drivers</a>
-          <a class="dropdown-item">Teams</a>
-          <a class="dropdown-item">Tracks</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">Forums</a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link">Logout</a>
-      </li>
-    </ul>
+      <ul *ngIf="loggedIn" class="nav nav-pills">
+        <li class="nav-item">
+          <a href="#" class="nav-link" aria-current="page">Home</a>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" dropdownToggle>Garage</a>
+          <div class="dropdown-menu" role="menu" *dropdownMenu>
+            <a class="dropdown-item">Office</a>
+            <a class="dropdown-item">Season Stats</a>
+            <a class="dropdown-item">Career Stats</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a class="nav-link dropdown-toggle" dropdownToggle>League</a>
+          <div class="dropdown-menu" role="menu" *dropdownMenu>
+            <a class="dropdown-item">Race Replay</a>
+            <a class="dropdown-item">Race Results</a>
+            <a class="dropdown-item">Schedule</a>
+            <a class="dropdown-item">Standings</a>
+            <a class="dropdown-item">History</a>
+            <a class="dropdown-item">Drivers</a>
+            <a class="dropdown-item">Teams</a>
+            <a class="dropdown-item">Tracks</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Forums</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Logout</a>
+        </li>
+      </ul>
 
-    <ul *ngIf="!loggedIn" class="nav nav-pills">
-      <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Sign In</a></li>
-      <li class="nav-item"><a href="#" class="nav-link">Register</a></li>
-    </ul>
-  </header>
-</div>
+      <ul *ngIf="!loggedIn" class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Sign In</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Register</a></li>
+      </ul>
+    </header>
+  </div>
 
-<!-- Hero -->
-<div class="container col-xxl-8 px-4 py-5">
-  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img src="assets/low-poly-stockcars.jpg" class="d-block mx-lg-auto img-fluid" alt="Low Poly Stockcars" loading="lazy">
-    </div>
-    <div class="col-lg-6">
-      <h1 class="display-5 fw-bold lh-1 mb-3">
-        <u>N</u>orth
-        <u>A</u>merican<br>
-        <u>S</u>tockcar
-        <u>R</u>acing<br>
-        <u>A</u>nalytics
-        <u>C</u>ompetition<br>
-      </h1>
-      <p class="lead">
-        NASRAC is <b>the</b> free premier online multiplayer stockcar management game. Create a driver, sign with a team and drive
-        your way to the top! Or, take the reigns of a team and leave a lasting legacy that no one can touch.
-        Inspired by the NASRAC originally developed by Kevin Minelli.
-      </p>
-      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Get started!</button>
+  <!-- Hero -->
+  <div class="container col-xxl-8 px-4 pb-4">
+    <div class="row flex-lg-row-reverse align-items-center g-5 pb-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="assets/low-poly-stockcars.jpg" class="d-block mx-lg-auto img-fluid" alt="Low Poly Stockcars"
+             loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold lh-1 mb-3">
+          <u>N</u>orth
+          <u>A</u>merican<br>
+          <u>S</u>tockcar
+          <u>R</u>acing<br>
+          <u>A</u>nalytics
+          <u>C</u>ompetition<br>
+        </h1>
+        <p class="lead">
+          Ever wanted to experience the thrill that is driving stockcars? Or better yet, manage a team and take
+          them to the top? NASRAC is <b>THE</b> premier web-based stockcar MMORPG. Whatever path you choose to take,
+          join other
+          racing fans and join or build a dynasty that'll last generations.
+        </p>
+        <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Get started!</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Season Jumbotron -->
-<div class="container">
-  <div id="next-race-jumbotron" class="p-3">
-    <div class="row align-items-center">
-      <div class="col-6 col-md-3 col-lg-3 race-logo">
-        <img class="img-fluid" [src]="raceLogoUrl" alt="Race Logo"/>
-      </div>
-      <div class="col-6 col-md-9 col-lg-4">
-        <div class="text">
-          <h3>{{premierSeriesName}}</h3>
-          <span>Race {{currentRaceNumber}} of {{totalRaces}}: {{raceName}}</span>
+  <!-- Season Jumbotron -->
+  <div class="container">
+    <div id="next-race-jumbotron" class="p-3">
+      <div class="row align-items-center">
+        <div class="col-6 col-md-3 col-lg-3 race-logo">
+          <img class="img-fluid" [src]="raceLogoUrl" alt="Race Logo"/>
         </div>
-      </div>
-      <div class="col-md-12 col-lg-5 mx-lg-auto">
+        <div class="col-6 col-md-9 col-lg-4">
+          <div class="text">
+            <h3>{{premierSeriesName}}</h3>
+            <span>Race {{currentRaceNumber}} of {{totalRaces}}: {{raceName}}</span>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-5 mx-lg-auto">
           <div id="timer" class="d-flex mt-sm-4 mt-4 mx-md-5 mb-2">
             <div class="time ps-lg-2">{{days}} <span>Days</span></div>
             <div class="time ps-lg-2 ps-sm-2 ps-2">{{hours}} <span>Hours</span></div>
             <div class="time ps-lg-2 ps-sm-2 ps-2">{{minutes}} <span>Minutes</span></div>
             <div class="time ps-lg-2 ps-sm-2 ps-2">{{seconds}} <span>Seconds</span></div>
           </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Race Report & Info -->
+  <div class="container">
+    <div id="mid-section">
+      <div class="row mt-5 justify-content-center">
+        <!-- Race Report -->
+        <div class="col-5 align-self-center">
+          <div class="heading">
+            <h1 class="title mb-2 header-color">Race Report</h1>
+            <img class="img" [src]="previousRaceLogoUrl" alt="Race Logo"/>
+            <h2 class="race-name my-3">{{previousRaceName}}</h2>
+          </div>
+          <div class="box mb-5 mb-lg-0">
+            <div class="d-sm-flex mb-4">
+              <div class="driver-standings">
+                <div class="px-1 px-md-3 desc">
+                  <h3 class="score win"><span>1st</span></h3>
+                  <h4 class="driver-name">{{firstPlaceDriver}}</h4>
+                </div>
+              </div>
+              <div class="driver-standings">
+                <div class="px-1 px-md-3 desc">
+                  <h3 class="score lost"><span>2nd</span></h3>
+                  <h4 class="driver-name">{{secondPlaceDriver}}</h4>
+                </div>
+              </div>
+              <div class="driver-standings">
+                <div class="px-1 px-md-3 desc">
+                  <h3 class="score lost"><span>3rd</span></h3>
+                  <h4 class="driver-name">{{thirdPlaceDriver}}</h4>
+                </div>
+              </div>
+            </div>
+            <div class="center-btn">
+              <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">View Results</button>
+            </div>
+          </div>
+        </div>
+        <!-- Info -->
+        <div class="col-4 p-lg-5">
+          <h3>Get Competitive</h3>
+          <ul>
+            <li>Compete in a full 36 race season, complete with clashes, duels and playoffs!</li>
+            <li>Make your way up the ranks solo, or sign with a team to gain a competitive edge!</li>
+            <li>Rather run a team? Buy an existing one or create your own, and compete against other teams to establish
+              a dynasty!
+            </li>
+            <li>Want to race AND drive? Have at it!</li>
+            <li>Spend your hard-earned money on skill upgrades or throw money into your car; your choice!</li>
+            <li>Make your own decisions and make it to the top!</li>
+          </ul>
+        </div>
+        <div class="col-3 py-lg-5">
+          <h3>Why join?</h3>
+          <ul>
+            <li>Races ran every Tuesday, Thursday and Sunday.</li>
+            <li>Play from any browser, any device.</li>
+            <li>Nothing is downloaded to your devices and your progress is saved automatically.</li>
+            <li>It's FREE!</li>
+            <li>You know you want to!</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Race Schedule -->
+  <div class="container">
+    <div id="race-schedule">
+      <div class="row">
+        <div class="col-md-12 heading mt-5 mb-3">
+          <div class="heading">
+            <h1 class="title header-color">Race Schedule</h1>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <owl-carousel-o [options]="carouselOptions">
+          <ng-container *ngFor="let race of raceSchedule">
+            <ng-template carouselSlide>
+              <div class="race-box">
+              <div class="race-info d-flex align-items-center">
+                <img class="logo me-3" [src]="race.url" alt=""/>
+                <div class="pl-4 desc">
+                  <span class="track-name">{{race.trackName}}</span>
+                  <h4 class="race-name">{{race.raceName}}</h4>
+                  <span class="date">{{race.date}}</span>
+                </div>
+              </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+        <svg class="bi" width="30" height="24">
+          <use xlink:href="#"/>
+        </svg>
+      </a>
+      <span class="mb-3 mb-md-0 text-muted">&copy; 2022 Endless Galaxy Studios, LLC</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3 social-logo"><i class="bi bi-discord"></i></li>
+      <li class="ms-3 social-logo"><i class="bi bi-reddit"></i></li>
+      <li class="ms-3 social-logo"><i class="bi bi-twitter"></i></li>
+      <li class="ms-3 social-logo"><i class="bi bi-facebook"></i></li>
+    </ul>
+  </footer>
 </div>
