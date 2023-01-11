@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NASRAC.API.Game.DTOs;
 using NASRAC.Models.WebApp.Entities;
-using NASRAC.Services.WebApp.Services;
+using NASRAC.Services.WebApp.Interfaces;
 
 namespace NASRAC.API.Game.Controllers;
 
@@ -11,9 +11,9 @@ public class AccountController : BaseApiController
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly SignInManager<AppUser> _signInManager;
-    private readonly TokenService _tokenService;
+    private readonly ITokenService _tokenService;
 
-    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, TokenService tokenService)
+    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenService tokenService)
     {
         _userManager = userManager;
         _signInManager = signInManager;

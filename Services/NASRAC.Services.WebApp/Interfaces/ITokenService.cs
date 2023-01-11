@@ -4,5 +4,5 @@ namespace NASRAC.Services.WebApp.Interfaces;
 
 public interface ITokenService
 {
-    string CreateToken(AppUser user);
+    public string CreateToken(AppUser user);
 }
