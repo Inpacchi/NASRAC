@@ -28,6 +28,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\NASRAC.Models.Game\NASRAC.Models.Game.csproj" />
       <ProjectReference Include="..\NASRAC.Models.WebApp\NASRAC.Models.WebApp.csproj" />
     </ItemGroup>
 
