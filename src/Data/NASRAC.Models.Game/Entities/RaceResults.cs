@@ -1,11 +1,12 @@
 ﻿using NASRAC.Models.Game.BaseEntities;
+using NASRAC.Services.Common.Enums;
 
 namespace NASRAC.Models.Game.Entities;
 
 public class RaceResults : BaseResults
 {
+    public Stage Stage { get; set; }
     public int StartPosition { get; set; }
-    public ICollection<int> StagePositions { get; set; }
     public int FinishPosition { get; set; }
     public int LowestPosition { get; set; }
     public int HighestPosition { get; set; }
