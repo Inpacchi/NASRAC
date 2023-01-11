@@ -1,6 +1,7 @@
-﻿using NASRAC.Services.Common.Enums;
+﻿using NASRAC.Models.Game.BaseEntities;
+using NASRAC.Services.Common.Enums;
 
-namespace NASRAC.Models.Game.BaseEntities;
+namespace NASRAC.Models.Game.Entities;
 
 public class Contract
 {
