@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Services\NASRAC.Services.Common\NASRAC.Services.Common.csproj" />
+      <ProjectReference Include="..\NASRAC.Models.WebApp\NASRAC.Models.WebApp.csproj" />
+    </ItemGroup>
+
+</Project>
