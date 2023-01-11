@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASRAC.Models.Game", "Data\NASRAC.Models.Game\NASRAC.Models.Game.csproj", "{D48E4957-A3E8-4922-BB65-DE43C61978A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASRAC.Models.WebApp", "Data\NASRAC.Models.WebApp\NASRAC.Models.WebApp.csproj", "{7A8C5D95-A5D8-4324-968D-54D0532DBFE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,8 +20,13 @@ Global
 		{D48E4957-A3E8-4922-BB65-DE43C61978A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D48E4957-A3E8-4922-BB65-DE43C61978A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D48E4957-A3E8-4922-BB65-DE43C61978A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A8C5D95-A5D8-4324-968D-54D0532DBFE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A8C5D95-A5D8-4324-968D-54D0532DBFE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A8C5D95-A5D8-4324-968D-54D0532DBFE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A8C5D95-A5D8-4324-968D-54D0532DBFE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D48E4957-A3E8-4922-BB65-DE43C61978A1} = {DD5895B8-4050-440E-BD6C-DE1D12084587}
+		{7A8C5D95-A5D8-4324-968D-54D0532DBFE6} = {DD5895B8-4050-440E-BD6C-DE1D12084587}
 	EndGlobalSection
 EndGlobal
