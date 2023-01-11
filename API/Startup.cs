@@ -1,5 +1,6 @@
 using API.Extensions;
 using Microsoft.OpenApi.Models;
+using NASRAC.Models.WebApp;
 
 namespace API
 {

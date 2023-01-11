@@ -1,9 +1,9 @@
-using API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NASRAC.Models.WebApp.Entities;
 
-namespace API.Data;
+namespace NASRAC.Persistence.Game.DAL;
 
 public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {

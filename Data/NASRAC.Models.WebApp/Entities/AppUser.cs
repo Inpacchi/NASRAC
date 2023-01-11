@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace NASRAC.Models.Webapp.Entities;
+namespace NASRAC.Models.WebApp.Entities;
 
 public class AppUser : IdentityUser<int>
 {

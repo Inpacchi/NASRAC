@@ -1,5 +1,5 @@
 ﻿using NASRAC.Models.Game.BaseEntities;
-using NASRAC.Models.Webapp.Entities;
+using NASRAC.Models.WebApp.Entities;
 
 namespace NASRAC.Models.Game.Entities;
 

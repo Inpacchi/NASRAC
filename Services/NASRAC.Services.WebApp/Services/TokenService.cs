@@ -2,10 +2,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using API.Entities;
-using API.Interfaces;
+using Microsoft.Extensions.Configuration;
+using NASRAC.Models.WebApp.Entities;
+using NASRAC.Services.WebApp.Interfaces;
 
-namespace API.Services;
+namespace NASRAC.Services.WebApp.Services;
 
 public class TokenService : ITokenService
 {
