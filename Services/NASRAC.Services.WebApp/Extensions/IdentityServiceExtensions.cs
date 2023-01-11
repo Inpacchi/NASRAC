@@ -7,7 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using NASRAC.Models.WebApp.Entities;
 using NASRAC.Persistence.Game.DAL;
 
-namespace API.Extensions;
+namespace NASRAC.Services.WebApp.Extensions;
 
 public static class IdentityServiceExtensions
 {

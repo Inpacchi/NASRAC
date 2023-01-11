@@ -1,6 +1,7 @@
-using API.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NASRAC.Models.WebApp;
+using NASRAC.Persistence.Game.DAL;
+using NASRAC.Services.WebApp.Extensions;
 
 namespace API
 {
@@ -16,10 +17,14 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplicationServices(_config);
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
+            });
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(_config);
+            services.AddWebAppServices(_config);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
