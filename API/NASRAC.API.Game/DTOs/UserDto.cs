@@ -1,4 +1,4 @@
-namespace API.DTOs;
+namespace NASRAC.API.Game.DTOs;
 
 public class UserDto
 {

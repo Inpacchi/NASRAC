@@ -3,7 +3,7 @@ using Microsoft.OpenApi.Models;
 using NASRAC.Persistence.Game.DAL;
 using NASRAC.Services.WebApp.Extensions;
 
-namespace API
+namespace NASRAC.API.Game
 {
     public class Startup
     {

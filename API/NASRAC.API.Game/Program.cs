@@ -1,4 +1,4 @@
-namespace API
+namespace NASRAC.API.Game
 {
     public class Program
     {

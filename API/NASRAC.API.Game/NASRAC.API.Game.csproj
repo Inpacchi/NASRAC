@@ -35,6 +35,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Data\NASRAC.Persistence.Game\NASRAC.Persistence.Game.csproj" />
+      <ProjectReference Include="..\..\Services\NASRAC.Services.WebApp\NASRAC.Services.WebApp.csproj" />
       <ProjectReference Include="..\Services\NASRAC.Services.WebApp\NASRAC.Services.WebApp.csproj" />
     </ItemGroup>
 

@@ -1,9 +1,9 @@
-using API.Data;
-using API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NASRAC.Models.WebApp.Entities;
+using NASRAC.Persistence.Game.DAL;
 
-namespace API.Controllers;
+namespace NASRAC.API.Game.Controllers;
 
 public class UsersController : BaseApiController
 {

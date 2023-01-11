@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers;
+namespace NASRAC.API.Game.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
