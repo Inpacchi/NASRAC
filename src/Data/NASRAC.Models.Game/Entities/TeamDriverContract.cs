@@ -3,13 +3,9 @@ using NASRAC.Services.Common.Enums;
 
 namespace NASRAC.Models.Game.Entities;
 
-public class Contract
+public class DriverContract : BaseContract
 {
-    public int Amount { get; set; }
-    public DateTime DateSigned { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public ContractType Type { get; }
+    public ContractType Type = ContractType.Driver;
     public GameObject Benefactor { get; set; }
     public GameObject Beneficiary { get; set; }
 
