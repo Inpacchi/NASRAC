@@ -7,3 +7,7 @@
 'node_modules/ngx-owl-carousel-o/lib/styles/scss/owl.theme.default',
 'bootstrap-icons/font/bootstrap-icons.css',
 'animate.css';
+
+button {
+  @include border-radius(5px);
+}
