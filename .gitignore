@@ -456,3 +456,4 @@ $RECYCLE.BIN/
 ## SQLite Files
 *.db-shm
 *.db-wal
+*.db
