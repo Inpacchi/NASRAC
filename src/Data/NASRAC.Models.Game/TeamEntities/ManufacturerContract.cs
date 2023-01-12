@@ -4,6 +4,9 @@ using NASRAC.Models.Game.Entities;
 
 namespace NASRAC.Models.Game.TeamEntities;
 
+/// <summary>
+/// Manufacturer contract for teams
+/// </summary>
 public class ManufacturerContract : BaseContract
 {
     [Required]

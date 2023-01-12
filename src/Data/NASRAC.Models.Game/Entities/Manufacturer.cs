@@ -3,14 +3,23 @@ using NASRAC.Services.Common.Enums;
 
 namespace NASRAC.Models.Game.Entities;
 
+/// <summary>
+/// Manufacturer entity
+/// </summary>
 public class Manufacturer
 {
-    [Required]
+    [Key]
     public int Id { get; set; }
     
+    /// <summary>
+    /// Name of the manufacturer
+    /// </summary>
     [Required]
     public string Name { get; set; }
     
+    /// <summary>
+    /// Type of vehicle the manufacturer produces
+    /// </summary>
     [Required]
     public VehicleType VehicleType { get; set; }
 }

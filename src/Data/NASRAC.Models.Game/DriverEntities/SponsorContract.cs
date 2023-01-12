@@ -4,6 +4,9 @@ using NASRAC.Models.Game.Entities;
 
 namespace NASRAC.Models.Game.DriverEntities;
 
+/// <summary>
+/// Sponsor contract for drivers
+/// </summary>
 public class SponsorContract : BaseContract
 {
     [Required]

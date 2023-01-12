@@ -4,6 +4,9 @@ using NASRAC.Models.Game.DriverEntities;
 
 namespace NASRAC.Models.Game.TeamEntities;
 
+/// <summary>
+/// Team contract for drivers
+/// </summary>
 public class DriverContract : BaseContract
 {
     [Required]

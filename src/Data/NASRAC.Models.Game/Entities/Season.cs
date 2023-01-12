@@ -1,37 +1,36 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using NASRAC.Services.Common.Enums;
 
 namespace NASRAC.Models.Game.Entities;
 
 /// <summary>
-/// Track entity
+/// Season entity
 /// </summary>
-public class Track
+public class Season
 {
     [Key]
     public int Id { get; set; }
     
     /// <summary>
-    /// Name of the track
+    /// Name of the season, e.g. 2022-23 for seasons that cross into the next year
     /// </summary>
     [Required]
     public string Name { get; set; }
     
     /// <summary>
-    /// Location of the track
+    /// Start date of the season
     /// </summary>
     [Required]
-    public string Location { get; set; }
+    public DateOnly StartDate { get; set; }
     
     /// <summary>
-    /// Length of the track
+    /// End date of the season
     /// </summary>
     [Required]
-    public double Length { get; set; }
+    public DateOnly EndDate { get; set; }
     
     /// <summary>
-    /// Type of track
+    /// Series for the season
     /// </summary>
     [Required]
-    public TrackType Type { get; set; }
+    public Series Series { get; set; }
 }
