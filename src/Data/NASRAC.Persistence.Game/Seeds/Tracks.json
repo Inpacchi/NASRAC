@@ -1,0 +1,230 @@
+[
+  {
+    "Name": "Atlanta Motor Speedway",
+    "Length": 1.540,
+    "Location": "Hampton, GA",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Auto Club Speedway",
+    "Length": 2.000,
+    "Location": "Fontana, CA",
+    "TrackType": "Superspeedway"
+  },
+  {
+    "Name": "Bristol Motor Speedway",
+    "Length": 0.533,
+    "Location": "Bristol, TN",
+    "TrackType": "Short"
+  },
+  {
+    "Name": "Canadian Tire Motorsport Park",
+    "Length": 2.459,
+    "Location": "Bowmanville, ON",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Charlotte Motor Speedway",
+    "Length": 1.500,
+    "Location": "Concord, NC",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Charlotte Motor Speedway Road Course",
+    "Length": 2.320,
+    "Location": "Concord, NC",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Chicagoland Speedway",
+    "Length": 1.500,
+    "Location": "Joliet, IL",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Circuit of the Americas",
+    "Length": 3.427,
+    "Location": "Austin, TX",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Daytona International Speedway",
+    "Length": 2.500,
+    "Location": "Daytona Beach, FL",
+    "TrackType": "Superspeedway"
+  },
+  {
+    "Name": "Daytona International Speedway Road Course",
+    "Length": 3.610,
+    "Location": "Daytona Beach, FL",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Darlington Raceway",
+    "Length": 1.366,
+    "Location": "Darlington, SC",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Dover Motor Speedway",
+    "Length": 1.000,
+    "Location": "Dover, DE",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Eldora Speedway",
+    "Length": 0.500,
+    "Location": "Rossburg, OH",
+    "TrackType": "Short"
+  },
+  {
+    "Name": "Homestead-Miami Speedway",
+    "Length": 1.500,
+    "Location": "Homestead, FL",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Indianapolis Motor Speedway",
+    "Length": 2.500,
+    "Location": "Speedway, IN",
+    "TrackType": "Speedway"
+  },
+  {
+    "Name": "Indianapolis Motor Speedway Road Course",
+    "Length": 2.439,
+    "Location": "Speedway, IN",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Iowa Speedway",
+    "Length": 0.875,
+    "Location": "Newton, IA",
+    "TrackType": "Short"
+  },
+  {
+    "Name": "Kansas Speedway",
+    "Length": 1.500,
+    "Location": "Kansas City, KS",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Kentucky Speedway",
+    "Length": 1.500,
+    "Location": "Sparta, KY",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Knoxville Raceway",
+    "Length": 0.500,
+    "Location": "Knoxville, IA",
+    "TrackType": "Short"
+  },
+  {
+    "Name": "Las Vegas Motor Speedway",
+    "Length": 1.500,
+    "Location": "Las Vegas, NV",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Los Angeles Memorial Coliseum",
+    "Length": 0.250,
+    "Location": "Los Angeles, CA",
+    "TrackType": "Short"
+  },
+  {
+    "Name": "Lucas Oil Indianapolis Raceway Park",
+    "Length": 0.686,
+    "Location": "Indianapolis, IN",
+    "TrackType": "Short"
+  },
+  {
+    "Name": "Martinsville Speedway",
+    "Length": 0.526,
+    "Location": "Ridgeway, VA",
+    "TrackType": "Short"
+  },
+  {
+    "Name": "Michigan International Speedway",
+    "Length": 2.000,
+    "Location": "Brooklyn, MI",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Mid-Ohio Sports Car Course",
+    "Length": 2.258,
+    "Location": "Lexington, OH",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Nashville Superspeedway",
+    "Length": 1.333,
+    "Location": "Lebanon, TN",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "New Hampshire Motor Speedway",
+    "Length": 1.058,
+    "Location": "Loudon, NH",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Phoenix Raceway",
+    "Length": 1.000,
+    "Location": "Avondale, AZ",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Pocono Raceway",
+    "Length": 2.500,
+    "Location": "Long Pond, PA",
+    "TrackType": "Superspeedway"
+  },
+  {
+    "Name": "Portland International Raceway",
+    "Length": 1.900,
+    "Location": "Portland, OR",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Richmond Raceway",
+    "Length": 0.750,
+    "Location": "Richmond, VA",
+    "TrackType": "Short"
+  },
+  {
+    "Name": "Road America",
+    "Length": 4.048,
+    "Location": "Elkhart Lake, WI",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Sonoma Raceway",
+    "Length": 1.990,
+    "Location": "Sonoma, CA",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "Talladega Superspeedway",
+    "Length": 2.660,
+    "Location": "Talladega, AL",
+    "TrackType": "Superspeedway"
+  },
+  {
+    "Name": "Texas Motor Speedway",
+    "Length": 1.500,
+    "Location": "Fort Worth, TX",
+    "TrackType": "Intermediate"
+  },
+  {
+    "Name": "Watkins Glen International",
+    "Length": 2.450,
+    "Location": "Watkins Glen, NY",
+    "TrackType": "Road"
+  },
+  {
+    "Name": "World Wide Technology Raceway",
+    "Length": 1.250,
+    "Location": "Madison, IL",
+    "TrackType": "Intermediate"
+  }
+]
