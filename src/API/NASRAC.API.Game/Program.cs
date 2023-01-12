@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NASRAC.Persistence.Game;
 using NASRAC.Persistence.Game.DAL;
 using NASRAC.Services.WebApp.Extensions;
 
@@ -39,5 +40,10 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
+
+using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+await context.Database.MigrateAsync();
+await Seed.SeedDevData(context);
 
 app.Run();

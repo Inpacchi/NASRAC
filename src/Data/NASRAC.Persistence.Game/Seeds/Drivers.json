@@ -1,0 +1,29 @@
+﻿[
+  {
+    "Id": 1,
+    "Name": "Yovarni Yearwood",
+    "Age": 26,
+    "ShortTrackRating": 88,
+    "IntermediateTrackRating": 83,
+    "SuperspeedwayTrackRating": 84,
+    "RoadTrackRating": 85,
+    "PotentialRating": 90,
+    "PeakAgeStart": 32,
+    "PeakAgeEnd": 35,
+    "PerformanceRating": 82,
+    "OverallRating": 85,
+    "Team": {
+      "Id": 1,
+      "Name": "Endless Galaxy Motorsports",
+      "Manufacturer": {
+        "Id": 1,
+        "Name": "Ford",
+        "VehicleType": "car"
+      },
+      "EquipmentRating": 72,
+      "PersonnelRating": 83,
+      "PerformanceRating": 80,
+      "OverallRating": 78
+    }
+  }
+]
