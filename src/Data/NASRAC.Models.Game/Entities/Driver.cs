@@ -2,8 +2,9 @@
 
 namespace NASRAC.Models.Game.Entities;
 
-public class Driver : GameObject
+public class Driver
 {
+    public string Name { get; set; }
     public int Age { get; set; }
     public double OverallRating { get; set; }
     public double PerformanceRating { get; set; }

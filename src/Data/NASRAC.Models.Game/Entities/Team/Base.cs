@@ -3,8 +3,9 @@ using NASRAC.Models.WebApp.Entities;
 
 namespace NASRAC.Models.Game.Entities;
 
-public class Team : GameObject
+public class Team
 {
+    public string Name { get; set; }
     public AppUser Owner { get; set; }
     public Manufacturer Manufacturer { get; set; }
     public double EquipmentRating { get; set; }
