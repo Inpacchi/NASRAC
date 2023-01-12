@@ -3,8 +3,8 @@ using NASRAC.Services.Common.Enums;
 
 namespace NASRAC.Models.Game.Entities;
 
-public class TeamDriverContract : BaseContract
+public class TeamSponsorContract : BaseContract
 {
     public Team Team { get; set; }
-    public Driver Driver { get; set; }
+    public Sponsor Sponsor { get; set; }
 }
