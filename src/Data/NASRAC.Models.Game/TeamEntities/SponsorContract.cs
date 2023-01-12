@@ -1,9 +1,9 @@
 ﻿using NASRAC.Models.Game.BaseEntities;
-using NASRAC.Services.Common.Enums;
+using NASRAC.Models.Game.Entities;
 
-namespace NASRAC.Models.Game.Entities;
+namespace NASRAC.Models.Game.TeamEntities;
 
-public class TeamSponsorContract : BaseContract
+public class SponsorContract : BaseContract
 {
     public Team Team { get; set; }
     public Sponsor Sponsor { get; set; }

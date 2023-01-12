@@ -1,6 +1,4 @@
-﻿using NASRAC.Models.Game.BaseEntities;
-
-namespace NASRAC.Models.Game.Entities;
+﻿namespace NASRAC.Models.Game.DriverEntities;
 
 public class Driver
 {

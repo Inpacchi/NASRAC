@@ -1,4 +1,6 @@
-﻿namespace NASRAC.Models.Game.Entities;
+﻿using NASRAC.Models.Game.TeamEntities;
+
+namespace NASRAC.Models.Game.Entities;
 
 public class Loan
 {

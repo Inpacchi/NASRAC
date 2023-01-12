@@ -1,4 +1,4 @@
-﻿namespace NASRAC.Models.Game.Entities;
+﻿namespace NASRAC.Models.Game.TeamEntities;
 
 public class TeamFinancials
 {

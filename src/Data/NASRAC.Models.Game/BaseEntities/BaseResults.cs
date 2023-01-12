@@ -1,4 +1,5 @@
-﻿using NASRAC.Models.Game.Entities;
+﻿using NASRAC.Models.Game.DriverEntities;
+using NASRAC.Models.Game.Entities;
 
 namespace NASRAC.Models.Game.BaseEntities;
 

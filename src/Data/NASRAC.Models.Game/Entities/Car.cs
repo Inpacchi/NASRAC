@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NASRAC.Models.Game.TeamEntities;
 
 namespace NASRAC.Models.Game.Entities;
 
