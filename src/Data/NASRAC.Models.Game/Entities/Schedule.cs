@@ -3,6 +3,6 @@
 public class Schedule
 {
     public int Year { get; set; }
-    public int RaceAmount { get; set; }
-    public ICollection<Race> Races { get; set; }
+    public Series Series { get; set; }
+    public Race Race { get; set; }
 }
