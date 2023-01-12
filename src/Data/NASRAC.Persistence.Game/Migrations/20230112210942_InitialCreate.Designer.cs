@@ -11,7 +11,7 @@ using NASRAC.Persistence.Game.DAL;
 namespace NASRAC.Persistence.Game.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230112192445_InitialCreate")]
+    [Migration("20230112210942_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -244,6 +244,9 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<int>("BorrowerId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("InterestRate")
+                        .HasColumnType("REAL");
+
                     b.Property<int>("LenderId")
                         .HasColumnType("INTEGER");
 
@@ -408,23 +411,15 @@ namespace NASRAC.Persistence.Game.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("EventNumber")
-                        .HasColumnType("INTEGER");
-
                     b.Property<int>("RaceId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("SeriesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateOnly>("ScheduleDate")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RaceId");
-
-                    b.HasIndex("SeriesId");
 
                     b.ToTable("Schedule");
                 });
@@ -775,15 +770,7 @@ namespace NASRAC.Persistence.Game.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NASRAC.Models.Game.Entities.Series", "Series")
-                        .WithMany()
-                        .HasForeignKey("SeriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Race");
-
-                    b.Navigation("Series");
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.Entities.Series", b =>

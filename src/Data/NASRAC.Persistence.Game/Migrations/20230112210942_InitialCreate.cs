@@ -348,6 +348,7 @@ namespace NASRAC.Persistence.Game.Migrations
                     TotalAmountLoaned = table.Column<double>(type: "REAL", nullable: false),
                     TotalAmountPaid = table.Column<double>(type: "REAL", nullable: false),
                     MaturityDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    InterestRate = table.Column<double>(type: "REAL", nullable: false),
                     LenderId = table.Column<int>(type: "INTEGER", nullable: false),
                     BorrowerId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -395,10 +396,8 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Year = table.Column<int>(type: "INTEGER", nullable: false),
-                    SeriesId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RaceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    EventNumber = table.Column<int>(type: "INTEGER", nullable: false)
+                    ScheduleDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    RaceId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -407,12 +406,6 @@ namespace NASRAC.Persistence.Game.Migrations
                         name: "FK_Schedule_Race_RaceId",
                         column: x => x.RaceId,
                         principalTable: "Race",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Schedule_Series_SeriesId",
-                        column: x => x.SeriesId,
-                        principalTable: "Series",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -578,11 +571,6 @@ namespace NASRAC.Persistence.Game.Migrations
                 column: "RaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Schedule_SeriesId",
-                table: "Schedule",
-                column: "SeriesId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Series_TierId",
                 table: "Series",
                 column: "TierId");
@@ -637,6 +625,9 @@ namespace NASRAC.Persistence.Game.Migrations
                 name: "Schedule");
 
             migrationBuilder.DropTable(
+                name: "Series");
+
+            migrationBuilder.DropTable(
                 name: "Sponsor");
 
             migrationBuilder.DropTable(
@@ -650,9 +641,6 @@ namespace NASRAC.Persistence.Game.Migrations
 
             migrationBuilder.DropTable(
                 name: "Race");
-
-            migrationBuilder.DropTable(
-                name: "Series");
 
             migrationBuilder.DropTable(
                 name: "Team");
