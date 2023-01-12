@@ -4,6 +4,7 @@ namespace NASRAC.Models.Game.Entities;
 
 public class Loan
 {
+    public int Id { get; set; }
     public double TotalAmountLoaned { get; set; }
     public double TotalAmountPaid { get; set; }
     public DateTime MaturityDate { get; set; }

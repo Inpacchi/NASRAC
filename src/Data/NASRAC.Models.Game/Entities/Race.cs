@@ -4,6 +4,7 @@ namespace NASRAC.Models.Game.Entities;
 
 public class Race
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public int Laps { get; set; }
     public int Stages { get; set; }

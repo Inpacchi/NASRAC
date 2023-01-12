@@ -6,6 +6,7 @@ namespace NASRAC.Models.Game.TeamEntities;
 
 public class Team
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public AppUser Owner { get; set; }
     public Manufacturer Manufacturer { get; set; }
