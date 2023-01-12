@@ -152,8 +152,14 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("DNFOdds")
+                        .HasColumnType("REAL");
+
                     b.Property<double>("IntermediateTrackRating")
                         .HasColumnType("REAL");
+
+                    b.Property<int>("Marketability")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -179,6 +185,9 @@ namespace NASRAC.Persistence.Game.Migrations
 
                     b.Property<double>("RegressionRate")
                         .HasColumnType("REAL");
+
+                    b.Property<int>("RetirementFactor")
+                        .HasColumnType("INTEGER");
 
                     b.Property<double>("RoadTrackRating")
                         .HasColumnType("REAL");
@@ -394,6 +403,9 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("EventNumber")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("RaceId")

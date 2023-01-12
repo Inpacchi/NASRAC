@@ -32,4 +32,8 @@
       <ProjectReference Include="..\NASRAC.Models.WebApp\NASRAC.Models.WebApp.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations" />
+    </ItemGroup>
+
 </Project>
