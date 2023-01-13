@@ -1,0 +1,28 @@
+﻿[
+  {
+    "Id": 1,
+    "Season": {
+      "Id": 1,
+      "Name": "2022",
+      "StartDate": "02/20/2022",
+      "EndDate": "11/06/2022",
+      "Series": "AAA"
+    },
+    "RaceNumber": 1,
+    "ScheduleDate": "02/20/2022",
+    "Race": {
+      "Id": 1,
+      "Name": "Daytona 500",
+      "Laps": 500,
+      "Stages": 3,
+      "Type": "RegularSeason",
+      "Track": {
+        "Id": 1,
+        "Name": "Daytona International Speedway",
+        "Length": 2.500,
+        "Location": "Daytona Beach, FL",
+        "TrackType": "Superspeedway"
+      }
+    }
+  }
+]
