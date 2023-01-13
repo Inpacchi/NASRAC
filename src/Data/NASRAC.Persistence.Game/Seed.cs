@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
-using NASRAC.Models.Game.TeamEntities;
 using NASRAC.Persistence.Game.DAL;
 
 namespace NASRAC.Persistence.Game;
@@ -21,7 +20,7 @@ public class Seed
     public static async Task SeedDevData(DataContext context)
     {
         _options.Converters.Add(new JsonStringEnumConverter());
-        await SeedRaces(context);
+        await SeedSchedule(context);
         await SeedDrivers(context);
     }
     
@@ -34,12 +33,12 @@ public class Seed
         await context.SaveChangesAsync();
     }
     
-    private static async Task SeedRaces(DataContext context)
+    private static async Task SeedSchedule(DataContext context)
     {
-        if (await context.Race.AnyAsync()) return;
-        var raceData = await File.ReadAllTextAsync(_seedPath + "Races.json");
-        var races = JsonSerializer.Deserialize<List<Race>>(raceData, _options);
-        context.AddRange(races);
+        if (await context.Schedule.AnyAsync()) return;
+        var scheduleData = await File.ReadAllTextAsync(_seedPath + "Schedule.json");
+        var schedules = JsonSerializer.Deserialize<List<Schedule>>(scheduleData, _options);
+        context.AddRange(schedules);
         await context.SaveChangesAsync();
     }
     #endregion
