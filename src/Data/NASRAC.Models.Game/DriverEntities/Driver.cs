@@ -91,7 +91,7 @@ public class Driver
     /// Likelihood that a driver will retire
     /// </summary>
     [Required]
-    public int RetirementFactor { get; set; }
+    public double RetirementFactor { get; set; }
     
     /// <summary>
     /// Likelihood that a driver will DNF (Did Not Finish)
