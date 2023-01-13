@@ -41,9 +41,4 @@ app.UseEndpoints(endpoints =>
     endpoints.MapControllers();
 });
 
-using var scope = app.Services.CreateScope();
-var context = scope.ServiceProvider.GetRequiredService<DataContext>();
-await context.Database.MigrateAsync();
-await Seed.SeedDevData(context);
-
 app.Run();

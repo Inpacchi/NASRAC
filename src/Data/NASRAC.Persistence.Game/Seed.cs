@@ -9,61 +9,56 @@ namespace NASRAC.Persistence.Game;
 
 public class Seed
 {
-    private const string _seedPath = "..\\..\\Data\\NASRAC.Persistence.Game\\Seeds\\";
+    private const string SeedPath = "..\\..\\Data\\NASRAC.Persistence.Game\\Seeds\\";
 
-    private static readonly JsonSerializerOptions _options = new JsonSerializerOptions
+    private readonly JsonSerializerOptions _options;
+    public Seed()
     {
-        PropertyNameCaseInsensitive = true
-    };
+        _options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        
+        _options.Converters.Add(new JsonStringEnumConverter());
+    }
 
     #region Development Seeds
-    public static async Task SeedDevData(DataContext context)
+    public List<Driver> SeedDrivers()
     {
-        _options.Converters.Add(new JsonStringEnumConverter());
-        await SeedSchedule(context);
-        await SeedDrivers(context);
+        var driverData = File.ReadAllText(SeedPath + "Drivers.json");
+        
+        return JsonSerializer.Deserialize<List<Driver>>(driverData, _options) ?? throw new ArgumentNullException();
     }
     
-    private static async Task SeedDrivers(DataContext context)
+    public List<Schedule> SeedSchedule()
     {
-        if (await context.Driver.AnyAsync()) return;
-        var driverData = await File.ReadAllTextAsync(_seedPath + "Drivers.json");
-        var drivers = JsonSerializer.Deserialize<List<Driver>>(driverData, _options);
-        context.AddRange(drivers);
-        await context.SaveChangesAsync();
-    }
-    
-    private static async Task SeedSchedule(DataContext context)
-    {
-        if (await context.Schedule.AnyAsync()) return;
-        var scheduleData = await File.ReadAllTextAsync(_seedPath + "Schedule.json");
-        var schedules = JsonSerializer.Deserialize<List<Schedule>>(scheduleData, _options);
-        context.AddRange(schedules);
-        await context.SaveChangesAsync();
+        var scheduleData = File.ReadAllText(SeedPath + "Schedule.json");
+        
+        return JsonSerializer.Deserialize<List<Schedule>>(scheduleData, _options) ?? throw new ArgumentNullException();
     }
     #endregion
 
     #region Production Seeds
-    public static async Task SeedProductionData(DataContext context)
+    public async Task SeedProductionData(DataContext context)
     {
         _options.Converters.Add(new JsonStringEnumConverter());
         await SeedManufacturers(context);
         await SeedTracks(context);
     }
     
-    private static async Task SeedManufacturers(DataContext context)
+    private async Task SeedManufacturers(DataContext context)
     {
         if (await context.Manufacturer.AnyAsync()) return;
-        var manufacturerData = await File.ReadAllTextAsync(_seedPath + "ProductionData\\Manufacturers.json");
+        var manufacturerData = await File.ReadAllTextAsync(SeedPath + "ProductionData\\Manufacturers.json");
         var manufacturers = JsonSerializer.Deserialize<List<Manufacturer>>(manufacturerData, _options);
         context.AddRange(manufacturers);
         await context.SaveChangesAsync();
     }
     
-    private static async Task SeedTracks(DataContext context)
+    private async Task SeedTracks(DataContext context)
     {
         if (await context.Track.AnyAsync()) return;
-        var trackData = await File.ReadAllTextAsync(_seedPath + "ProductionData\\Tracks.json");
+        var trackData = await File.ReadAllTextAsync(SeedPath + "ProductionData\\Tracks.json");
         var tracks = JsonSerializer.Deserialize<List<Track>>(trackData, _options);
         context.AddRange(tracks);
         await context.SaveChangesAsync();
