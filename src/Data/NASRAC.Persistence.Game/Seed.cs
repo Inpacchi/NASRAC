@@ -17,18 +17,12 @@ public class Seed
         PropertyNameCaseInsensitive = true
     };
 
+    #region Development Seeds
     public static async Task SeedDevData(DataContext context)
     {
         _options.Converters.Add(new JsonStringEnumConverter());
         await SeedRaces(context);
         await SeedDrivers(context);
-    }
-    
-    public static async Task SeedProductionData(DataContext context)
-    {
-        _options.Converters.Add(new JsonStringEnumConverter());
-        await SeedManufacturers(context);
-        await SeedTracks(context);
     }
     
     private static async Task SeedDrivers(DataContext context)
@@ -40,21 +34,30 @@ public class Seed
         await context.SaveChangesAsync();
     }
     
-    private static async Task SeedManufacturers(DataContext context)
-    {
-        if (await context.Manufacturer.AnyAsync()) return;
-        var manufacturerData = await File.ReadAllTextAsync(_seedPath + "ProductionData\\Manufacturers.json");
-        var manufacturers = JsonSerializer.Deserialize<List<Manufacturer>>(manufacturerData, _options);
-        context.AddRange(manufacturers);
-        await context.SaveChangesAsync();
-    }
-    
     private static async Task SeedRaces(DataContext context)
     {
         if (await context.Race.AnyAsync()) return;
         var raceData = await File.ReadAllTextAsync(_seedPath + "Races.json");
         var races = JsonSerializer.Deserialize<List<Race>>(raceData, _options);
         context.AddRange(races);
+        await context.SaveChangesAsync();
+    }
+    #endregion
+
+    #region Production Seeds
+    public static async Task SeedProductionData(DataContext context)
+    {
+        _options.Converters.Add(new JsonStringEnumConverter());
+        await SeedManufacturers(context);
+        await SeedTracks(context);
+    }
+    
+    private static async Task SeedManufacturers(DataContext context)
+    {
+        if (await context.Manufacturer.AnyAsync()) return;
+        var manufacturerData = await File.ReadAllTextAsync(_seedPath + "ProductionData\\Manufacturers.json");
+        var manufacturers = JsonSerializer.Deserialize<List<Manufacturer>>(manufacturerData, _options);
+        context.AddRange(manufacturers);
         await context.SaveChangesAsync();
     }
     
@@ -66,4 +69,5 @@ public class Seed
         context.AddRange(tracks);
         await context.SaveChangesAsync();
     }
+    #endregion
 }
