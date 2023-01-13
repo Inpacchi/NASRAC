@@ -1,15 +1,20 @@
 ﻿[
   {
     "Id": 1,
-    "Season": {
+    "Seasons": {
       "Id": 1,
       "Name": "2022",
-      "StartDate": "02/20/2022",
-      "EndDate": "11/06/2022",
-      "Series": "AAA"
+      "StartDate": "2022-02-20",
+      "EndDate": "2022-11-06",
+      "Series": {
+        "Id": 1,
+        "Name": "NASRAC Cup Series",
+        "Tier": "AAA",
+        "VehicleType": "car"
+      }
     },
     "RaceNumber": 1,
-    "ScheduleDate": "02/20/2022",
+    "ScheduleDate": "2022-02-20",
     "Race": {
       "Id": 1,
       "Name": "Daytona 500",
