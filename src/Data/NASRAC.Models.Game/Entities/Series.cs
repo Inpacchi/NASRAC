@@ -21,7 +21,7 @@ public class Series
     /// Tier of the series
     /// </summary>
     [Required]
-    public Series Tier { get; set; }
+    public SeriesTier Tier { get; set; }
     
     /// <summary>
     /// Vehicle types allowed in the series

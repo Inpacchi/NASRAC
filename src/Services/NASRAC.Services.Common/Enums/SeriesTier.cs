@@ -1,6 +1,6 @@
 ﻿namespace NASRAC.Services.Common.Enums;
 
-public enum Series
+public enum SeriesTier
 {
     Rookie,
     A,
