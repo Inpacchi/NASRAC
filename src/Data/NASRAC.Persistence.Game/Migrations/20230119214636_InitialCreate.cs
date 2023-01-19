@@ -73,18 +73,12 @@ namespace NASRAC.Persistence.Game.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    TierId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Tier = table.Column<int>(type: "INTEGER", nullable: false),
                     VehicleType = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Series", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Series_Series_TierId",
-                        column: x => x.TierId,
-                        principalTable: "Series",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -236,7 +230,7 @@ namespace NASRAC.Persistence.Game.Migrations
                     PersonnelRating = table.Column<double>(type: "REAL", nullable: false),
                     PerformanceRating = table.Column<double>(type: "REAL", nullable: false),
                     OverallRating = table.Column<double>(type: "REAL", nullable: false),
-                    OwnerId = table.Column<int>(type: "INTEGER", nullable: false)
+                    OwnerId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -245,12 +239,33 @@ namespace NASRAC.Persistence.Game.Migrations
                         name: "FK_Team_AspNetUsers_OwnerId",
                         column: x => x.OwnerId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Team_Manufacturer_ManufacturerId",
                         column: x => x.ManufacturerId,
                         principalTable: "Manufacturer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Season",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    StartDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    EndDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    SeriesId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Season", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Season_Series_SeriesId",
+                        column: x => x.SeriesId,
+                        principalTable: "Series",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -324,7 +339,7 @@ namespace NASRAC.Persistence.Game.Migrations
                     RegressionRate = table.Column<double>(type: "REAL", nullable: false),
                     PeakAgeStart = table.Column<int>(type: "INTEGER", nullable: false),
                     PeakAgeEnd = table.Column<int>(type: "INTEGER", nullable: false),
-                    RetirementFactor = table.Column<int>(type: "INTEGER", nullable: false),
+                    RetirementFactor = table.Column<double>(type: "REAL", nullable: false),
                     DNFOdds = table.Column<double>(type: "REAL", nullable: false),
                     Marketability = table.Column<int>(type: "INTEGER", nullable: false),
                     TeamId = table.Column<int>(type: "INTEGER", nullable: true)
@@ -396,6 +411,8 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    SeasonId = table.Column<int>(type: "INTEGER", nullable: false),
+                    RaceNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     ScheduleDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
                     RaceId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
@@ -406,6 +423,12 @@ namespace NASRAC.Persistence.Game.Migrations
                         name: "FK_Schedule_Race_RaceId",
                         column: x => x.RaceId,
                         principalTable: "Race",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Schedule_Season_SeasonId",
+                        column: x => x.SeasonId,
+                        principalTable: "Season",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -571,9 +594,14 @@ namespace NASRAC.Persistence.Game.Migrations
                 column: "RaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Series_TierId",
-                table: "Series",
-                column: "TierId");
+                name: "IX_Schedule_SeasonId",
+                table: "Schedule",
+                column: "SeasonId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Season_SeriesId",
+                table: "Season",
+                column: "SeriesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Team_ManufacturerId",
@@ -625,9 +653,6 @@ namespace NASRAC.Persistence.Game.Migrations
                 name: "Schedule");
 
             migrationBuilder.DropTable(
-                name: "Series");
-
-            migrationBuilder.DropTable(
                 name: "Sponsor");
 
             migrationBuilder.DropTable(
@@ -643,10 +668,16 @@ namespace NASRAC.Persistence.Game.Migrations
                 name: "Race");
 
             migrationBuilder.DropTable(
+                name: "Season");
+
+            migrationBuilder.DropTable(
                 name: "Team");
 
             migrationBuilder.DropTable(
                 name: "Track");
+
+            migrationBuilder.DropTable(
+                name: "Series");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

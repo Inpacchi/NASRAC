@@ -14,15 +14,6 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     {
     }
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
-        var seeder = new Seed();
-        
-        builder.Entity<Schedule>().HasData(seeder.SeedSchedule());
-        builder.Entity<Driver>().HasData(seeder.SeedDrivers());
-    }
-
     public virtual DbSet<Car> Car { get; set; }
     public virtual DbSet<Driver> Driver { get; set; }
     public virtual DbSet<Loan> Loan { get; set; }

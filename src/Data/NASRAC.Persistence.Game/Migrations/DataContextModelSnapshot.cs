@@ -186,8 +186,8 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<double>("RegressionRate")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("RetirementFactor")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("RetirementFactor")
+                        .HasColumnType("REAL");
 
                     b.Property<double>("RoadTrackRating")
                         .HasColumnType("REAL");
@@ -411,14 +411,48 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<int>("RaceId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("RaceNumber")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateOnly>("ScheduleDate")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RaceId");
 
+                    b.HasIndex("SeasonId");
+
                     b.ToTable("Schedule");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Entities.Season", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("SeriesId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateOnly>("StartDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SeriesId");
+
+                    b.ToTable("Season");
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.Entities.Series", b =>
@@ -431,15 +465,13 @@ namespace NASRAC.Persistence.Game.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TierId")
+                    b.Property<int>("Tier")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("VehicleType")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TierId");
 
                     b.ToTable("Series");
                 });
@@ -509,7 +541,7 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<double>("OverallRating")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("OwnerId")
+                    b.Property<int?>("OwnerId")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("PerformanceRating")
@@ -767,18 +799,26 @@ namespace NASRAC.Persistence.Game.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Race");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Series", b =>
-                {
-                    b.HasOne("NASRAC.Models.Game.Entities.Series", "Tier")
+                    b.HasOne("NASRAC.Models.Game.Entities.Season", "Season")
                         .WithMany()
-                        .HasForeignKey("TierId")
+                        .HasForeignKey("SeasonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Tier");
+                    b.Navigation("Race");
+
+                    b.Navigation("Season");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Entities.Season", b =>
+                {
+                    b.HasOne("NASRAC.Models.Game.Entities.Series", "Series")
+                        .WithMany()
+                        .HasForeignKey("SeriesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Series");
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
@@ -791,9 +831,7 @@ namespace NASRAC.Persistence.Game.Migrations
 
                     b.HasOne("NASRAC.Models.WebApp.Entities.AppUser", "Owner")
                         .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("OwnerId");
 
                     b.Navigation("Manufacturer");
 
