@@ -2,8 +2,8 @@
 
 public enum RaceType
 {
-    Duel,
     Clash,
+    Duel,
     RegularSeason,
     Playoff
 }
