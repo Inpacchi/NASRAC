@@ -11,7 +11,7 @@ using NASRAC.Persistence.Game.DAL;
 namespace NASRAC.Persistence.Game.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230119214636_InitialCreate")]
+    [Migration("20230120194135_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -201,7 +201,7 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<double>("SuperspeedwayTrackRating")
                         .HasColumnType("REAL");
 
-                    b.Property<int?>("TeamId")
+                    b.Property<int>("TeamId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -209,6 +209,71 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("Driver");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Age = 26,
+                            DNFOdds = 0.025000000000000001,
+                            IntermediateTrackRating = 73.0,
+                            Marketability = 6,
+                            Name = "Yovarni Yearwood",
+                            OverallRating = 80.0,
+                            PeakAgeEnd = 33,
+                            PeakAgeStart = 28,
+                            PerformanceRating = 86.0,
+                            PotentialRating = 85.0,
+                            ProgressionRate = 0.0,
+                            RegressionRate = 2.0,
+                            RetirementFactor = 0.0050000000000000001,
+                            RoadTrackRating = 85.0,
+                            ShortTrackRating = 75.0,
+                            SuperspeedwayTrackRating = 80.0,
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Age = 26,
+                            DNFOdds = 0.025000000000000001,
+                            IntermediateTrackRating = 83.0,
+                            Marketability = 7,
+                            Name = "Angel Ortega",
+                            OverallRating = 83.0,
+                            PeakAgeEnd = 45,
+                            PeakAgeStart = 26,
+                            PerformanceRating = 89.0,
+                            PotentialRating = 92.0,
+                            ProgressionRate = 4.0,
+                            RegressionRate = 2.0,
+                            RetirementFactor = 0.0050000000000000001,
+                            RoadTrackRating = 86.0,
+                            ShortTrackRating = 78.0,
+                            SuperspeedwayTrackRating = 77.0,
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Age = 26,
+                            DNFOdds = 0.025000000000000001,
+                            IntermediateTrackRating = 73.0,
+                            Marketability = 5,
+                            Name = "Agustin Cruz, Jr.",
+                            OverallRating = 70.0,
+                            PeakAgeEnd = 32,
+                            PeakAgeStart = 28,
+                            PerformanceRating = 69.0,
+                            PotentialRating = 72.0,
+                            ProgressionRate = 5.0,
+                            RegressionRate = 1.0,
+                            RetirementFactor = 0.0050000000000000001,
+                            RoadTrackRating = 65.0,
+                            ShortTrackRating = 69.0,
+                            SuperspeedwayTrackRating = 76.0,
+                            TeamId = 3
+                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.Entities.Car", b =>
@@ -284,6 +349,44 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Manufacturer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Chevy",
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Chevy",
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Ford",
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Ford",
+                            VehicleType = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Toyota",
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Toyota",
+                            VehicleType = 1
+                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.Entities.QualifyingResults", b =>
@@ -343,6 +446,53 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.HasIndex("TrackId");
 
                     b.ToTable("Race");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Laps = 150,
+                            Name = "Busch Light Clash at The Coliseum",
+                            Stages = 0,
+                            TrackId = 1,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Laps = 60,
+                            Name = "Bluegreen Vacations Duel 1 at DAYTONA",
+                            Stages = 2,
+                            TrackId = 2,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Laps = 60,
+                            Name = "Bluegreen Vacations Duel 2 at DAYTONA",
+                            Stages = 2,
+                            TrackId = 2,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Laps = 500,
+                            Name = "Daytona 500",
+                            Stages = 3,
+                            TrackId = 2,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Laps = 200,
+                            Name = "Pale Casino 400",
+                            Stages = 3,
+                            TrackId = 3,
+                            Type = 2
+                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.Entities.RaceResults", b =>
@@ -411,14 +561,14 @@ namespace NASRAC.Persistence.Game.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("RaceId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("RaceNumber")
                         .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly>("ScheduleDate")
-                        .HasColumnType("TEXT");
 
                     b.Property<int>("SeasonId")
                         .HasColumnType("INTEGER");
@@ -427,35 +577,49 @@ namespace NASRAC.Persistence.Game.Migrations
 
                     b.HasIndex("RaceId");
 
-                    b.HasIndex("SeasonId");
-
                     b.ToTable("Schedule");
-                });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Season", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly>("EndDate")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SeriesId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly>("StartDate")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SeriesId");
-
-                    b.ToTable("Season");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateOnly(2022, 2, 6),
+                            RaceId = 1,
+                            RaceNumber = 1,
+                            SeasonId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateOnly(2022, 2, 17),
+                            RaceId = 2,
+                            RaceNumber = 2,
+                            SeasonId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateOnly(2022, 2, 17),
+                            RaceId = 3,
+                            RaceNumber = 3,
+                            SeasonId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateOnly(2022, 2, 20),
+                            RaceId = 4,
+                            RaceNumber = 4,
+                            SeasonId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Date = new DateOnly(2022, 2, 27),
+                            RaceId = 5,
+                            RaceNumber = 5,
+                            SeasonId = 1
+                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.Entities.Series", b =>
@@ -477,6 +641,29 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Series");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "NASRAC Cup Series",
+                            Tier = 1,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "NASRAC Bowl Series",
+                            Tier = 2,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "NASRAC Truck Series",
+                            Tier = 3,
+                            VehicleType = 1
+                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.Entities.Sponsor", b =>
@@ -523,6 +710,91 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Track");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Length = 0.25,
+                            Location = "Los Angeles, CA",
+                            Name = "Los Angeles Memorial Coliseum",
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Length = 2.5,
+                            Location = "Daytona Beach, FL",
+                            Name = "Daytona International Speedway",
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Length = 2.0,
+                            Location = "Fontana, CA",
+                            Name = "Auto Club Speedway",
+                            Type = 2
+                        });
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.JoinEntities.TeamManufacturers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ManufacturerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ManufacturerId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamManufacturers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ManufacturerId = 3,
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ManufacturerId = 4,
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ManufacturerId = 1,
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ManufacturerId = 2,
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ManufacturerId = 5,
+                            TeamId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ManufacturerId = 6,
+                            TeamId = 3
+                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
@@ -533,9 +805,6 @@ namespace NASRAC.Persistence.Game.Migrations
 
                     b.Property<double>("EquipmentRating")
                         .HasColumnType("REAL");
-
-                    b.Property<int>("ManufacturerId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -555,11 +824,38 @@ namespace NASRAC.Persistence.Game.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ManufacturerId");
-
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Team");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            EquipmentRating = 94.0,
+                            Name = "Endless Galaxy Motorsports",
+                            OverallRating = 83.0,
+                            PerformanceRating = 85.0,
+                            PersonnelRating = 70.0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EquipmentRating = 69.0,
+                            Name = "Ortega Racing",
+                            OverallRating = 78.0,
+                            PerformanceRating = 81.0,
+                            PersonnelRating = 83.0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            EquipmentRating = 87.0,
+                            Name = "AJ Cruz Motorsports",
+                            OverallRating = 78.0,
+                            PerformanceRating = 81.0,
+                            PersonnelRating = 65.0
+                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.TeamFinancials", b =>
@@ -702,9 +998,13 @@ namespace NASRAC.Persistence.Game.Migrations
 
             modelBuilder.Entity("NASRAC.Models.Game.DriverEntities.Driver", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", null)
+                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Team")
                         .WithMany("Drivers")
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Team");
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.Entities.Car", b =>
@@ -802,41 +1102,33 @@ namespace NASRAC.Persistence.Game.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NASRAC.Models.Game.Entities.Season", "Season")
-                        .WithMany()
-                        .HasForeignKey("SeasonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Race");
-
-                    b.Navigation("Season");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Season", b =>
-                {
-                    b.HasOne("NASRAC.Models.Game.Entities.Series", "Series")
-                        .WithMany()
-                        .HasForeignKey("SeriesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Series");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
+            modelBuilder.Entity("NASRAC.Models.Game.JoinEntities.TeamManufacturers", b =>
                 {
                     b.HasOne("NASRAC.Models.Game.Entities.Manufacturer", "Manufacturer")
-                        .WithMany()
+                        .WithMany("TeamManufacturers")
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Team")
+                        .WithMany("TeamManufacturers")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Manufacturer");
+
+                    b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
+                {
                     b.HasOne("NASRAC.Models.WebApp.Entities.AppUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
-
-                    b.Navigation("Manufacturer");
 
                     b.Navigation("Owner");
                 });
@@ -852,11 +1144,18 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Navigation("Team");
                 });
 
+            modelBuilder.Entity("NASRAC.Models.Game.Entities.Manufacturer", b =>
+                {
+                    b.Navigation("TeamManufacturers");
+                });
+
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
                 {
                     b.Navigation("Cars");
 
                     b.Navigation("Drivers");
+
+                    b.Navigation("TeamManufacturers");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace NASRAC.Persistence.Game.Migrations
 {
     /// <inheritdoc />
@@ -225,7 +227,6 @@ namespace NASRAC.Persistence.Game.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    ManufacturerId = table.Column<int>(type: "INTEGER", nullable: false),
                     EquipmentRating = table.Column<double>(type: "REAL", nullable: false),
                     PersonnelRating = table.Column<double>(type: "REAL", nullable: false),
                     PerformanceRating = table.Column<double>(type: "REAL", nullable: false),
@@ -240,34 +241,6 @@ namespace NASRAC.Persistence.Game.Migrations
                         column: x => x.OwnerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Team_Manufacturer_ManufacturerId",
-                        column: x => x.ManufacturerId,
-                        principalTable: "Manufacturer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Season",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", nullable: false),
-                    StartDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    EndDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    SeriesId = table.Column<int>(type: "INTEGER", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Season", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Season_Series_SeriesId",
-                        column: x => x.SeriesId,
-                        principalTable: "Series",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -342,7 +315,7 @@ namespace NASRAC.Persistence.Game.Migrations
                     RetirementFactor = table.Column<double>(type: "REAL", nullable: false),
                     DNFOdds = table.Column<double>(type: "REAL", nullable: false),
                     Marketability = table.Column<int>(type: "INTEGER", nullable: false),
-                    TeamId = table.Column<int>(type: "INTEGER", nullable: true)
+                    TeamId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -351,7 +324,8 @@ namespace NASRAC.Persistence.Game.Migrations
                         name: "FK_Driver_Team_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Team",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -406,15 +380,41 @@ namespace NASRAC.Persistence.Game.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TeamManufacturers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ManufacturerId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TeamId = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamManufacturers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TeamManufacturers_Manufacturer_ManufacturerId",
+                        column: x => x.ManufacturerId,
+                        principalTable: "Manufacturer",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeamManufacturers_Team_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Team",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Schedule",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    SeasonId = table.Column<int>(type: "INTEGER", nullable: false),
                     RaceNumber = table.Column<int>(type: "INTEGER", nullable: false),
-                    ScheduleDate = table.Column<DateOnly>(type: "TEXT", nullable: false),
-                    RaceId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Date = table.Column<DateOnly>(type: "TEXT", nullable: false),
+                    RaceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    SeasonId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -423,12 +423,6 @@ namespace NASRAC.Persistence.Game.Migrations
                         name: "FK_Schedule_Race_RaceId",
                         column: x => x.RaceId,
                         principalTable: "Race",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Schedule_Season_SeasonId",
-                        column: x => x.SeasonId,
-                        principalTable: "Season",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -499,6 +493,96 @@ namespace NASRAC.Persistence.Game.Migrations
                         principalTable: "Race",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Manufacturer",
+                columns: new[] { "Id", "Name", "VehicleType" },
+                values: new object[,]
+                {
+                    { 1, "Chevy", 0 },
+                    { 2, "Chevy", 1 },
+                    { 3, "Ford", 0 },
+                    { 4, "Ford", 1 },
+                    { 5, "Toyota", 0 },
+                    { 6, "Toyota", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Series",
+                columns: new[] { "Id", "Name", "Tier", "VehicleType" },
+                values: new object[,]
+                {
+                    { 1, "NASRAC Cup Series", 1, 0 },
+                    { 2, "NASRAC Bowl Series", 2, 0 },
+                    { 3, "NASRAC Truck Series", 3, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Team",
+                columns: new[] { "Id", "EquipmentRating", "Name", "OverallRating", "OwnerId", "PerformanceRating", "PersonnelRating" },
+                values: new object[,]
+                {
+                    { 1, 94.0, "Endless Galaxy Motorsports", 83.0, null, 85.0, 70.0 },
+                    { 2, 69.0, "Ortega Racing", 78.0, null, 81.0, 83.0 },
+                    { 3, 87.0, "AJ Cruz Motorsports", 78.0, null, 81.0, 65.0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Track",
+                columns: new[] { "Id", "Length", "Location", "Name", "Type" },
+                values: new object[,]
+                {
+                    { 1, 0.25, "Los Angeles, CA", "Los Angeles Memorial Coliseum", 0 },
+                    { 2, 2.5, "Daytona Beach, FL", "Daytona International Speedway", 2 },
+                    { 3, 2.0, "Fontana, CA", "Auto Club Speedway", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Driver",
+                columns: new[] { "Id", "Age", "DNFOdds", "IntermediateTrackRating", "Marketability", "Name", "OverallRating", "PeakAgeEnd", "PeakAgeStart", "PerformanceRating", "PotentialRating", "ProgressionRate", "RegressionRate", "RetirementFactor", "RoadTrackRating", "ShortTrackRating", "SuperspeedwayTrackRating", "TeamId" },
+                values: new object[,]
+                {
+                    { 1, 26, 0.025000000000000001, 73.0, 6, "Yovarni Yearwood", 80.0, 33, 28, 86.0, 85.0, 0.0, 2.0, 0.0050000000000000001, 85.0, 75.0, 80.0, 1 },
+                    { 2, 26, 0.025000000000000001, 83.0, 7, "Angel Ortega", 83.0, 45, 26, 89.0, 92.0, 4.0, 2.0, 0.0050000000000000001, 86.0, 78.0, 77.0, 2 },
+                    { 3, 26, 0.025000000000000001, 73.0, 5, "Agustin Cruz, Jr.", 70.0, 32, 28, 69.0, 72.0, 5.0, 1.0, 0.0050000000000000001, 65.0, 69.0, 76.0, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Race",
+                columns: new[] { "Id", "Laps", "Name", "Stages", "TrackId", "Type" },
+                values: new object[,]
+                {
+                    { 1, 150, "Busch Light Clash at The Coliseum", 0, 1, 0 },
+                    { 2, 60, "Bluegreen Vacations Duel 1 at DAYTONA", 2, 2, 1 },
+                    { 3, 60, "Bluegreen Vacations Duel 2 at DAYTONA", 2, 2, 1 },
+                    { 4, 500, "Daytona 500", 3, 2, 2 },
+                    { 5, 200, "Pale Casino 400", 3, 3, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TeamManufacturers",
+                columns: new[] { "Id", "ManufacturerId", "TeamId" },
+                values: new object[,]
+                {
+                    { 1, 3, 1 },
+                    { 2, 4, 1 },
+                    { 3, 1, 2 },
+                    { 4, 2, 2 },
+                    { 5, 5, 3 },
+                    { 6, 6, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Schedule",
+                columns: new[] { "Id", "Date", "RaceId", "RaceNumber", "SeasonId" },
+                values: new object[,]
+                {
+                    { 1, new DateOnly(2022, 2, 6), 1, 1, 1 },
+                    { 2, new DateOnly(2022, 2, 17), 2, 2, 1 },
+                    { 3, new DateOnly(2022, 2, 17), 3, 3, 1 },
+                    { 4, new DateOnly(2022, 2, 20), 4, 4, 1 },
+                    { 5, new DateOnly(2022, 2, 27), 5, 5, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -594,21 +678,6 @@ namespace NASRAC.Persistence.Game.Migrations
                 column: "RaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Schedule_SeasonId",
-                table: "Schedule",
-                column: "SeasonId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Season_SeriesId",
-                table: "Season",
-                column: "SeriesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Team_ManufacturerId",
-                table: "Team",
-                column: "ManufacturerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Team_OwnerId",
                 table: "Team",
                 column: "OwnerId");
@@ -616,6 +685,16 @@ namespace NASRAC.Persistence.Game.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TeamFinancials_TeamId",
                 table: "TeamFinancials",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamManufacturers_ManufacturerId",
+                table: "TeamManufacturers",
+                column: "ManufacturerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamManufacturers_TeamId",
+                table: "TeamManufacturers",
                 column: "TeamId");
         }
 
@@ -653,10 +732,16 @@ namespace NASRAC.Persistence.Game.Migrations
                 name: "Schedule");
 
             migrationBuilder.DropTable(
+                name: "Series");
+
+            migrationBuilder.DropTable(
                 name: "Sponsor");
 
             migrationBuilder.DropTable(
                 name: "TeamFinancials");
+
+            migrationBuilder.DropTable(
+                name: "TeamManufacturers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -668,7 +753,7 @@ namespace NASRAC.Persistence.Game.Migrations
                 name: "Race");
 
             migrationBuilder.DropTable(
-                name: "Season");
+                name: "Manufacturer");
 
             migrationBuilder.DropTable(
                 name: "Team");
@@ -677,13 +762,7 @@ namespace NASRAC.Persistence.Game.Migrations
                 name: "Track");
 
             migrationBuilder.DropTable(
-                name: "Series");
-
-            migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Manufacturer");
         }
     }
 }
