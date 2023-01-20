@@ -23,7 +23,7 @@ public class Team
     /// Manufacturer for the team
     /// </summary>
     [Required]
-    public Manufacturer Manufacturer { get; set; }
+    public ICollection<Manufacturer> Manufacturers { get; set; }
     
     /// <summary>
     /// Measure of the team's equipment quality
