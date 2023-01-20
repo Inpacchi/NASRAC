@@ -1,0 +1,26 @@
+﻿[
+  {
+    "Id": 1,
+    "Name": "Endless Galaxy Motorsports",
+    "EquipmentRating": 94,
+    "PersonnelRating": 70,
+    "PerformanceRating": 85,
+    "OverallRating": 83
+  },
+  {
+    "Id": 2,
+    "Name": "Ortega Racing",
+    "EquipmentRating": 69,
+    "PersonnelRating": 83,
+    "PerformanceRating": 81,
+    "OverallRating": 78
+  },
+  {
+    "Id": 3,
+    "Name": "AJ Cruz Motorsports",
+    "EquipmentRating": 87,
+    "PersonnelRating": 65,
+    "PerformanceRating": 81,
+    "OverallRating": 78
+  }
+]

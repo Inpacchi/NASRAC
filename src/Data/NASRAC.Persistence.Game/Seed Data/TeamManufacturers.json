@@ -1,0 +1,32 @@
+﻿[
+  {
+    "Id": 1,
+    "TeamId": 1,
+    "ManufacturerId": 3
+  },
+  {
+    "Id": 2,
+    "TeamId": 1,
+    "ManufacturerId": 4
+  },
+  {
+    "Id": 3,
+    "TeamId": 2,
+    "ManufacturerId": 1
+  },
+  {
+    "Id": 4,
+    "TeamId": 2,
+    "ManufacturerId": 2
+  },
+  {
+    "Id": 5,
+    "TeamId": 3,
+    "ManufacturerId": 5
+  },
+  {
+    "Id": 6,
+    "TeamId": 3,
+    "ManufacturerId": 6
+  }
+]

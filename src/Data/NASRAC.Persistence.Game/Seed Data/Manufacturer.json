@@ -1,0 +1,32 @@
+﻿[
+  {
+    "Id": 1,
+    "Name": "Chevy",
+    "VehicleType": "car"
+  },
+  {
+    "Id": 2,
+    "Name": "Chevy",
+    "VehicleType": "truck"
+  },
+  {
+    "Id": 3,
+    "Name": "Ford",
+    "VehicleType": "car"
+  },
+  {
+    "Id": 4,
+    "Name": "Ford",
+    "VehicleType": "truck"
+  },
+  {
+    "Id": 5,
+    "Name": "Toyota",
+    "VehicleType": "car"
+  },
+  {
+    "Id": 6,
+    "Name": "Toyota",
+    "VehicleType": "truck"
+  }
+]

@@ -1,7 +1,10 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
+using NASRAC.Models.Game.JoinEntities;
+using NASRAC.Models.Game.TeamEntities;
 
 namespace NASRAC.Persistence.Game.DAL;
 
@@ -24,13 +27,16 @@ public class Seed
         _options.Converters.Add(new JsonStringEnumConverter());
     }
 
-    public void Initialize()
+    public async void Initialize()
     {
         SeedData<Track>("Track.json");
         SeedData<Series>("Series.json");
         SeedData<Race>("Race.json");
         SeedData<Schedule>("Schedule.json");
-        SeedData<Season>("Season.json");
+        SeedData<Driver>("Driver.json");
+        SeedData<Manufacturer>("Manufacturer.json");
+        SeedData<Team>("Team.json");
+        SeedData<TeamManufacturers>("TeamManufacturers.json");
     }
 
     private void SeedData<T>(string filename) where T : class

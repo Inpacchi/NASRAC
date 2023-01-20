@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using NASRAC.Models.Game.TeamEntities;
 using NASRAC.Services.Common.Enums;
 
 namespace NASRAC.Models.Game.DriverEntities;
@@ -104,5 +105,14 @@ public class Driver
     /// </summary>
     [Required]
     public Marketability Marketability { get; set; }
-    
+
+    /// <summary>
+    /// ID of the team the driver is contracted to
+    /// </summary>
+    public int TeamId { get; set; }
+
+    /// <summary>
+    /// Team the driver is contracted to
+    /// </summary>
+    public Team Team { get; set; }
 }

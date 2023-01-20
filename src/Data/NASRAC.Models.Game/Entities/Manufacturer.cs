@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using NASRAC.Models.Game.JoinEntities;
 using NASRAC.Models.Game.TeamEntities;
 using NASRAC.Services.Common.Enums;
 
@@ -27,6 +28,5 @@ public class Manufacturer
     /// <summary>
     /// Teams the manufacturer provides for
     /// </summary>
-    [Required]
-    public ICollection<Team> Teams { get; set; }
+    public ICollection<TeamManufacturers> TeamManufacturers { get; set; }
 }

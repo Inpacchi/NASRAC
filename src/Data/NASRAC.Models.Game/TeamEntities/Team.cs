@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
+using NASRAC.Models.Game.JoinEntities;
 using NASRAC.Models.WebApp.Entities;
 
 namespace NASRAC.Models.Game.TeamEntities;
@@ -18,12 +19,6 @@ public class Team
     /// </summary>
     [Required]
     public string Name { get; set; }
-    
-    /// <summary>
-    /// Manufacturer for the team
-    /// </summary>
-    [Required]
-    public ICollection<Manufacturer> Manufacturers { get; set; }
     
     /// <summary>
     /// Measure of the team's equipment quality
@@ -53,6 +48,11 @@ public class Team
     /// Owner of the team
     /// </summary>
     public AppUser Owner { get; set; }
+    
+    /// <summary>
+    /// Team manufacturers
+    /// </summary>
+    public ICollection<TeamManufacturers> TeamManufacturers { get; set; }
 
     public ICollection<Car> Cars { get; set; }
     public ICollection<Driver> Drivers { get; set; }
