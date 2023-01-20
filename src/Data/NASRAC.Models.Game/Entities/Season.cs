@@ -29,8 +29,19 @@ public class Season
     public DateOnly EndDate { get; set; }
     
     /// <summary>
+    /// Series ID for the season
+    /// </summary>
+    [Required]
+    public int SeriesId { get; set; }
+    
+    /// <summary>
     /// Series for the season
     /// </summary>
     [Required]
     public Series Series { get; set; }
+    
+    /// <summary>
+    /// Collection of the scheduled events for the season
+    /// </summary>
+    public ICollection<Schedule> Schedules { get; set; }
 }

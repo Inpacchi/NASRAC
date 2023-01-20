@@ -11,13 +11,7 @@ public class Schedule
     public int Id { get; set; }
     
     /// <summary>
-    /// Season for the scheduled race
-    /// </summary>
-    [Required]
-    public Season Season { get; set; }
-    
-    /// <summary>
-    /// ID of the race for the season
+    /// Event series number
     /// </summary>
     [Required]
     public int RaceNumber { get; set; }
@@ -26,8 +20,21 @@ public class Schedule
     /// Date of the race
     /// </summary>
     [Required]
-    public DateOnly ScheduleDate { get; set; }
+    public DateOnly Date { get; set; }
     
+    /// <summary>
+    /// ID of the event
+    /// </summary>
+    public int RaceId { get; set; }
+    
+    /// <summary>
+    /// Event details
+    /// </summary>
     [Required]
     public Race Race { get; set; }
+    
+    /// <summary>
+    /// ID of the season the schedule is tied to
+    /// </summary>
+    public int SeasonId { get; set; }
 }

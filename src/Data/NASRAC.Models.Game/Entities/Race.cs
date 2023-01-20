@@ -36,6 +36,12 @@ public class Race
     public RaceType Type { get; set; }
     
     /// <summary>
+    /// ID of the track the race is being held at
+    /// </summary>
+    [Required]
+    public int TrackId { get; set; }
+    
+    /// <summary>
     /// Track the race is being held at
     /// </summary>
     [Required]
