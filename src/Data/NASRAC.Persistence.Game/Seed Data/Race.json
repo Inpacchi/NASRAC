@@ -1,0 +1,42 @@
+﻿[
+  {
+    "Id": 1,
+    "Name": "Busch Light Clash at The Coliseum",
+    "Laps": 150,
+    "Stages": 0,
+    "Type": "Clash",
+    "TrackId": 1
+  },
+  {
+    "Id": 2,
+    "Name": "Bluegreen Vacations Duel 1 at DAYTONA",
+    "Laps": 60,
+    "Stages": 2,
+    "Type": "Duel",
+    "TrackId": 2
+  },
+  {
+    "Id": 3,
+    "Name": "Bluegreen Vacations Duel 2 at DAYTONA",
+    "Laps": 60,
+    "Stages": 2,
+    "Type": "Duel",
+    "TrackId": 2
+  },
+  {
+    "Id": 4,
+    "Name": "Daytona 500",
+    "Laps": 500,
+    "Stages": 3,
+    "Type": "RegularSeason",
+    "TrackId": 2
+  },
+  {
+    "Id": 5,
+    "Name": "Pale Casino 400",
+    "Laps": 200,
+    "Stages": 3,
+    "Type": "RegularSeason",
+    "TrackId": 3
+  }
+]

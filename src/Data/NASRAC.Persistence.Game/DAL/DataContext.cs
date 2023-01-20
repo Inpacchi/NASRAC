@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +14,15 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {
     public DataContext(DbContextOptions options) : base(options)
     {
+
+    }
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        var seed = new Seed(builder);
+        
+        seed.Initialize();
     }
 
     public virtual DbSet<Car> Car { get; set; }

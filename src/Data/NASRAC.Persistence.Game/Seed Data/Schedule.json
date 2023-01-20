@@ -1,0 +1,37 @@
+﻿[
+  {
+    "Id": 1,
+    "RaceNumber": 1,
+    "Date": "2022-02-06",
+    "RaceId": 1,
+    "SeasonId": 1
+  },
+  {
+    "Id": 2,
+    "RaceNumber": 2,
+    "Date": "2022-02-17",
+    "RaceId": 2,
+    "SeasonId": 1
+  },
+  {
+    "Id": 3,
+    "RaceNumber": 3,
+    "Date": "2022-02-17",
+    "RaceId": 3,
+    "SeasonId": 1
+  },
+  {
+    "Id": 4,
+    "RaceNumber": 4,
+    "Date": "2022-02-20",
+    "RaceId": 4,
+    "SeasonId": 1
+  },
+  {
+    "Id": 5,
+    "RaceNumber": 5,
+    "Date": "2022-02-27",
+    "RaceId": 5,
+    "SeasonId": 1
+  }
+]

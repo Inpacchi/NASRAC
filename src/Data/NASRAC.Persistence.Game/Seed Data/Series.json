@@ -1,0 +1,20 @@
+﻿[
+  {
+    "Id": 1,
+    "Name": "NASRAC Cup Series",
+    "Tier": "AAA",
+    "VehicleType": "car"
+  },
+  {
+    "Id": 2,
+    "Name": "NASRAC Bowl Series",
+    "Tier": "AA",
+    "VehicleType": "car"
+  },
+  {
+    "Id": 3,
+    "Name": "NASRAC Truck Series",
+    "Tier": "A",
+    "VehicleType": "truck"
+  }
+]

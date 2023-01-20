@@ -1,0 +1,23 @@
+﻿[
+  {
+    "Id": 1,
+    "Name": "Los Angeles Memorial Coliseum",
+    "Length": 0.250,
+    "Location": "Los Angeles, CA",
+    "Type": "Short"
+  },
+  {
+    "Id": 2,
+    "Name": "Daytona International Speedway",
+    "Length": 2.500,
+    "Location": "Daytona Beach, FL",
+    "Type": "Superspeedway"
+  },
+  {
+    "Id": 3,
+    "Name": "Auto Club Speedway",
+    "Length": 2.000,
+    "Location": "Fontana, CA",
+    "Type": "Superspeedway"
+  }
+]
