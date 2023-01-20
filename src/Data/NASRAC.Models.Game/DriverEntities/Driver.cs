@@ -115,4 +115,16 @@ public class Driver
     /// Team the driver is contracted to
     /// </summary>
     public Team Team { get; set; }
+
+    public double GetTrackRating(TrackType trackType)
+    {
+        return trackType switch
+        {
+            TrackType.Short => ShortTrackRating,
+            TrackType.Intermediate => IntermediateTrackRating,
+            TrackType.Superspeedway => SuperspeedwayTrackRating,
+            TrackType.Road => RoadTrackRating,
+            _ => 0
+        };
+    }
 }
