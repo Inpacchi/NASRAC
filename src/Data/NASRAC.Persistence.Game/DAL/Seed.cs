@@ -27,7 +27,7 @@ public class Seed
         _options.Converters.Add(new JsonStringEnumConverter());
     }
 
-    public async void Initialize()
+    public void Initialize()
     {
         SeedData<Track>("Track.json");
         SeedData<Series>("Series.json");
@@ -44,10 +44,17 @@ public class Seed
         var json = File.ReadAllText(SeedPath + filename);
 
         var data = JsonSerializer.Deserialize<List<T>>(json, _options);
-        
-        foreach (var d in data)
+
+        if (data != null)
         {
-            _modelBuilder.Entity<T>().HasData(d);
+            foreach (var d in data)
+            {
+                _modelBuilder.Entity<T>().HasData(d);
+            }
+        }
+        else
+        {
+            throw new NullReferenceException($"Filename {filename} returned an error - please double check the filename, location and contents.");
         }
     }
 }
