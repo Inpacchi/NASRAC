@@ -15,6 +15,8 @@ public abstract class BaseResults
     [Required]
     public Race Race { get; set; }
     
+    public int DriverId { get; set; }
+    
     [Required]
     public Driver Driver { get; set; }
     

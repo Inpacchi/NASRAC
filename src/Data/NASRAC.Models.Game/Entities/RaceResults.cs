@@ -9,10 +9,6 @@ namespace NASRAC.Models.Game.Entities;
 /// </summary>
 public class RaceResults : BaseResults
 {
-    public int DriverId { get; set; }
-
-    public Driver Driver { get; set; }
-    
     /// <summary>
     /// Driver's start position for the race
     /// </summary>
