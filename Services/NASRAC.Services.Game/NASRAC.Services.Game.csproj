@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Enums" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\src\Data\NASRAC.Models.Game\NASRAC.Models.Game.csproj" />
     </ItemGroup>
 
