@@ -5,16 +5,18 @@ namespace NASRAC.API.Game.Controllers;
 
 public class GameController : BaseApiController
 {
-    private readonly IGameService GameService;
+    private readonly IGameService _gameService;
 
     public GameController(IGameService gameService)
     {
-        GameService = gameService;
+        _gameService = gameService;
     }
     
     [HttpPost]
-    public async Task RunRace()
+    public async Task<ActionResult> Run()
     {
-        
+        _gameService.RunRace();
+
+        return Ok();
     }
 }
