@@ -1,5 +1,3 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +12,6 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {
     public DataContext(DbContextOptions options) : base(options)
     {
-
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -25,17 +22,24 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
         seed.Initialize();
     }
 
-    public virtual DbSet<Car> Car { get; set; }
-    public virtual DbSet<Driver> Driver { get; set; }
-    public virtual DbSet<Loan> Loan { get; set; }
-    public virtual DbSet<Manufacturer> Manufacturer { get; set; }
-    public virtual DbSet<QualifyingResults> QualifyingResults { get; set; }
-    public virtual DbSet<Race> Race { get; set; }
-    public virtual DbSet<RaceResults> RaceResults { get; set; }
-    public virtual DbSet<Schedule> Schedule { get; set; }
-    public virtual DbSet<Series> Series { get; set; }
-    public virtual DbSet<Sponsor> Sponsor { get; set; }
-    public virtual DbSet<Team> Team { get; set; }
-    public virtual DbSet<TeamFinancials> TeamFinancials { get; set; }
-    public virtual DbSet<Track> Track { get; set; }
+    protected virtual DbSet<Car> Car { get; set; }
+    protected virtual DbSet<Driver> Driver { get; set; }
+    protected virtual DbSet<Loan> Loan { get; set; }
+    protected virtual DbSet<Manufacturer> Manufacturer { get; set; }
+    protected virtual DbSet<QualifyingResults> QualifyingResults { get; set; }
+    protected virtual DbSet<Race> Race { get; set; }
+    protected virtual DbSet<RaceResults> RaceResults { get; set; }
+    protected virtual DbSet<Schedule> Schedule { get; set; }
+    protected virtual DbSet<Series> Series { get; set; }
+    protected virtual DbSet<Sponsor> Sponsor { get; set; }
+    protected virtual DbSet<Team> Team { get; set; }
+    protected virtual DbSet<TeamFinancials> TeamFinancials { get; set; }
+    protected virtual DbSet<Track> Track { get; set; }
+
+    public async Task<ICollection<Driver>> GetAllDrivers()
+    {
+        return await Driver
+            .Include(d => d.Team)
+            .ToListAsync();
+    }
 }
