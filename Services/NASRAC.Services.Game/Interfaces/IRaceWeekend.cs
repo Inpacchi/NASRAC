@@ -2,5 +2,5 @@
 
 public interface IRaceWeekend
 {
-    public void RunRace();
+    public void Initialization();
 }

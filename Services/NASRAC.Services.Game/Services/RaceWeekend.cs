@@ -1,4 +1,4 @@
-﻿using NASRAC.Persistence.Game.DAL;
+using NASRAC.Persistence.Game.DAL;
 using NASRAC.Services.Common.Enums;
 using NASRAC.Services.Game.Entities;
 using NASRAC.Services.Game.Interfaces;
@@ -14,7 +14,7 @@ public class RaceWeekend : IRaceWeekend
         _dataContext = dataContext;
     }
 
-    public void RunRace()
+    public async void Initialization()
     {
         var drivers = _dataContext.Driver;
         var rateRanges = new List<RateRange>();
