@@ -20,6 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{27AA6F0C-D13
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASRAC.Services.Game", "Services\NASRAC.Services.Game\NASRAC.Services.Game.csproj", "{DD002A8B-414C-4AE0-860E-DF9402B3B2A2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution Files", "{48413F35-E451-45B3-A397-03BD71517500}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Makefile = Makefile
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
