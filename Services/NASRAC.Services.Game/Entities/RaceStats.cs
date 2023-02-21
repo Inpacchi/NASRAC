@@ -16,4 +16,12 @@ public class RaceStats : RaceResults
     public double DNFOdds { get; set; }
     public bool IsRunning { get; set; }
     public int CurrentPosition { get; set; }
+
+    public void UpdateLap1Positions(int position)
+    {
+        CurrentPosition = position;
+        StartPosition = position;
+        LowestPosition = position;
+        HighestPosition = position;
+    }
 }

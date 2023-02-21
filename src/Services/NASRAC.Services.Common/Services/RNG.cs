@@ -1,4 +1,4 @@
-namespace NASRAC.Services.Common.Services;
+﻿namespace NASRAC.Services.Common.Services;
 
 public static class RNG
 {
@@ -23,5 +23,9 @@ public static class RNG
     {
         return RandomNumberGenerator.NextDouble() * (upperBound - lowerBound) + lowerBound;
     }
+
+    public static int RollFromList(List<int> list)
+    {
+        return list[RandomNumberGenerator.Next(list.Count)];
     }
 }
