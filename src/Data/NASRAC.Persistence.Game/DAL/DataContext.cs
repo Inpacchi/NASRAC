@@ -36,10 +36,24 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     protected virtual DbSet<TeamFinancials> TeamFinancials { get; set; }
     protected virtual DbSet<Track> Track { get; set; }
 
-    public async Task<ICollection<Driver>> GetAllDrivers()
+    public ICollection<Driver> GetAllDrivers()
     {
-        return await Driver
+        return Driver
             .Include(d => d.Team)
-            .ToListAsync();
+            .ToList();
+    }
+
+    public Race GetRaceById(int id)
+    {
+        return Race
+            .Include(r => r.Track)
+            .First(r => r.Id.Equals(id));
+    }
+
+    public Race GetRaceByName(string name)
+    {
+        return Race
+            .Include(r => r.Track)
+            .First(r => r.Name.Equals(name));
     }
 }
