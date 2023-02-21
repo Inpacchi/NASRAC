@@ -23,6 +23,7 @@ public class RaceWeekend : IRaceWeekend
     private readonly ICollection<RaceResults> _raceResults = new List<RaceResults>();
 
     private int _endingRange;
+    private int _currentLap;
 
     public RaceWeekend(DataContext dataContext)
     {
@@ -34,6 +35,7 @@ public class RaceWeekend : IRaceWeekend
     {
         _race = _dataContext.GetRaceByName("Bluegreen Vacations Duel 1 at DAYTONA");
         _session = RaceWeekendSession.Race;
+        _currentLap = 1;
         
         Setup();
     }
@@ -68,18 +70,26 @@ public class RaceWeekend : IRaceWeekend
 
     private void Race()
     {
-        var currentLap = 1;
         const int averagePositionChange = 6;
         const int averageLapsUnderCaution = 4;
         
-        while (currentLap <= _race.Laps)
+        while (_currentLap <= _race.Laps)
         {
             var lastPosition = DetermineLastPosition();
             var floorPosition = lastPosition - averagePositionChange;
             
-            Console.WriteLine($"********** Processing lap {currentLap} **********");
-            
-            
+            Console.WriteLine($"********** Processing lap {_currentLap} **********");
+
+            if (_currentLap == 1)
+            {
+                CalculateLap1Positions();
+                CalculatePostLapStats();
+            }
+            else
+            {
+                var positionChanges = new List<int>();
+                var driversNotOnLeadLap = new List<Driver>();
+            }
         }
     }
 
@@ -148,6 +158,45 @@ public class RaceWeekend : IRaceWeekend
                 var position = RNG.RollFromList(positions);
                 raceStats.UpdateLap1Positions(position);
                 positions.Remove(position);
+            }
+        }
+    }
+
+    private void CalculatePostLapStats(bool cautionLap = false)
+    {
+        foreach (var raceStats in _raceStats)
+        {
+            raceStats.CalculatePostLapStats(_currentLap, cautionLap);
+        }
+    }
+
+    private void RepopulateRanges()
+    {
+        var placementRange = 0;
+
+        foreach (var driver in _drivers)
+        {
+            var raceStats = _raceStats.First(rs => rs.Driver.Equals(driver));
+            
+            if (raceStats.IsRunning)
+            {
+                var rateRange = _rateRanges.First(rr => rr.Driver.Equals(driver));
+                var cautionsCausedPenalty = 0;
+                var bonus = 0;
+                
+                rateRange.StartingRange = placementRange;
+
+                if (raceStats.CautionsCaused > 0)
+                {
+                    cautionsCausedPenalty = raceStats.CautionsCaused * -250;
+                }
+
+                if (raceStats.TotalLapCount < _currentLap)
+                {
+                    var lapDifference = _currentLap - raceStats.TotalLapCount;
+                    var lapDownPenalty = lapDifference * -100;
+                    bonus = lapDownPenalty + cautionsCausedPenalty;
+                }
             }
         }
     }

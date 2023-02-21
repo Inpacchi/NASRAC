@@ -24,4 +24,43 @@ public class RaceStats : RaceResults
         LowestPosition = position;
         HighestPosition = position;
     }
+    
+    public void CalculatePostLapStats(int currentLap, bool cautionLap = false)
+    {
+        if (!IsRunning) return;
+        
+        AverageRacePosition += CurrentPosition;
+        TotalLapCount += 1;
+
+        if (currentLap == TotalLapCount)
+        {
+            AverageRunningPosition += CurrentPosition;
+        }
+
+        if (cautionLap)
+        {
+            CautionLapCount += 1;
+        }
+
+        if (CurrentPosition <= 15)
+        {
+            Top15LapCount += 1;
+        }
+
+        if (CurrentPosition == 1)
+        {
+            LapLedCount += 1;
+            HighestPosition = 1;
+        }
+        else
+        {
+            if (CurrentPosition > LowestPosition)
+            {
+                LowestPosition = CurrentPosition;
+            } else if (CurrentPosition < HighestPosition)
+            {
+                HighestPosition = CurrentPosition;
+            }
+        }
+    }
 }

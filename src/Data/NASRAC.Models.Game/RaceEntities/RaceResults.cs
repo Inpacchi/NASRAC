@@ -38,8 +38,8 @@ public class RaceResults : BaseResults
         LapLedPercentage = null;
         CautionLapCount = null;
         CautionLapPercentage = null;
-        CautionsCaused = null;
-        TotalLapCount = null;
+        CautionsCaused = 0;
+        TotalLapCount = 0;
     }
 
     /// <summary>
@@ -120,10 +120,10 @@ public class RaceResults : BaseResults
     /// <summary>
     /// How many cautions the driver caused
     /// </summary>
-    public int? CautionsCaused { get; set; }
+    public int CautionsCaused { get; set; }
 
     /// <summary>
     /// Driver's total lap count
     /// </summary>
-    public int? TotalLapCount { get; set; }
+    public int TotalLapCount { get; set; }
 }
