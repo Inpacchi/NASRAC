@@ -11,19 +11,12 @@ public abstract class BaseResults
 {
     public BaseResults()
     {
-        Initialize();
     }
     
     public BaseResults(Race race, Driver driver)
     {
         RaceId = race.Id;
         DriverId = driver.Id;
-    }
-
-    protected virtual void Initialize()
-    {
-        FastestTime = null;
-        TopSpeed = null;
     }
     
     [Key]
@@ -43,11 +36,11 @@ public abstract class BaseResults
     /// Fastest lap time achieved of the session
     /// </summary>
     [Required]
-    public double? FastestTime { get; set; }
+    public double FastestTime { get; set; }
     
     /// <summary>
     /// Fastest speed achieved of the session
     /// </summary>
     [Required]
-    public double? TopSpeed { get; set; }
+    public double TopSpeed { get; set; }
 }
