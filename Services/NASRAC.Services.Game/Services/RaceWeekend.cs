@@ -170,7 +170,7 @@ public class RaceWeekend : IRaceWeekend
         }
     }
 
-    private void RepopulateRanges()
+    private void RepopulateRanges(int stageSwitch = 0)
     {
         var placementRange = 0;
 
@@ -182,7 +182,7 @@ public class RaceWeekend : IRaceWeekend
             {
                 var rateRange = _rateRanges.First(rr => rr.Driver.Equals(driver));
                 var cautionsCausedPenalty = 0;
-                var bonus = 0;
+                int bonus;
                 
                 rateRange.StartingRange = placementRange;
 
@@ -196,6 +196,31 @@ public class RaceWeekend : IRaceWeekend
                     var lapDifference = _currentLap - raceStats.TotalLapCount;
                     var lapDownPenalty = lapDifference * -100;
                     bonus = lapDownPenalty + cautionsCausedPenalty;
+                }
+                else if (stageSwitch != -1)
+                {
+                    int stageBonus = stageSwitch switch
+                    {
+                        1 => raceStats.Stage1Position,
+                        2 => raceStats.Stage2Position,
+                        _ => throw new ArgumentOutOfRangeException()
+                    };
+
+                    bonus = stageBonus + cautionsCausedPenalty;
+                }
+                else
+                {
+                    if (raceStats.LapLedCount == 0)
+                    {
+                        bonus = raceStats.LapLedCount + cautionsCausedPenalty;
+                    } else if (raceStats.Top15LapCount != 0)
+                    {
+                        bonus = raceStats.Top15LapCount + cautionsCausedPenalty;
+                    }
+                    else
+                    {
+                        bonus = 0;
+                    }
                 }
             }
         }
