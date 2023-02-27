@@ -11,6 +11,9 @@ namespace NASRAC.Services.Game.Services;
 
 public class RaceWeekend : IRaceWeekend
 {
+    private const double DriverFactor = 1.25;
+    private const double TeamFactor = 1.40;
+    
     private readonly DataContext _dataContext;
     
     private readonly ICollection<Driver> _drivers;
@@ -46,7 +49,7 @@ public class RaceWeekend : IRaceWeekend
         
         foreach (var driver in _drivers)
         {
-            var rateRange = new RateRange(driver, TrackType.Short, startingRange);
+            var rateRange = new RateRange(driver, _race.Track.Type, startingRange);
             startingRange = rateRange.EndingRange + 1;
             _rateRanges.Add(rateRange);
 
@@ -89,6 +92,43 @@ public class RaceWeekend : IRaceWeekend
             {
                 var positionChanges = new List<int>();
                 var driversNotOnLeadLap = new List<Driver>();
+                RepopulateRanges();
+                
+                foreach (var rateRange in _rateRanges)
+                {
+                    var raceStats = _raceStats.First(rs => rs.Driver.Equals(rateRange.Driver));
+                    
+                    if (!raceStats.IsRunning) continue;
+
+                    if (raceStats.TotalLapCount == _currentLap - 1)
+                    {
+                        CalculateLeadLapPosition(rateRange, raceStats, averagePositionChange, positionChanges, floorPosition, lastPosition);
+                    }
+                    else
+                    {
+                        driversNotOnLeadLap.Add(raceStats.Driver);
+                    }
+                }
+
+                if (driversNotOnLeadLap.Count > 1)
+                {
+                    // process non lead lap drivers
+                }
+                else if (driversNotOnLeadLap.Count == 1)
+                {
+                    var raceStats = _raceStats.First(rs => rs.Driver.Equals(driversNotOnLeadLap[0]));
+                    raceStats.DNFOdds += RNG.RollDoubleRange(.001, .002);
+                }
+                
+                CalculatePostLapStats();
+                
+                foreach (var raceStats in _raceStats)
+                {
+                    if (raceStats.IsRunning && raceStats.DNFOdds > .1)
+                    {
+                        // process wreck chances
+                    } 
+                }
             }
         }
     }
@@ -177,51 +217,156 @@ public class RaceWeekend : IRaceWeekend
         foreach (var driver in _drivers)
         {
             var raceStats = _raceStats.First(rs => rs.Driver.Equals(driver));
+
+            if (!raceStats.IsRunning) continue;
             
-            if (raceStats.IsRunning)
-            {
-                var rateRange = _rateRanges.First(rr => rr.Driver.Equals(driver));
-                var cautionsCausedPenalty = 0;
-                int bonus;
+            var rateRange = _rateRanges.First(rr => rr.Driver.Equals(driver));
+            var cautionsCausedPenalty = 0;
+            int bonus;
                 
-                rateRange.StartingRange = placementRange;
+            rateRange.StartingRange = placementRange;
 
-                if (raceStats.CautionsCaused > 0)
-                {
-                    cautionsCausedPenalty = raceStats.CautionsCaused * -250;
-                }
+            if (raceStats.CautionsCaused > 0)
+            {
+                cautionsCausedPenalty = raceStats.CautionsCaused * -250;
+            }
 
-                if (raceStats.TotalLapCount < _currentLap)
+            if (raceStats.TotalLapCount < _currentLap)
+            {
+                var lapDifference = _currentLap - raceStats.TotalLapCount;
+                var lapDownPenalty = lapDifference * -100;
+                bonus = lapDownPenalty + cautionsCausedPenalty;
+            }
+            else if (stageSwitch != -1)
+            {
+                var stageBonus = stageSwitch switch
                 {
-                    var lapDifference = _currentLap - raceStats.TotalLapCount;
-                    var lapDownPenalty = lapDifference * -100;
-                    bonus = lapDownPenalty + cautionsCausedPenalty;
-                }
-                else if (stageSwitch != -1)
-                {
-                    int stageBonus = stageSwitch switch
-                    {
-                        1 => raceStats.Stage1Position,
-                        2 => raceStats.Stage2Position,
-                        _ => throw new ArgumentOutOfRangeException()
-                    };
+                    1 => raceStats.Stage1Position,
+                    2 => raceStats.Stage2Position,
+                    _ => throw new ArgumentOutOfRangeException()
+                };
 
-                    bonus = stageBonus + cautionsCausedPenalty;
+                bonus = stageBonus + cautionsCausedPenalty;
+            }
+            else
+            {
+                if (raceStats.LapLedCount == 0)
+                {
+                    bonus = raceStats.LapLedCount + cautionsCausedPenalty;
+                } else if (raceStats.Top15LapCount != 0)
+                {
+                    bonus = raceStats.Top15LapCount + cautionsCausedPenalty;
                 }
                 else
                 {
-                    if (raceStats.LapLedCount == 0)
+                    bonus = 0;
+                }
+            }
+
+            placementRange += CalculateRange(driver, bonus);
+                
+            var positionBonus = PositionBonus.Get(raceStats.CurrentPosition);
+            var bonusRange = (int)Math.Floor((placementRange * positionBonus) + placementRange);
+
+            if (rateRange.EndingRange <= bonusRange)
+            {
+                rateRange.EndingRange = bonusRange;
+            }
+            else
+            {
+                var endingRange = rateRange.EndingRange;
+                rateRange.EndingRange = (int)Math.Floor(endingRange * positionBonus) + endingRange;
+            }
+
+            placementRange = rateRange.EndingRange++;
+        }
+
+        _endingRange = placementRange;
+    }
+
+    private int CalculateRange(Driver driver, int bonus)
+    {
+        var driverResult = Math.Pow(driver.GetTrackRating(_race.Track.Type), DriverFactor);
+        var teamResult = Math.Pow((driver.Team.EquipmentRating + driver.Team.PersonnelRating) / 2, TeamFactor);
+        var bonusResult = bonus * 50;
+        
+        return (int)Math.Round((driverResult * teamResult + bonusResult) / 100);
+    }
+
+    private void CalculateLeadLapPosition(RateRange rateRange, RaceStats raceStats, int averagePositionChange, List<int> positionChanges, int floorPosition, int lastPosition)
+    {
+        var magicNumber = RNG.RollIntRange(0, _endingRange);
+        var currentPosition = raceStats.CurrentPosition;
+        
+        if (rateRange.StartingRange <= magicNumber && magicNumber <= rateRange.EndingRange)
+        {
+            var randomPosition = currentPosition <= averagePositionChange
+                ? RNG.RollIntRange(1, currentPosition)
+                : RNG.RollIntRange(currentPosition - averagePositionChange, currentPosition);
+
+            if (randomPosition == 1)
+            {
+                if (!positionChanges.Contains(randomPosition))
+                {
+                    raceStats.DNFOdds += RNG.RollDoubleRange(0, .001);
+                    positionChanges.Add(1);
+                }
+                else
+                {
+                    raceStats.DNFOdds += RNG.RollDoubleRange(0, .0015);
+
+                    for (var i = 0; i < randomPosition; i++)
                     {
-                        bonus = raceStats.LapLedCount + cautionsCausedPenalty;
-                    } else if (raceStats.Top15LapCount != 0)
-                    {
-                        bonus = raceStats.Top15LapCount + cautionsCausedPenalty;
-                    }
-                    else
-                    {
-                        bonus = 0;
+                        randomPosition = currentPosition <= averagePositionChange
+                            ? RNG.RollIntRange(2, currentPosition)
+                            : RNG.RollIntRange(currentPosition - averagePositionChange, currentPosition);
                     }
                 }
+            }
+            else
+            {
+                raceStats.DNFOdds += RNG.RollDoubleRange(0, .002);
+            }
+
+            raceStats.CurrentPosition = randomPosition;
+            
+            ShiftDrivers(rateRange.Driver, currentPosition, randomPosition, ShiftDirection.Up);
+        }
+        else
+        {
+            var previousPosition = raceStats.CurrentPosition;
+            raceStats.DNFOdds += RNG.RollDoubleRange(.002, .002);
+            var randomPosition = currentPosition >= floorPosition ?
+                RNG.RollIntRange(previousPosition, lastPosition) :
+                RNG.RollIntRange(currentPosition, currentPosition + averagePositionChange);
+
+            raceStats.CurrentPosition = randomPosition;
+            ShiftDrivers(rateRange.Driver, previousPosition, randomPosition, ShiftDirection.Down);
+        }
+    }
+
+    private void ShiftDrivers(Driver driver, int oldPosition, int newPosition, ShiftDirection direction)
+    {
+        while (oldPosition != newPosition)
+        {
+            foreach (var raceStats in _raceStats)
+            {
+                if (raceStats.Driver != driver && raceStats.CurrentPosition == newPosition)
+                {
+                    if (direction == ShiftDirection.Up)
+                        newPosition += 1;
+                    else
+                        newPosition -= 1;
+
+                    raceStats.CurrentPosition = newPosition;
+                    driver = raceStats.Driver;
+
+                    if (!raceStats.IsRunning)
+                        raceStats.FinishPosition = newPosition;
+                    
+                    break;
+                }
+                    
             }
         }
     }
