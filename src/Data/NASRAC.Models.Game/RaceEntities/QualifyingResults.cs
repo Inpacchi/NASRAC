@@ -10,22 +10,13 @@ public class QualifyingResults : BaseResults
 {
     public QualifyingResults()
     {
-        Initialize();
     }
     public QualifyingResults(Race race, Driver driver) : base(race, driver)
     {
-        Initialize();
-    }
-
-    protected sealed override void Initialize()
-    {
-        base.Initialize();
-
-        Position = null;
     }
 
     /// <summary>
     /// Final qualifying position
     /// </summary>
-    public int? Position { get; set; }
+    public int Position { get; set; }
 }
