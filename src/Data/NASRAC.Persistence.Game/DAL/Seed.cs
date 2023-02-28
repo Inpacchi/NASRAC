@@ -12,8 +12,8 @@ public class Seed
 {
     private readonly ModelBuilder _modelBuilder;
     private readonly JsonSerializerOptions _options;
-    
-    private const string SeedPath = "..\\..\\Data\\NASRAC.Persistence.Game\\Seed Data\\";
+
+    private static readonly string SeedPath = Path.Combine("..", "..", "Data", "NASRAC.Persistence.Game", "Seed Data");
 
     public Seed(ModelBuilder modelBuilder)
     {
@@ -41,7 +41,7 @@ public class Seed
 
     private void SeedData<T>(string filename) where T : class
     {
-        var json = File.ReadAllText(SeedPath + filename);
+        var json = File.ReadAllText(Path.Combine(SeedPath, filename));
 
         var data = JsonSerializer.Deserialize<List<T>>(json, _options);
 
