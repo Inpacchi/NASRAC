@@ -15,7 +15,9 @@ public abstract class BaseResults
     
     public BaseResults(Race race, Driver driver)
     {
+        Race = race;
         RaceId = race.Id;
+        Driver = driver;
         DriverId = driver.Id;
     }
     

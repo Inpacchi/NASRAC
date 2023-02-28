@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
+using NASRAC.Models.Game.RaceEntities;
 using NASRAC.Models.Game.TeamEntities;
 using NASRAC.Models.WebApp.Entities;
 
@@ -28,6 +29,7 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     protected virtual DbSet<Manufacturer> Manufacturer { get; set; }
     protected virtual DbSet<QualifyingResults> QualifyingResults { get; set; }
     protected virtual DbSet<Race> Race { get; set; }
+    protected virtual DbSet<RaceLog> RaceLogs { get; set; }
     protected virtual DbSet<RaceResults> RaceResults { get; set; }
     protected virtual DbSet<Schedule> Schedule { get; set; }
     protected virtual DbSet<Series> Series { get; set; }
