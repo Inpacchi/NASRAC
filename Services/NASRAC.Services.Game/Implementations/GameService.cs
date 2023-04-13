@@ -1,7 +1,8 @@
 using NASRAC.Persistence.Game.DAL;
 using NASRAC.Services.Game.Interfaces;
+using NASRAC.Services.Game.Services;
 
-namespace NASRAC.Services.Game.Services;
+namespace NASRAC.Services.Game.Implementations;
 
 public class GameService : IGameService
 {
