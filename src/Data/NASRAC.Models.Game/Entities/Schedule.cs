@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using NASRAC.Models.Game.RaceEntities;
 
 namespace NASRAC.Models.Game.Entities;
 

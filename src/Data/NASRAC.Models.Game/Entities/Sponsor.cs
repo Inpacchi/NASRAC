@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using NASRAC.Models.Game.BaseEntities;
 using NASRAC.Services.Common.Enums;
 
 namespace NASRAC.Models.Game.Entities;

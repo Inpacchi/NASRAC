@@ -1,8 +1,7 @@
 ﻿using NASRAC.Models.Game.BaseEntities;
 using NASRAC.Models.Game.DriverEntities;
-using NASRAC.Services.Common.Enums;
 
-namespace NASRAC.Models.Game.Entities;
+namespace NASRAC.Models.Game.RaceEntities;
 
 /// <summary>
 /// Driver's Race Results & Stats

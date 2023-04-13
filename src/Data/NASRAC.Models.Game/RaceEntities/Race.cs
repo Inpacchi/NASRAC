@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NASRAC.Services.Common.Enums;
 
-namespace NASRAC.Models.Game.Entities;
+namespace NASRAC.Models.Game.RaceEntities;
 
 /// <summary>
 /// Race entity

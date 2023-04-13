@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NASRAC.Models.Game.DriverEntities;
-using NASRAC.Models.Game.Entities;
+using NASRAC.Models.Game.RaceEntities;
 
 namespace NASRAC.Models.Game.BaseEntities;
 
@@ -9,11 +9,11 @@ namespace NASRAC.Models.Game.BaseEntities;
 /// </summary>
 public abstract class BaseResults
 {
-    public BaseResults()
+    protected BaseResults()
     {
     }
-    
-    public BaseResults(Race race, Driver driver)
+
+    protected BaseResults(Race race, Driver driver)
     {
         Race = race;
         RaceId = race.Id;

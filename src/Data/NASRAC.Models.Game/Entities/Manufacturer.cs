@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NASRAC.Models.Game.JoinEntities;
-using NASRAC.Models.Game.TeamEntities;
 using NASRAC.Services.Common.Enums;
 
 namespace NASRAC.Models.Game.Entities;

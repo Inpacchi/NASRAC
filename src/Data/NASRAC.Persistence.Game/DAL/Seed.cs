@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
 using NASRAC.Models.Game.JoinEntities;
+using NASRAC.Models.Game.RaceEntities;
 using NASRAC.Models.Game.TeamEntities;
 
 namespace NASRAC.Persistence.Game.DAL;
