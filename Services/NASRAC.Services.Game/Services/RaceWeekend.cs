@@ -137,6 +137,7 @@ public class RaceWeekend : IRaceWeekend
         }
         
         // process post race
+        _dataContext.SaveChanges();
     }
 
     private int DetermineLastPosition()
