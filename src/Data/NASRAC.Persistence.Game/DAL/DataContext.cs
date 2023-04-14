@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using NASRAC.Models.Game.BaseEntities;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
 using NASRAC.Models.Game.RaceEntities;
@@ -18,9 +19,20 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        #region Create Tables
+
+        builder.Entity<BaseResults>().UseTpcMappingStrategy();
+        
+        #endregion
+
+        #region Seed Data
+
         var seed = new Seed(builder);
         
         seed.Initialize();
+
+        #endregion
     }
 
     protected virtual DbSet<Car> Car { get; set; }
@@ -29,7 +41,7 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     protected virtual DbSet<Manufacturer> Manufacturer { get; set; }
     protected virtual DbSet<QualifyingResults> QualifyingResults { get; set; }
     protected virtual DbSet<Race> Race { get; set; }
-    protected virtual DbSet<RaceLog> RaceLogs { get; set; }
+    protected virtual DbSet<RaceLog> RaceLog { get; set; }
     protected virtual DbSet<RaceResults> RaceResults { get; set; }
     protected virtual DbSet<Schedule> Schedule { get; set; }
     protected virtual DbSet<Series> Series { get; set; }
