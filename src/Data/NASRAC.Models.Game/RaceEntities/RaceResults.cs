@@ -4,7 +4,7 @@ using NASRAC.Models.Game.DriverEntities;
 namespace NASRAC.Models.Game.RaceEntities;
 
 /// <summary>
-/// Driver's Race Results & Stats
+/// Driver's End of Race Results
 /// </summary>
 public class RaceResults : BaseResults
 {

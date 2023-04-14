@@ -3,6 +3,9 @@ using NASRAC.Services.Common.Services;
 
 namespace NASRAC.Models.Game.RaceEntities;
 
+/// <summary>
+/// Driver's Per-Lap Race Log
+/// </summary>
 public class RaceLog : RaceResults
 {
     public RaceLog() : base()
