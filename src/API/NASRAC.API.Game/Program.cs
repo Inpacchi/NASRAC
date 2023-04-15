@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
 var app = builder.Build();

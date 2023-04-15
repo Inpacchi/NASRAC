@@ -5,38 +5,47 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NASRAC.Persistence.Game.DAL;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace NASRAC.Persistence.Game.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230120194135_InitialCreate")]
+    [Migration("20230415024537_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.2");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.HasSequence("BaseResultsSequence");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
@@ -51,16 +60,18 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -73,16 +84,18 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -94,16 +107,16 @@ namespace NASRAC.Persistence.Game.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -115,10 +128,10 @@ namespace NASRAC.Persistence.Game.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("RoleId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -130,79 +143,113 @@ namespace NASRAC.Persistence.Game.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.Property<int>("UserId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Value")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("NASRAC.Models.Game.BaseEntities.BaseResults", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValueSql("nextval('\"BaseResultsSequence\"')");
+
+                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
+
+                    b.Property<int>("DriverId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("FastestTime")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("TopSpeed")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable((string)null);
+
+                    b.UseTpcMappingStrategy();
+                });
+
             modelBuilder.Entity("NASRAC.Models.Game.DriverEntities.Driver", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Age")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<double>("DNFOdds")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("IntermediateTrackRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<int>("Marketability")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<double>("OverallRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<int>("PeakAgeEnd")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("PeakAgeStart")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<double>("PerformanceRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("PotentialRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("ProgressionRate")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("RegressionRate")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("RetirementFactor")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("RoadTrackRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("ShortTrackRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("SuperspeedwayTrackRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<int>("TeamId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -280,16 +327,18 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("ManufacturerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Number")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("TeamId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -304,25 +353,27 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("BorrowerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<double>("InterestRate")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<int>("LenderId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("MaturityDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("TotalAmountLoaned")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("TotalAmountPaid")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -337,14 +388,16 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("VehicleType")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -389,57 +442,228 @@ namespace NASRAC.Persistence.Game.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.QualifyingResults", b =>
+            modelBuilder.Entity("NASRAC.Models.Game.Entities.Schedule", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
-                    b.Property<int>("DriverId")
-                        .HasColumnType("INTEGER");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("FastestTime")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateOnly>("Date")
+                        .HasColumnType("date");
 
                     b.Property<int>("RaceId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
-                    b.Property<double>("TopSpeed")
-                        .HasColumnType("REAL");
+                    b.Property<int>("RaceNumber")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SeasonId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DriverId");
-
                     b.HasIndex("RaceId");
 
-                    b.ToTable("QualifyingResults");
+                    b.ToTable("Schedule");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateOnly(2022, 2, 6),
+                            RaceId = 1,
+                            RaceNumber = 1,
+                            SeasonId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Date = new DateOnly(2022, 2, 17),
+                            RaceId = 2,
+                            RaceNumber = 2,
+                            SeasonId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Date = new DateOnly(2022, 2, 17),
+                            RaceId = 3,
+                            RaceNumber = 3,
+                            SeasonId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Date = new DateOnly(2022, 2, 20),
+                            RaceId = 4,
+                            RaceNumber = 4,
+                            SeasonId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Date = new DateOnly(2022, 2, 27),
+                            RaceId = 5,
+                            RaceNumber = 5,
+                            SeasonId = 1
+                        });
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Race", b =>
+            modelBuilder.Entity("NASRAC.Models.Game.Entities.Series", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
-                    b.Property<int>("Laps")
-                        .HasColumnType("INTEGER");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
+
+                    b.Property<int>("Tier")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("VehicleType")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Series");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "NASRAC Cup Series",
+                            Tier = 1,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "NASRAC Bowl Series",
+                            Tier = 2,
+                            VehicleType = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "NASRAC Truck Series",
+                            Tier = 3,
+                            VehicleType = 1
+                        });
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Entities.Sponsor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<double>("Budget")
+                        .HasColumnType("double precision");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("PrestigeLevel")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sponsor");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.JoinEntities.TeamManufacturers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ManufacturerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ManufacturerId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamManufacturers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ManufacturerId = 3,
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ManufacturerId = 4,
+                            TeamId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ManufacturerId = 1,
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ManufacturerId = 2,
+                            TeamId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ManufacturerId = 5,
+                            TeamId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ManufacturerId = 6,
+                            TeamId = 3
+                        });
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.Race", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Laps")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("Stages")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("TrackId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -495,217 +719,27 @@ namespace NASRAC.Persistence.Game.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.RaceResults", b =>
+            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.Track", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
-                    b.Property<int>("AveragePosition")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("DriverId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("FastestTime")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("FinishPosition")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("HighestPosition")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LapLedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LapLedPercentage")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("LowestPosition")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("RaceId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Stage")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("StartPosition")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Top15LapCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Top15LapPercentage")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("TopSpeed")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("TotalLapCount")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DriverId");
-
-                    b.HasIndex("RaceId");
-
-                    b.ToTable("RaceResults");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Schedule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateOnly>("Date")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("RaceId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("RaceNumber")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("SeasonId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RaceId");
-
-                    b.ToTable("Schedule");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Date = new DateOnly(2022, 2, 6),
-                            RaceId = 1,
-                            RaceNumber = 1,
-                            SeasonId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Date = new DateOnly(2022, 2, 17),
-                            RaceId = 2,
-                            RaceNumber = 2,
-                            SeasonId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Date = new DateOnly(2022, 2, 17),
-                            RaceId = 3,
-                            RaceNumber = 3,
-                            SeasonId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Date = new DateOnly(2022, 2, 20),
-                            RaceId = 4,
-                            RaceNumber = 4,
-                            SeasonId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Date = new DateOnly(2022, 2, 27),
-                            RaceId = 5,
-                            RaceNumber = 5,
-                            SeasonId = 1
-                        });
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Series", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Tier")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("VehicleType")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Series");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "NASRAC Cup Series",
-                            Tier = 1,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "NASRAC Bowl Series",
-                            Tier = 2,
-                            VehicleType = 0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "NASRAC Truck Series",
-                            Tier = 3,
-                            VehicleType = 1
-                        });
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Sponsor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Budget")
-                        .HasColumnType("REAL");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("PrestigeLevel")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sponsor");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Track", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<double>("Length")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<int>("Type")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -738,89 +772,32 @@ namespace NASRAC.Persistence.Game.Migrations
                         });
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.JoinEntities.TeamManufacturers", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ManufacturerId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ManufacturerId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("TeamManufacturers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ManufacturerId = 3,
-                            TeamId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ManufacturerId = 4,
-                            TeamId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ManufacturerId = 1,
-                            TeamId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ManufacturerId = 2,
-                            TeamId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ManufacturerId = 5,
-                            TeamId = 3
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ManufacturerId = 6,
-                            TeamId = 3
-                        });
-                });
-
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<double>("EquipmentRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<double>("OverallRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<int?>("OwnerId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<double>("PerformanceRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<double>("PersonnelRating")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -862,16 +839,18 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<double>("Balance")
-                        .HasColumnType("REAL");
+                        .HasColumnType("double precision");
 
                     b.Property<DateTime>("StatementDate")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("TeamId")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -884,54 +863,56 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("integer");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("boolean");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("text");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("boolean");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("character varying(256)");
 
                     b.HasKey("Id");
 
@@ -943,6 +924,93 @@ namespace NASRAC.Persistence.Game.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.QualifyingResults", b =>
+                {
+                    b.HasBaseType("NASRAC.Models.Game.BaseEntities.BaseResults");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer");
+
+                    b.ToTable("QualifyingResults");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.RaceResults", b =>
+                {
+                    b.HasBaseType("NASRAC.Models.Game.BaseEntities.BaseResults");
+
+                    b.Property<int>("AverageRacePosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("AverageRunningPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionLapCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionLapPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionsCaused")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DNFPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FinishPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("HighestPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LapLedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("LapLedPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LowestPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Stage1Position")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Stage2Position")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StartPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Top15LapCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Top15LapPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TotalLapCount")
+                        .HasColumnType("integer");
+
+                    b.ToTable("RaceResults");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.RaceLog", b =>
+                {
+                    b.HasBaseType("NASRAC.Models.Game.RaceEntities.RaceResults");
+
+                    b.Property<int>("CurrentPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("DNFOdds")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("DriverRating")
+                        .HasColumnType("double precision");
+
+                    b.Property<bool>("IsRunning")
+                        .HasColumnType("boolean");
+
+                    b.ToTable("RaceLog");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -996,6 +1064,25 @@ namespace NASRAC.Persistence.Game.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NASRAC.Models.Game.BaseEntities.BaseResults", b =>
+                {
+                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Race");
+                });
+
             modelBuilder.Entity("NASRAC.Models.Game.DriverEntities.Driver", b =>
                 {
                     b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Team")
@@ -1045,58 +1132,9 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Navigation("Lender");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.QualifyingResults", b =>
-                {
-                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NASRAC.Models.Game.Entities.Race", "Race")
-                        .WithMany()
-                        .HasForeignKey("RaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Driver");
-
-                    b.Navigation("Race");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Race", b =>
-                {
-                    b.HasOne("NASRAC.Models.Game.Entities.Track", "Track")
-                        .WithMany()
-                        .HasForeignKey("TrackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Track");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.RaceResults", b =>
-                {
-                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NASRAC.Models.Game.Entities.Race", "Race")
-                        .WithMany()
-                        .HasForeignKey("RaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Driver");
-
-                    b.Navigation("Race");
-                });
-
             modelBuilder.Entity("NASRAC.Models.Game.Entities.Schedule", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.Entities.Race", "Race")
+                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
                         .WithMany()
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1122,6 +1160,17 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Navigation("Manufacturer");
 
                     b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.Race", b =>
+                {
+                    b.HasOne("NASRAC.Models.Game.RaceEntities.Track", "Track")
+                        .WithMany()
+                        .HasForeignKey("TrackId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Track");
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
