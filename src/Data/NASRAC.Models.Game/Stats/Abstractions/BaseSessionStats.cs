@@ -1,60 +1,51 @@
-﻿using NASRAC.Models.Game.BaseEntities;
-using NASRAC.Models.Game.DriverEntities;
+﻿using NASRAC.Models.Game.DriverEntities;
+using NASRAC.Models.Game.RaceEntities;
+using NASRAC.Models.Game.Stats.Interfaces;
 
-namespace NASRAC.Models.Game.RaceEntities;
+namespace NASRAC.Models.Game.Stats.Abstractions;
 
 /// <summary>
-/// Driver's End of Race Results
+/// Driver's Session Results (used for Stages and End of Race)
 /// </summary>
-public class RaceResults : BaseResults
+public abstract class BaseSessionStats : BaseStats, IBaseSessionStats
 {
-    public RaceResults() : base()
+    protected BaseSessionStats()
+    {
+    }
+
+    protected BaseSessionStats(Race race, Driver driver) : base(race, driver)
     {
     }
     
-    public RaceResults(Race race, Driver driver) : base(race, driver)
-    {
-    }
-
     /// <summary>
-    /// Driver's start position for the race
+    /// Driver's start position for the session
     /// </summary>
     public int StartPosition { get; set; }
     
     /// <summary>
-    /// Driver's end position for the race
+    /// Driver's finish position for the session
     /// </summary>
     public int FinishPosition { get; set; }
     
     /// <summary>
-    /// Lowest position the driver dropped to during the race
+    /// Lowest position the driver dropped to during the session
     /// </summary>
     public int LowestPosition { get; set; }
     
     /// <summary>
-    /// Highest position the driver rose to during the race
+    /// Highest position the driver rose to during the session
     /// </summary>
     public int HighestPosition { get; set; }
     
     /// <summary>
-    /// Driver's overall average race position
+    /// Driver's overall average position
     /// </summary>
-    public int AverageRacePosition { get; set; }
+    public int AveragePosition { get; set; }
     
     /// <summary>
-    /// Driver's average race position while on the lead lap
+    /// Driver's average position while on the lead lap
     /// </summary>
     public int AverageRunningPosition { get; set; }
-
-    /// <summary>
-    /// Driver's position at the end of stage 1
-    /// </summary>
-    public int Stage1Position { get; set; }
-
-    /// <summary>
-    /// Driver's position at the end of stage 2
-    /// </summary>
-    public int Stage2Position { get; set; }
 
     /// <summary>
     /// Driver's position (if) at the time they DNF'd
@@ -79,7 +70,7 @@ public class RaceResults : BaseResults
     /// <summary>
     /// Percentage of laps the driver led
     /// </summary>
-    public int? LapLedPercentage { get; set; }
+    public int LapLedPercentage { get; set; }
 
     /// <summary>
     /// How many laps the driver spent under caution

@@ -1,12 +1,14 @@
 ﻿using NASRAC.Models.Game.DriverEntities;
+using NASRAC.Models.Game.RaceEntities;
+using NASRAC.Models.Game.Stats.Abstractions;
 using NASRAC.Services.Common.Services;
 
-namespace NASRAC.Models.Game.RaceEntities;
+namespace NASRAC.Models.Game.Stats;
 
 /// <summary>
 /// Driver's Per-Lap Race Log
 /// </summary>
-public class RaceLog : RaceResults
+public class RaceLog : BaseSessionStats
 {
     public RaceLog() : base()
     {
@@ -34,7 +36,7 @@ public class RaceLog : RaceResults
     {
         if (!IsRunning) return;
         
-        AverageRacePosition += CurrentPosition;
+        AveragePosition += CurrentPosition;
         TotalLapCount += 1;
 
         if (currentLap == TotalLapCount)

@@ -1,6 +1,8 @@
 ﻿using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.RaceEntities;
+using NASRAC.Models.Game.Stats;
 using NASRAC.Persistence.Game.DAL;
+using NASRAC.Persistence.Game.DAL.Queries;
 using NASRAC.Services.Common.Enums;
 using NASRAC.Services.Common.Services;
 using NASRAC.Services.Game.Entities;
@@ -21,7 +23,7 @@ public class RaceWeekend : IRaceWeekend
     
     private readonly ICollection<RateRange> _rateRanges = new List<RateRange>();
     private readonly ICollection<RaceLog> _raceLogs = new List<RaceLog>();
-    private readonly ICollection<QualifyingResults> _qualifyingResults = new List<QualifyingResults>();
+    private readonly ICollection<QualifyingStats> _qualifyingStats = new List<QualifyingStats>();
     private readonly ICollection<RaceResults> _raceResults = new List<RaceResults>();
 
     private int _endingRange;
@@ -30,12 +32,12 @@ public class RaceWeekend : IRaceWeekend
     public RaceWeekend(DataContext dataContext)
     {
         _dataContext = dataContext;
-        _drivers = _dataContext.GetAllDrivers();
+        _drivers = _dataContext.DriverQueries.GetAllDrivers();
     }
 
     public async void Initialization()
     {
-        _race = _dataContext.GetRaceByName("Bluegreen Vacations Duel 1 at DAYTONA");
+        _race = _dataContext.RaceQueries.GetRaceByName("Bluegreen Vacations Duel 1 at DAYTONA");
         _session = RaceWeekendSession.Race;
         _currentLap = 1;
         
@@ -56,11 +58,18 @@ public class RaceWeekend : IRaceWeekend
             switch (_session)
             {
                 case RaceWeekendSession.Qualifying:
-                    _qualifyingResults.Add(new QualifyingResults(_race, driver));
+                    var qualifyingStats = new QualifyingStats(_race, driver);
+                    _dataContext.Add(qualifyingStats);
+                    _qualifyingStats.Add(qualifyingStats);
                     break;
                 case RaceWeekendSession.Race:
-                    _raceLogs.Add(new RaceLog(_race, driver));
-                    _raceResults.Add(new RaceResults(_race, driver));
+                    var raceLog = new RaceLog(_race, driver);
+                    _dataContext.Add(raceLog);
+                    _raceLogs.Add(raceLog);
+
+                    var raceResults = new RaceResults(_race, driver);
+                    _dataContext.Add(raceResults);
+                    _raceResults.Add(raceResults);
                     break;
                 case RaceWeekendSession.Practice:
                 default:
@@ -93,6 +102,7 @@ public class RaceWeekend : IRaceWeekend
                 var positionChanges = new List<int>();
                 var driversNotOnLeadLap = new List<Driver>();
                 RepopulateRanges();
+                Console.WriteLine("Ranges repopulated");
                 
                 foreach (var rateRange in _rateRanges)
                 {
@@ -136,6 +146,7 @@ public class RaceWeekend : IRaceWeekend
         
         // process post race
         _dataContext.SaveChanges();
+        Console.WriteLine("Save called");
     }
 
     private int DetermineLastPosition()
@@ -244,10 +255,14 @@ public class RaceWeekend : IRaceWeekend
             }
             else if (stageSwitch != -1)
             {
+                /*
+                 * TODO: Redo logic now that Stage Position lives in RaceStats and is tracked in RaceLog by using
+                 * the RaceSession switch
+                 */
                 var stageBonus = stageSwitch switch
                 {
-                    1 => raceLog.Stage1Position,
-                    2 => raceLog.Stage2Position,
+                    1 => raceLog.FinishPosition,
+                    2 => raceLog.FinishPosition,
                     _ => throw new ArgumentOutOfRangeException()
                 };
 

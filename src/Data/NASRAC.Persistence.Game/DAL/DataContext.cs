@@ -1,73 +1,56 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using NASRAC.Models.Game.BaseEntities;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
 using NASRAC.Models.Game.RaceEntities;
+using NASRAC.Models.Game.Stats;
 using NASRAC.Models.Game.TeamEntities;
 using NASRAC.Models.WebApp.Entities;
+using NASRAC.Persistence.Game.DAL.Queries;
 
 namespace NASRAC.Persistence.Game.DAL;
 
 public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {
+    public readonly RaceQueries RaceQueries;
+    public readonly DriverQueries DriverQueries;
+    
     public DataContext(DbContextOptions options) : base(options)
     {
+        DriverQueries = new DriverQueries(options);
+        RaceQueries = new RaceQueries(options);
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        #region Create Tables
-
-        builder.Entity<BaseResults>().UseTpcMappingStrategy();
-        
-        #endregion
-
         #region Seed Data
-
-        var seed = new Seed(builder);
         
+        var seed = new Seed(builder);
         seed.Initialize();
-
+        
         #endregion
     }
 
+    #region Database Structure
+    
     protected virtual DbSet<Car> Car { get; set; }
     protected virtual DbSet<Driver> Driver { get; set; }
     protected virtual DbSet<Loan> Loan { get; set; }
     protected virtual DbSet<Manufacturer> Manufacturer { get; set; }
-    protected virtual DbSet<QualifyingResults> QualifyingResults { get; set; }
     protected virtual DbSet<Race> Race { get; set; }
-    protected virtual DbSet<RaceLog> RaceLog { get; set; }
-    protected virtual DbSet<RaceResults> RaceResults { get; set; }
     protected virtual DbSet<Schedule> Schedule { get; set; }
     protected virtual DbSet<Series> Series { get; set; }
     protected virtual DbSet<Sponsor> Sponsor { get; set; }
     protected virtual DbSet<Team> Team { get; set; }
     protected virtual DbSet<TeamFinancials> TeamFinancials { get; set; }
     protected virtual DbSet<Track> Track { get; set; }
-
-    public ICollection<Driver> GetAllDrivers()
-    {
-        return Driver
-            .Include(d => d.Team)
-            .ToList();
-    }
-
-    public Race GetRaceById(int id)
-    {
-        return Race
-            .Include(r => r.Track)
-            .First(r => r.Id.Equals(id));
-    }
-
-    public Race GetRaceByName(string name)
-    {
-        return Race
-            .Include(r => r.Track)
-            .First(r => r.Name.Equals(name));
-    }
+    protected virtual DbSet<SessionStats> SessionStats { get; set; }
+    protected virtual DbSet<QualifyingStats> QualifyingStats { get; set; }
+    protected virtual DbSet<RaceLog> RaceLog { get; set; }
+    protected virtual DbSet<RaceResults> RaceResults { get; set; }
+    
+    #endregion
 }

@@ -1,19 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.RaceEntities;
+using NASRAC.Models.Game.Stats.Interfaces;
 
-namespace NASRAC.Models.Game.BaseEntities;
+namespace NASRAC.Models.Game.Stats.Abstractions;
 
 /// <summary>
-/// Base implementation of the Results class that all Results classes should implement
+/// Base implementation of the Stats class that all Stats-related classes should implement
 /// </summary>
-public abstract class BaseResults
+public abstract class BaseStats : IBaseStats
 {
-    protected BaseResults()
+    protected BaseStats()
     {
     }
 
-    protected BaseResults(Race race, Driver driver)
+    protected BaseStats(Race race, Driver driver)
     {
         Race = race;
         RaceId = race.Id;
