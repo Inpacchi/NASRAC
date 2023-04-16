@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NASRAC.Persistence.Game.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230415024537_InitialCreate")]
+    [Migration("20230416063020_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,8 +24,6 @@ namespace NASRAC.Persistence.Game.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.HasSequence("BaseResultsSequence");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
                 {
@@ -157,38 +155,6 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.BaseEntities.BaseResults", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasDefaultValueSql("nextval('\"BaseResultsSequence\"')");
-
-                    NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
-
-                    b.Property<int>("DriverId")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("FastestTime")
-                        .HasColumnType("double precision");
-
-                    b.Property<int>("RaceId")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("TopSpeed")
-                        .HasColumnType("double precision");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DriverId");
-
-                    b.HasIndex("RaceId");
-
-                    b.ToTable((string)null);
-
-                    b.UseTpcMappingStrategy();
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.DriverEntities.Driver", b =>
@@ -772,6 +738,284 @@ namespace NASRAC.Persistence.Game.Migrations
                         });
                 });
 
+            modelBuilder.Entity("NASRAC.Models.Game.Stats.QualifyingStats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DriverId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("FastestTime")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("Position")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("TopSpeed")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("QualifyingStats");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Stats.RaceLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AveragePosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("AverageRunningPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionLapCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionLapPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionsCaused")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CurrentPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("DNFOdds")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("DNFPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DriverId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("DriverRating")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("FastestTime")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("FinishPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("HighestPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsRunning")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("LapLedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LapLedPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LowestPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StartPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Top15LapCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Top15LapPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("TopSpeed")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("TotalLapCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("RaceLog");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Stats.RaceResults", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AveragePosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("AverageRunningPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionLapCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionLapPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionsCaused")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DNFPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DriverId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EndPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("FastestTime")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("FinishPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("HighestPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LapLedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LapLedPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LowestPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Stage1Position")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Stage2Position")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StartPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Top15LapCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Top15LapPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("TopSpeed")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("TotalLapCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("RaceResults");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Stats.SessionStats", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AveragePosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("AverageRunningPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionLapCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionLapPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CautionsCaused")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DNFPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("DriverId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("FastestTime")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("FinishPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("HighestPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LapLedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LapLedPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("LowestPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RaceId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Session")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StartPosition")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Top15LapCount")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Top15LapPercentage")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("TopSpeed")
+                        .HasColumnType("double precision");
+
+                    b.Property<int>("TotalLapCount")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DriverId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("SessionStats");
+                });
+
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
                 {
                     b.Property<int>("Id")
@@ -926,93 +1170,6 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.QualifyingResults", b =>
-                {
-                    b.HasBaseType("NASRAC.Models.Game.BaseEntities.BaseResults");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("integer");
-
-                    b.ToTable("QualifyingResults");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.RaceResults", b =>
-                {
-                    b.HasBaseType("NASRAC.Models.Game.BaseEntities.BaseResults");
-
-                    b.Property<int>("AverageRacePosition")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("AverageRunningPosition")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CautionLapCount")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CautionLapPercentage")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("CautionsCaused")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("DNFPosition")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("FinishPosition")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("HighestPosition")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("LapLedCount")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("LapLedPercentage")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("LowestPosition")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Stage1Position")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Stage2Position")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("StartPosition")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Top15LapCount")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Top15LapPercentage")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("TotalLapCount")
-                        .HasColumnType("integer");
-
-                    b.ToTable("RaceResults");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.RaceLog", b =>
-                {
-                    b.HasBaseType("NASRAC.Models.Game.RaceEntities.RaceResults");
-
-                    b.Property<int>("CurrentPosition")
-                        .HasColumnType("integer");
-
-                    b.Property<double>("DNFOdds")
-                        .HasColumnType("double precision");
-
-                    b.Property<double>("DriverRating")
-                        .HasColumnType("double precision");
-
-                    b.Property<bool>("IsRunning")
-                        .HasColumnType("boolean");
-
-                    b.ToTable("RaceLog");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -1062,25 +1219,6 @@ namespace NASRAC.Persistence.Game.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.BaseEntities.BaseResults", b =>
-                {
-                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
-                        .WithMany()
-                        .HasForeignKey("RaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Driver");
-
-                    b.Navigation("Race");
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.DriverEntities.Driver", b =>
@@ -1171,6 +1309,82 @@ namespace NASRAC.Persistence.Game.Migrations
                         .IsRequired();
 
                     b.Navigation("Track");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Stats.QualifyingStats", b =>
+                {
+                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Race");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Stats.RaceLog", b =>
+                {
+                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Race");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Stats.RaceResults", b =>
+                {
+                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Race");
+                });
+
+            modelBuilder.Entity("NASRAC.Models.Game.Stats.SessionStats", b =>
+                {
+                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
+                        .WithMany()
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Race");
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>

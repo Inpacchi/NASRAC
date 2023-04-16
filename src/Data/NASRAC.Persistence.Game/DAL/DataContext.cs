@@ -7,19 +7,13 @@ using NASRAC.Models.Game.RaceEntities;
 using NASRAC.Models.Game.Stats;
 using NASRAC.Models.Game.TeamEntities;
 using NASRAC.Models.WebApp.Entities;
-using NASRAC.Persistence.Game.DAL.Queries;
 
 namespace NASRAC.Persistence.Game.DAL;
 
 public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {
-    public readonly RaceQueries RaceQueries;
-    public readonly DriverQueries DriverQueries;
-    
     public DataContext(DbContextOptions options) : base(options)
     {
-        DriverQueries = new DriverQueries(options);
-        RaceQueries = new RaceQueries(options);
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

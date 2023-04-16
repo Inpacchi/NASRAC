@@ -2,7 +2,7 @@
 using NASRAC.Models.Game.RaceEntities;
 using NASRAC.Models.Game.Stats;
 using NASRAC.Persistence.Game.DAL;
-using NASRAC.Persistence.Game.DAL.Queries;
+using NASRAC.Persistence.Game.Repository;
 using NASRAC.Services.Common.Enums;
 using NASRAC.Services.Common.Services;
 using NASRAC.Services.Game.Entities;
@@ -16,6 +16,8 @@ public class RaceWeekend : IRaceWeekend
     private const double TeamFactor = 1.40;
     
     private readonly DataContext _dataContext;
+    private readonly DriverRepository _driverRepository;
+    private readonly RaceRepository _raceRepository;
     
     private readonly ICollection<Driver> _drivers;
     private Race _race;
@@ -32,12 +34,15 @@ public class RaceWeekend : IRaceWeekend
     public RaceWeekend(DataContext dataContext)
     {
         _dataContext = dataContext;
-        _drivers = _dataContext.DriverQueries.GetAllDrivers();
+        _driverRepository = new DriverRepository(dataContext);
+        _raceRepository = new RaceRepository(dataContext);
+        
+        _drivers = _driverRepository.GetAllDrivers();
     }
 
     public async void Initialization()
     {
-        _race = _dataContext.RaceQueries.GetRaceByName("Bluegreen Vacations Duel 1 at DAYTONA");
+        _race = _raceRepository.GetRaceByName("Bluegreen Vacations Duel 1 at DAYTONA");
         _session = RaceWeekendSession.Race;
         _currentLap = 1;
         

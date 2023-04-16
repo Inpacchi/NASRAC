@@ -33,6 +33,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="DAL\Queries" />
       <Folder Include="Migrations" />
     </ItemGroup>
 
