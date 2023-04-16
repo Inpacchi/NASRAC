@@ -17,6 +17,7 @@ public class RaceLog : BaseSessionStats
     public RaceLog(Race race, Driver driver) : base(race, driver)
     {
         DNFOdds = RNG.RollDoubleTenths() * Math.Pow((driver.GetTrackRating(race.Track.Type) / 100), 2);
+        IsRunning = true;
     }
     
     public double DriverRating { get; set; }

@@ -49,9 +49,15 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     #endregion
 
     #region Helper Methods
-
-    public TEntity Clone<TEntity>(TEntity entity) where TEntity : class
-        => Entry(entity).CurrentValues.Clone().ToObject() as TEntity ?? throw new InvalidOperationException();
+    
+    public void Clone<T>(T entity, T clone) where T : class
+    {
+        var values = Entry(entity).CurrentValues.Clone();
+        Entry(clone).CurrentValues.SetValues(values);
+        typeof(T).GetProperty("Id")?.SetValue(clone, 0);
+        Add(clone);
+        SaveChanges();
+    }
 
     #endregion
 }

@@ -107,7 +107,6 @@ public class RaceWeekend : IRaceWeekend
                 var positionChanges = new List<int>();
                 var driversNotOnLeadLap = new List<Driver>();
                 RepopulateRanges();
-                Console.WriteLine("Ranges repopulated");
                 
                 foreach (var rateRange in _rateRanges)
                 {
@@ -228,7 +227,7 @@ public class RaceWeekend : IRaceWeekend
         foreach (var raceLog in _raceLogs)
         {
             raceLog.CalculatePostLapStats(_currentLap, cautionLap);
-            _dataContext.Clone(raceLog);
+            _dataContext.Clone(raceLog, new RaceLog());
         }
     }
 
