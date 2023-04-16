@@ -47,4 +47,11 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     protected virtual DbSet<RaceResults> RaceResults { get; set; }
     
     #endregion
+
+    #region Helper Methods
+
+    public TEntity Clone<TEntity>(TEntity entity) where TEntity : class
+        => Entry(entity).CurrentValues.Clone().ToObject() as TEntity ?? throw new InvalidOperationException();
+
+    #endregion
 }

@@ -228,6 +228,7 @@ public class RaceWeekend : IRaceWeekend
         foreach (var raceLog in _raceLogs)
         {
             raceLog.CalculatePostLapStats(_currentLap, cautionLap);
+            _dataContext.Clone(raceLog);
         }
     }
 
