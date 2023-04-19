@@ -26,7 +26,7 @@ public class RaceWeekend : IRaceWeekend
     private readonly ICollection<RateRange> _rateRanges = new List<RateRange>();
     private readonly ICollection<RaceLog> _raceLogs = new List<RaceLog>();
     private readonly ICollection<QualifyingStats> _qualifyingStats = new List<QualifyingStats>();
-    private readonly ICollection<RaceResults> _raceResults = new List<RaceResults>();
+    private readonly ICollection<SessionResults> _sessionResults = new List<SessionResults>();
 
     private int _endingRange;
     private int _currentLap;
@@ -72,9 +72,9 @@ public class RaceWeekend : IRaceWeekend
                     _dataContext.Add(raceLog);
                     _raceLogs.Add(raceLog);
 
-                    var raceResults = new RaceResults(_race, driver);
-                    _dataContext.Add(raceResults);
-                    _raceResults.Add(raceResults);
+                    var sessionResults = new SessionResults(_race, driver);
+                    _dataContext.Add(sessionResults);
+                    _sessionResults.Add(sessionResults);
                     break;
                 case RaceWeekendSession.Practice:
                 default:
@@ -148,9 +148,10 @@ public class RaceWeekend : IRaceWeekend
             _currentLap++;
         }
         
+        
         // process post race
+        CalculatePostRaceStats(_race.Laps);
         _dataContext.SaveChanges();
-        Console.WriteLine("Save called");
     }
 
     private int DetermineLastPosition()
@@ -178,32 +179,24 @@ public class RaceWeekend : IRaceWeekend
             var randomNumber = RNG.RollIntRange(0, _endingRange);
             var raceLog = _raceLogs.First(rs => rs.Driver.Equals(rateRange.Driver));
             
-            /* Any driver that has thier rate range hit will get first pickings at the high end of the positions.
+            /* Any driver that has their rate range hit will get first pickings at the high end of the positions.
                 Use the nonRangeHits to keep track of how many drivers don't get their ranges hit. */
             if (rateRange.StartingRange <= randomNumber && randomNumber <= rateRange.EndingRange)
             {
-                if (runningPosition == 1)
-                {
-                    raceLog.DNFOdds += RNG.RollDoubleRange(0, .001);
-                }
-                else
-                {
-                    raceLog.DNFOdds += RNG.RollDoubleRange(0, .002);
-                }
-
-                raceLog.UpdateLap1Positions(runningPosition);
+                raceLog.GenerateDNFOdds(0, runningPosition == 1 ? .001 : .002);
+                raceLog.CurrentPosition = runningPosition;
                 runningPosition += 1;
             }
             else
             {
-                raceLog.DNFOdds += RNG.RollDoubleRange(.002, .003);
+                raceLog.GenerateDNFOdds(.002, .003);
                 nonRangeHits += 1;
             }
         }
 
         // For any driver that doesn't have their range hit, we'll assign them a random position based on what's left
         var positions = new List<int>();
-        for (int i = 0; i < nonRangeHits; i++)
+        for (var i = 0; i < nonRangeHits; i++)
         {
             positions.Add(runningPosition);
             runningPosition += 1;
@@ -213,12 +206,11 @@ public class RaceWeekend : IRaceWeekend
         {
             var raceLog = _raceLogs.First(rs => rs.Driver.Equals(rateRange.Driver));
 
-            if (raceLog.CurrentPosition == 0)
-            {
-                var position = RNG.RollFromList(positions);
-                raceLog.UpdateLap1Positions(position);
-                positions.Remove(position);
-            }
+            if (raceLog.CurrentPosition != 0) continue;
+            
+            var position = RNG.RollFromList(positions);
+            raceLog.CurrentPosition = position;
+            positions.Remove(position);
         }
     }
 
@@ -231,6 +223,15 @@ public class RaceWeekend : IRaceWeekend
         }
     }
 
+    private void CalculatePostRaceStats(int laps)
+    {
+        foreach (var sessionResults in _sessionResults)
+        {
+            var raceLog = _raceLogs.First(rs => rs.Driver.Equals(sessionResults.Driver));
+            sessionResults.CalculatePostSessionStats(raceLog, laps);
+        }
+    }
+
     private void RepopulateRanges(int stageSwitch = 0)
     {
         var placementRange = 0;
@@ -238,7 +239,7 @@ public class RaceWeekend : IRaceWeekend
         foreach (var driver in _drivers)
         {
             var raceLog = _raceLogs.First(rs => rs.Driver.Equals(driver));
-
+            
             if (!raceLog.IsRunning) continue;
             
             var rateRange = _rateRanges.First(rr => rr.Driver.Equals(driver));
@@ -260,18 +261,14 @@ public class RaceWeekend : IRaceWeekend
             }
             else if (stageSwitch != -1)
             {
-                /*
-                 * TODO: Redo logic now that Stage Position lives in RaceStats and is tracked in RaceLog by using
-                 * the RaceSession switch
-                 */
-                var stageBonus = stageSwitch switch
+                var sessionResults = stageSwitch switch
                 {
-                    1 => raceLog.FinishPosition,
-                    2 => raceLog.FinishPosition,
-                    _ => throw new ArgumentOutOfRangeException()
+                    1 => _sessionResults.First(sr => sr.Driver.Equals(driver) && sr.SessionType == SessionType.Stage1),
+                    2 => _sessionResults.First(sr => sr.Driver.Equals(driver) && sr.SessionType == SessionType.Stage2),
+                    _ => throw new ArgumentOutOfRangeException(nameof(stageSwitch), stageSwitch, null)
                 };
 
-                bonus = stageBonus + cautionsCausedPenalty;
+                bonus = sessionResults.FinishPosition + cautionsCausedPenalty;
             }
             else
             {
@@ -387,7 +384,10 @@ public class RaceWeekend : IRaceWeekend
                     driver = raceLog.Driver;
 
                     if (!raceLog.IsRunning)
-                        raceLog.FinishPosition = newPosition;
+                    {
+                        var sessionResults = _sessionResults.First(sr => sr.Driver.Equals(driver));
+                        sessionResults.FinishPosition = newPosition;
+                    }
                     
                     break;
                 }

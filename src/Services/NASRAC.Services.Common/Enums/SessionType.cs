@@ -1,6 +1,6 @@
 namespace NASRAC.Services.Common.Enums;
 
-public enum RaceSession
+public enum SessionType
 {
     Stage1,
     Stage2,

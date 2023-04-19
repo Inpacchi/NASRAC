@@ -41,10 +41,9 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
     protected virtual DbSet<Team> Team { get; set; }
     protected virtual DbSet<TeamFinancials> TeamFinancials { get; set; }
     protected virtual DbSet<Track> Track { get; set; }
-    protected virtual DbSet<SessionStats> SessionStats { get; set; }
     protected virtual DbSet<QualifyingStats> QualifyingStats { get; set; }
     protected virtual DbSet<RaceLog> RaceLog { get; set; }
-    protected virtual DbSet<RaceResults> RaceResults { get; set; }
+    protected virtual DbSet<SessionResults> SessionResults { get; set; }
     
     #endregion
 

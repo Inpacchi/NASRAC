@@ -10,13 +10,13 @@ namespace NASRAC.Models.Game.Stats;
 /// </summary>
 public class RaceLog : BaseSessionStats
 {
-    public RaceLog() : base()
+    public RaceLog()
     {
     }
     
     public RaceLog(Race race, Driver driver) : base(race, driver)
     {
-        DNFOdds = RNG.RollDoubleTenths() * Math.Pow((driver.GetTrackRating(race.Track.Type) / 100), 2);
+        DNFOdds = RNG.RollDoubleTenths() * Math.Pow(driver.GetTrackRating(race.Track.Type) / 100, 2);
         IsRunning = true;
     }
     
@@ -24,14 +24,6 @@ public class RaceLog : BaseSessionStats
     public double DNFOdds { get; set; }
     public bool IsRunning { get; set; }
     public int CurrentPosition { get; set; }
-
-    public void UpdateLap1Positions(int position)
-    {
-        CurrentPosition = position;
-        StartPosition = position;
-        LowestPosition = position;
-        HighestPosition = position;
-    }
     
     public void CalculatePostLapStats(int currentLap, bool cautionLap = false)
     {
@@ -58,17 +50,11 @@ public class RaceLog : BaseSessionStats
         if (CurrentPosition == 1)
         {
             LapLedCount += 1;
-            HighestPosition = 1;
         }
-        else
-        {
-            if (CurrentPosition > LowestPosition)
-            {
-                LowestPosition = CurrentPosition;
-            } else if (CurrentPosition < HighestPosition)
-            {
-                HighestPosition = CurrentPosition;
-            }
-        }
+    }
+
+    public void GenerateDNFOdds(double lowerBound, double upperbound)
+    {
+        DNFOdds += RNG.RollDoubleRange(lowerBound, upperbound);
     }
 }

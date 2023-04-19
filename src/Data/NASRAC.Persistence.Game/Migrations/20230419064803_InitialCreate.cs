@@ -471,13 +471,8 @@ namespace NASRAC.Persistence.Game.Migrations
                     DriverId = table.Column<int>(type: "integer", nullable: false),
                     FastestTime = table.Column<double>(type: "double precision", nullable: false),
                     TopSpeed = table.Column<double>(type: "double precision", nullable: false),
-                    StartPosition = table.Column<int>(type: "integer", nullable: false),
-                    FinishPosition = table.Column<int>(type: "integer", nullable: false),
-                    LowestPosition = table.Column<int>(type: "integer", nullable: false),
-                    HighestPosition = table.Column<int>(type: "integer", nullable: false),
                     AveragePosition = table.Column<int>(type: "integer", nullable: false),
                     AverageRunningPosition = table.Column<int>(type: "integer", nullable: false),
-                    DNFPosition = table.Column<int>(type: "integer", nullable: false),
                     Top15LapCount = table.Column<int>(type: "integer", nullable: false),
                     Top15LapPercentage = table.Column<int>(type: "integer", nullable: false),
                     LapLedCount = table.Column<int>(type: "integer", nullable: false),
@@ -505,25 +500,23 @@ namespace NASRAC.Persistence.Game.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RaceResults",
+                name: "SessionResults",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Stage1Position = table.Column<int>(type: "integer", nullable: false),
-                    Stage2Position = table.Column<int>(type: "integer", nullable: false),
-                    EndPosition = table.Column<int>(type: "integer", nullable: false),
-                    RaceId = table.Column<int>(type: "integer", nullable: false),
-                    DriverId = table.Column<int>(type: "integer", nullable: false),
-                    FastestTime = table.Column<double>(type: "double precision", nullable: false),
-                    TopSpeed = table.Column<double>(type: "double precision", nullable: false),
                     StartPosition = table.Column<int>(type: "integer", nullable: false),
                     FinishPosition = table.Column<int>(type: "integer", nullable: false),
                     LowestPosition = table.Column<int>(type: "integer", nullable: false),
                     HighestPosition = table.Column<int>(type: "integer", nullable: false),
+                    DNFPosition = table.Column<int>(type: "integer", nullable: false),
+                    SessionType = table.Column<int>(type: "integer", nullable: false),
+                    RaceId = table.Column<int>(type: "integer", nullable: false),
+                    DriverId = table.Column<int>(type: "integer", nullable: false),
+                    FastestTime = table.Column<double>(type: "double precision", nullable: false),
+                    TopSpeed = table.Column<double>(type: "double precision", nullable: false),
                     AveragePosition = table.Column<int>(type: "integer", nullable: false),
                     AverageRunningPosition = table.Column<int>(type: "integer", nullable: false),
-                    DNFPosition = table.Column<int>(type: "integer", nullable: false),
                     Top15LapCount = table.Column<int>(type: "integer", nullable: false),
                     Top15LapPercentage = table.Column<int>(type: "integer", nullable: false),
                     LapLedCount = table.Column<int>(type: "integer", nullable: false),
@@ -535,59 +528,15 @@ namespace NASRAC.Persistence.Game.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RaceResults", x => x.Id);
+                    table.PrimaryKey("PK_SessionResults", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RaceResults_Driver_DriverId",
+                        name: "FK_SessionResults_Driver_DriverId",
                         column: x => x.DriverId,
                         principalTable: "Driver",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RaceResults_Race_RaceId",
-                        column: x => x.RaceId,
-                        principalTable: "Race",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SessionStats",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Session = table.Column<int>(type: "integer", nullable: false),
-                    RaceId = table.Column<int>(type: "integer", nullable: false),
-                    DriverId = table.Column<int>(type: "integer", nullable: false),
-                    FastestTime = table.Column<double>(type: "double precision", nullable: false),
-                    TopSpeed = table.Column<double>(type: "double precision", nullable: false),
-                    StartPosition = table.Column<int>(type: "integer", nullable: false),
-                    FinishPosition = table.Column<int>(type: "integer", nullable: false),
-                    LowestPosition = table.Column<int>(type: "integer", nullable: false),
-                    HighestPosition = table.Column<int>(type: "integer", nullable: false),
-                    AveragePosition = table.Column<int>(type: "integer", nullable: false),
-                    AverageRunningPosition = table.Column<int>(type: "integer", nullable: false),
-                    DNFPosition = table.Column<int>(type: "integer", nullable: false),
-                    Top15LapCount = table.Column<int>(type: "integer", nullable: false),
-                    Top15LapPercentage = table.Column<int>(type: "integer", nullable: false),
-                    LapLedCount = table.Column<int>(type: "integer", nullable: false),
-                    LapLedPercentage = table.Column<int>(type: "integer", nullable: false),
-                    CautionLapCount = table.Column<int>(type: "integer", nullable: false),
-                    CautionLapPercentage = table.Column<int>(type: "integer", nullable: false),
-                    CautionsCaused = table.Column<int>(type: "integer", nullable: false),
-                    TotalLapCount = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SessionStats", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SessionStats_Driver_DriverId",
-                        column: x => x.DriverId,
-                        principalTable: "Driver",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SessionStats_Race_RaceId",
+                        name: "FK_SessionResults_Race_RaceId",
                         column: x => x.RaceId,
                         principalTable: "Race",
                         principalColumn: "Id",
@@ -772,28 +721,18 @@ namespace NASRAC.Persistence.Game.Migrations
                 column: "RaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RaceResults_DriverId",
-                table: "RaceResults",
-                column: "DriverId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RaceResults_RaceId",
-                table: "RaceResults",
-                column: "RaceId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Schedule_RaceId",
                 table: "Schedule",
                 column: "RaceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SessionStats_DriverId",
-                table: "SessionStats",
+                name: "IX_SessionResults_DriverId",
+                table: "SessionResults",
                 column: "DriverId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SessionStats_RaceId",
-                table: "SessionStats",
+                name: "IX_SessionResults_RaceId",
+                table: "SessionResults",
                 column: "RaceId");
 
             migrationBuilder.CreateIndex(
@@ -848,16 +787,13 @@ namespace NASRAC.Persistence.Game.Migrations
                 name: "RaceLog");
 
             migrationBuilder.DropTable(
-                name: "RaceResults");
-
-            migrationBuilder.DropTable(
                 name: "Schedule");
 
             migrationBuilder.DropTable(
                 name: "Series");
 
             migrationBuilder.DropTable(
-                name: "SessionStats");
+                name: "SessionResults");
 
             migrationBuilder.DropTable(
                 name: "Sponsor");
