@@ -775,17 +775,17 @@ namespace NASRAC.Persistence.Game.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AveragePosition")
-                        .HasColumnType("integer");
+                    b.Property<double>("AveragePosition")
+                        .HasColumnType("double precision");
 
-                    b.Property<int>("AverageRunningPosition")
-                        .HasColumnType("integer");
+                    b.Property<double>("AverageRunningPosition")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("CautionLapCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CautionLapPercentage")
-                        .HasColumnType("integer");
+                    b.Property<double>("CautionLapPercentage")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("CautionsCaused")
                         .HasColumnType("integer");
@@ -811,8 +811,8 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<int>("LapLedCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("LapLedPercentage")
-                        .HasColumnType("integer");
+                    b.Property<double>("LapLedPercentage")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("RaceId")
                         .HasColumnType("integer");
@@ -820,8 +820,8 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<int>("Top15LapCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Top15LapPercentage")
-                        .HasColumnType("integer");
+                    b.Property<double>("Top15LapPercentage")
+                        .HasColumnType("double precision");
 
                     b.Property<double>("TopSpeed")
                         .HasColumnType("double precision");
@@ -846,17 +846,17 @@ namespace NASRAC.Persistence.Game.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AveragePosition")
-                        .HasColumnType("integer");
+                    b.Property<double>("AveragePosition")
+                        .HasColumnType("double precision");
 
-                    b.Property<int>("AverageRunningPosition")
-                        .HasColumnType("integer");
+                    b.Property<double>("AverageRunningPosition")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("CautionLapCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CautionLapPercentage")
-                        .HasColumnType("integer");
+                    b.Property<double>("CautionLapPercentage")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("CautionsCaused")
                         .HasColumnType("integer");
@@ -879,8 +879,8 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<int>("LapLedCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("LapLedPercentage")
-                        .HasColumnType("integer");
+                    b.Property<double>("LapLedPercentage")
+                        .HasColumnType("double precision");
 
                     b.Property<int>("LowestPosition")
                         .HasColumnType("integer");
@@ -897,8 +897,8 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<int>("Top15LapCount")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Top15LapPercentage")
-                        .HasColumnType("integer");
+                    b.Property<double>("Top15LapPercentage")
+                        .HasColumnType("double precision");
 
                     b.Property<double>("TopSpeed")
                         .HasColumnType("double precision");

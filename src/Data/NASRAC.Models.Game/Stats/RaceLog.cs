@@ -37,23 +37,23 @@ public class RaceLog : BaseSessionStats
         TotalLapCount += 1;
         
         AveragePositionSum += CurrentPosition;
-        AveragePosition = AveragePositionSum / TotalLapCount;
+        AveragePosition = Math.Round((double)AveragePositionSum / TotalLapCount, 2);
 
         if (currentLap == TotalLapCount)
             AverageRunningPositionSum += CurrentPosition;
-        AverageRunningPosition = AverageRunningPositionSum / TotalLapCount;
+        AverageRunningPosition = Math.Round((double)AverageRunningPositionSum / TotalLapCount, 2);
 
         if (cautionLap)
             CautionLapCount += 1;
-        CautionLapPercentage = CautionLapCount / TotalLapCount * 100;
+        CautionLapPercentage = Math.Round((double)CautionLapCount / TotalLapCount * 100.0, 2);
 
         if (CurrentPosition <= 15)
             Top15LapCount += 1;
-        Top15LapPercentage = Top15LapCount / TotalLapCount * 100;
+        Top15LapPercentage = Math.Round((double)Top15LapCount / TotalLapCount * 100.0, 2);
 
         if (CurrentPosition == 1)
             LapLedCount += 1;
-        LapLedPercentage = LapLedCount / TotalLapCount * 100;
+        LapLedPercentage = Math.Round((double)LapLedCount / TotalLapCount * 100.0, 2);
     }
 
     public void GenerateDNFOdds(double lowerBound, double upperbound)

@@ -5,12 +5,12 @@ public interface IBaseSessionStats : IBaseStats
     /// <summary>
     /// Driver's overall average position
     /// </summary>
-    public int AveragePosition { get; set; }
+    public double AveragePosition { get; set; }
     
     /// <summary>
     /// Driver's average position while on the lead lap
     /// </summary>
-    public int AverageRunningPosition { get; set; }
+    public double AverageRunningPosition { get; set; }
     
     /// <summary>
     /// How many laps the driver was in the top 15 standings
@@ -20,7 +20,7 @@ public interface IBaseSessionStats : IBaseStats
     /// <summary>
     /// Percentage of laps the driver was in the top 15 standings
     /// </summary>
-    public int Top15LapPercentage { get; set; }
+    public double Top15LapPercentage { get; set; }
     
     /// <summary>
     /// How many laps the driver led
@@ -30,7 +30,7 @@ public interface IBaseSessionStats : IBaseStats
     /// <summary>
     /// Percentage of laps the driver led
     /// </summary>
-    public int LapLedPercentage { get; set; }
+    public double LapLedPercentage { get; set; }
 
     /// <summary>
     /// How many laps the driver spent under caution
@@ -40,7 +40,7 @@ public interface IBaseSessionStats : IBaseStats
     /// <summary>
     /// Percentage of laps the driver spent under caution
     /// </summary>
-    public int CautionLapPercentage { get; set; }
+    public double CautionLapPercentage { get; set; }
 
     /// <summary>
     /// How many cautions the driver caused
