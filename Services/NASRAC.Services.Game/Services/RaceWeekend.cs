@@ -206,12 +206,18 @@ public class RaceWeekend : IRaceWeekend
         {
             var raceLog = _raceLogs.First(rs => rs.Driver.Equals(rateRange.Driver));
 
-            if (raceLog.CurrentPosition != 0) continue;
+            if (raceLog.CurrentPosition == 0)
+            {
+                var position = RNG.RollFromList(positions);
+                raceLog.CurrentPosition = position;
+                positions.Remove(position);
+            }
             
-            var position = RNG.RollFromList(positions);
-            raceLog.CurrentPosition = position;
-            positions.Remove(position);
+            var sessionResults = _sessionResults.First(sr => sr.Driver.Equals(rateRange.Driver));
+            sessionResults.StartPosition = raceLog.CurrentPosition;
         }
+        
+        
     }
 
     private void CalculatePostLapStats(bool cautionLap = false)
