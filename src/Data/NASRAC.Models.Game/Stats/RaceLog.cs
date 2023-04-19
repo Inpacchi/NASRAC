@@ -1,4 +1,5 @@
-﻿using NASRAC.Models.Game.DriverEntities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.RaceEntities;
 using NASRAC.Models.Game.Stats.Abstractions;
 using NASRAC.Services.Common.Services;
@@ -25,32 +26,34 @@ public class RaceLog : BaseSessionStats
     public bool IsRunning { get; set; }
     public int CurrentPosition { get; set; }
     
+    [NotMapped] private int AveragePositionSum { get; set; }
+    
+    [NotMapped] private int AverageRunningPositionSum { get; set; }
+    
     public void CalculatePostLapStats(int currentLap, bool cautionLap = false)
     {
         if (!IsRunning) return;
         
-        AveragePosition += CurrentPosition;
         TotalLapCount += 1;
+        
+        AveragePositionSum += CurrentPosition;
+        AveragePosition = AveragePositionSum / TotalLapCount;
 
         if (currentLap == TotalLapCount)
-        {
-            AverageRunningPosition += CurrentPosition;
-        }
+            AverageRunningPositionSum += CurrentPosition;
+        AverageRunningPosition = AverageRunningPositionSum / TotalLapCount;
 
         if (cautionLap)
-        {
             CautionLapCount += 1;
-        }
+        CautionLapPercentage = CautionLapCount / TotalLapCount * 100;
 
         if (CurrentPosition <= 15)
-        {
             Top15LapCount += 1;
-        }
+        Top15LapPercentage = Top15LapCount / TotalLapCount * 100;
 
         if (CurrentPosition == 1)
-        {
             LapLedCount += 1;
-        }
+        LapLedPercentage = LapLedCount / TotalLapCount * 100;
     }
 
     public void GenerateDNFOdds(double lowerBound, double upperbound)

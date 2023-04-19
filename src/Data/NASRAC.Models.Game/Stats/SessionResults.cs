@@ -66,16 +66,16 @@ public class SessionResults : BaseSessionStats
         }
     }
     
-    public void CalculatePostSessionStats(RaceLog raceLog, int raceLaps)
+    public void CalculatePostSessionStats(RaceLog raceLog)
     {
         FinishPosition = raceLog.CurrentPosition;
         TotalLapCount = raceLog.TotalLapCount;
-        
-        AveragePosition /= raceLaps;
-        AverageRunningPosition /= TotalLapCount;
 
-        Top15LapPercentage = Top15LapCount / TotalLapCount * 100;
-        LapLedPercentage = LapLedCount / TotalLapCount * 100;
-        CautionLapPercentage = CautionLapCount / TotalLapCount * 100;
+        AveragePosition = raceLog.AveragePosition;
+        AverageRunningPosition = raceLog.AverageRunningPosition;
+
+        Top15LapPercentage = raceLog.Top15LapPercentage;
+        LapLedPercentage = raceLog.LapLedPercentage;
+        CautionLapPercentage = raceLog.CautionLapPercentage;
     }
 }

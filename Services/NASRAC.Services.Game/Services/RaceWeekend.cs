@@ -225,7 +225,12 @@ public class RaceWeekend : IRaceWeekend
         foreach (var raceLog in _raceLogs)
         {
             raceLog.CalculatePostLapStats(_currentLap, cautionLap);
-            _dataContext.Clone(raceLog, new RaceLog());
+            
+            var sessionResults = _sessionResults.First(sr => sr.Driver.Equals(raceLog.Driver));
+            sessionResults.CalculatePositions(raceLog.CurrentPosition);
+            
+            if (_currentLap != raceLog.TotalLapCount)
+                _dataContext.Clone(raceLog, new RaceLog());
         }
     }
 
@@ -234,7 +239,7 @@ public class RaceWeekend : IRaceWeekend
         foreach (var sessionResults in _sessionResults)
         {
             var raceLog = _raceLogs.First(rs => rs.Driver.Equals(sessionResults.Driver));
-            sessionResults.CalculatePostSessionStats(raceLog, laps);
+            sessionResults.CalculatePostSessionStats(raceLog);
         }
     }
 
