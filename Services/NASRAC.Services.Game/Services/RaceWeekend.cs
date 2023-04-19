@@ -229,7 +229,7 @@ public class RaceWeekend : IRaceWeekend
             var sessionResults = _sessionResults.First(sr => sr.Driver.Equals(raceLog.Driver));
             sessionResults.CalculatePositions(raceLog.CurrentPosition);
             
-            if (_currentLap != raceLog.TotalLapCount)
+            if (_currentLap != _race.Laps)
                 _dataContext.Clone(raceLog, new RaceLog());
         }
     }
