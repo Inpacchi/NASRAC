@@ -34,10 +34,7 @@ public class Seed
         SeedData<Series>("Series.json");
         SeedData<Race>("Race.json");
         SeedData<Schedule>("Schedule.json");
-        SeedData<Driver>("Driver.json");
         SeedData<Manufacturer>("Manufacturer.json");
-        SeedData<Team>("Team.json");
-        SeedData<TeamManufacturers>("TeamManufacturers.json");
     }
 
     private void SeedData<T>(string filename) where T : class
