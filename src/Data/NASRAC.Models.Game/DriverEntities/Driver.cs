@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Bogus;
+using Bogus.Distributions.Gaussian;
 using NASRAC.Models.Game.TeamEntities;
 using NASRAC.Services.Common.Enums;
+using NASRAC.Services.Common.Equations;
+using NASRAC.Services.Common.Services;
 
 namespace NASRAC.Models.Game.DriverEntities;
 
@@ -126,5 +130,40 @@ public class Driver
             TrackType.Road => RoadTrackRating,
             _ => 0
         };
+    }
+    
+    public static Driver GenerateRandomDriver(int peakAgeStart, int peakAgeEnd)
+    {
+        var driver = new Faker<Driver>()
+            .RuleFor(d => d.Name, f => f.Name.FullName())
+            .RuleFor(d => d.Age, f => f.Random.GaussianInt(30, 7))
+            .Generate();
+
+        driver.PeakAgeStart = RNG.RollIntRange(27, 38);
+        driver.PeakAgeEnd = RNG.RollIntRange(driver.PeakAgeStart, 41);
+        
+        driver.PotentialRating = Gaussian.GeneratePotentialRating(driver.Age);
+
+        var ratingMean = RNG.RollDoubleRange(driver.PotentialRating * .6, driver.PotentialRating);
+        var ratingStdDev = RNG.RollDoubleRange(driver.PotentialRating * .05, driver.PotentialRating * .2);
+        
+        driver.ShortTrackRating = Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100);
+        driver.IntermediateTrackRating = Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100);
+        driver.SuperspeedwayTrackRating = Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100);
+        driver.RoadTrackRating = Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100);
+        
+        driver.OverallRating = (driver.ShortTrackRating + driver.IntermediateTrackRating + driver.SuperspeedwayTrackRating + driver.RoadTrackRating) / 4;
+        
+        driver.ProgressionRate = RNG.RollDoubleRange(0, .1);
+        driver.RegressionRate = RNG.RollDoubleRange(0, driver.ProgressionRate);
+        driver.DNFOdds = RNG.RollDoubleRange(0, .005);
+        driver.Marketability = RNG.RollEnum<Marketability>();
+
+        return driver;
+    }
+    
+    private static double Clamp(double value, double min, double max)
+    {
+        return Math.Min(Math.Max(value, min), max);
     }
 }

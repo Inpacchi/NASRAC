@@ -45,10 +45,22 @@ public static class RNG
     /// <summary>
     /// Rolls a random integer from the given list
     /// </summary>
-    /// <param name="list">List of integers to return a random interger from</param>
+    /// <param name="list">List of integers to return a random integer from</param>
     /// <returns></returns>
     public static int RollFromList(List<int> list)
     {
         return list[RandomNumberGenerator.Next(list.Count)];
+    }
+
+    /// <summary>
+    /// Rolls a random enum from the given enum
+    /// </summary>
+    /// <returns></returns>
+    public static T RollEnum<T>() where T : Enum
+    {
+        var length = Enum.GetValues(typeof(T)).Length;
+        var index = RandomNumberGenerator.Next(0, length);
+        
+        return (T)Enum.GetValues(typeof(T)).GetValue(index);
     }
 }
