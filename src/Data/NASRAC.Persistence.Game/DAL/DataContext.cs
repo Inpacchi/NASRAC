@@ -12,8 +12,16 @@ namespace NASRAC.Persistence.Game.DAL;
 
 public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 {
+    private readonly string _seedPath;
+    
     public DataContext(DbContextOptions options) : base(options)
     {
+        _seedPath = Path.Combine("..", "..", "Data", "NASRAC.Persistence.Game", "Seed Data");
+    }
+    
+    public DataContext(DbContextOptions options, string seedPath) : base(options)
+    {
+        _seedPath = seedPath;
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -22,7 +30,7 @@ public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
 
         #region Seed Data
         
-        var seed = new Seed(builder);
+        var seed = new Seed(builder, _seedPath);
         seed.Initialize();
         
         #endregion

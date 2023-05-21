@@ -3,9 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
-using NASRAC.Models.Game.JoinEntities;
 using NASRAC.Models.Game.RaceEntities;
-using NASRAC.Models.Game.TeamEntities;
 
 namespace NASRAC.Persistence.Game.DAL;
 
@@ -14,11 +12,12 @@ public class Seed
     private readonly ModelBuilder _modelBuilder;
     private readonly JsonSerializerOptions _options;
 
-    private static readonly string SeedPath = Path.Combine("..", "..", "Data", "NASRAC.Persistence.Game", "Seed Data");
+    private readonly string _seedPath;
 
-    public Seed(ModelBuilder modelBuilder)
+    public Seed(ModelBuilder modelBuilder, string seedPath)
     {
         _modelBuilder = modelBuilder;
+        _seedPath = seedPath;
         
         _options = new JsonSerializerOptions
         {
@@ -42,7 +41,7 @@ public class Seed
 
     private void SeedData<T>(string filename) where T : class
     {
-        var json = File.ReadAllText(Path.Combine(SeedPath, filename));
+        var json = File.ReadAllText(Path.Combine(_seedPath, filename));
 
         var data = JsonSerializer.Deserialize<List<T>>(json, _options);
 
