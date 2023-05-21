@@ -16,6 +16,6 @@ public class GameService : IGameService
     }
     public void RunRace()
     {
-        _raceWeekend.Initialization();
+        _raceWeekend.Initialize();
     }
 }

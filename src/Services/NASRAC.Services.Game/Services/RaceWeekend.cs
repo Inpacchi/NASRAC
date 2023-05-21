@@ -40,7 +40,7 @@ public class RaceWeekend : IRaceWeekend
         _drivers = _driverRepository.GetAllDrivers();
     }
 
-    public async void Initialization()
+    public async void Initialize()
     {
         _race = _raceRepository.GetRaceByName("Bluegreen Vacations Duel 1 at DAYTONA");
         _session = RaceWeekendSession.Race;

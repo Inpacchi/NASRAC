@@ -2,5 +2,5 @@
 
 public interface IRaceWeekend
 {
-    public void Initialization();
+    public void Initialize();
 }

@@ -14,6 +14,7 @@
       <ProjectReference Include="..\..\..\Services\NASRAC.Services.Game\NASRAC.Services.Game.csproj" />
       <ProjectReference Include="..\..\Data\NASRAC.Models.WebApp\NASRAC.Models.WebApp.csproj" />
       <ProjectReference Include="..\..\Data\NASRAC.Persistence.Game\NASRAC.Persistence.Game.csproj" />
+      <ProjectReference Include="..\..\Services\NASRAC.Services.Game\NASRAC.Services.Game.csproj" />
       <ProjectReference Include="..\..\Services\NASRAC.Services.WebApp\NASRAC.Services.WebApp.csproj" />
     </ItemGroup>
 
