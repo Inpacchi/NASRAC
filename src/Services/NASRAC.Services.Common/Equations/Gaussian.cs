@@ -19,7 +19,7 @@ public class Gaussian
         var potentialRatingModifier = _rng.NextDouble() * potentialRatingModifierRange;
         var potentialRating = ceiling - potentialRatingModifier;
 
-        return RNG.Clamp(potentialRating, 0, 100);
+        return RNG.Clamp(potentialRating, 0, 100, 3);
     }
 
     public static double GenerateNormal(double mean, double stdDev)
