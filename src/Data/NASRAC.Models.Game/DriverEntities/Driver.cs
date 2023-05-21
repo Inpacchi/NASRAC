@@ -113,7 +113,7 @@ public class Driver
     /// <summary>
     /// ID of the team the driver is contracted to
     /// </summary>
-    public int TeamId { get; set; }
+    public int? TeamId { get; set; }
 
     /// <summary>
     /// Team the driver is contracted to

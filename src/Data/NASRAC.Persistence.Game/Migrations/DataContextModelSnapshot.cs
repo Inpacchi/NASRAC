@@ -211,7 +211,7 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.Property<double>("SuperspeedwayTrackRating")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int?>("TeamId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -224,65 +224,802 @@ namespace NASRAC.Persistence.Game.Migrations
                         new
                         {
                             Id = 1,
-                            Age = 26,
-                            DNFOdds = 0.025000000000000001,
-                            IntermediateTrackRating = 73.0,
-                            Marketability = 6,
-                            Name = "Yovarni Yearwood",
-                            OverallRating = 80.0,
-                            PeakAgeEnd = 33,
-                            PeakAgeStart = 28,
-                            PerformanceRating = 86.0,
-                            PotentialRating = 85.0,
-                            ProgressionRate = 0.0,
-                            RegressionRate = 2.0,
-                            RetirementFactor = 0.0050000000000000001,
-                            RoadTrackRating = 85.0,
-                            ShortTrackRating = 75.0,
-                            SuperspeedwayTrackRating = 80.0,
-                            TeamId = 1
+                            Age = 38,
+                            DNFOdds = 0.0021375708368050902,
+                            IntermediateTrackRating = 100.0,
+                            Marketability = 1,
+                            Name = "Rosa Bernier",
+                            OverallRating = 81.522721524512903,
+                            PeakAgeEnd = 36,
+                            PeakAgeStart = 32,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 105.27078748198981,
+                            ProgressionRate = 0.098219326429966877,
+                            RegressionRate = 0.085440725363896755,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 60.479410573317232,
+                            ShortTrackRating = 83.718533026103188,
+                            SuperspeedwayTrackRating = 81.892942498631157
                         },
                         new
                         {
                             Id = 2,
-                            Age = 26,
-                            DNFOdds = 0.025000000000000001,
-                            IntermediateTrackRating = 83.0,
-                            Marketability = 7,
-                            Name = "Angel Ortega",
-                            OverallRating = 83.0,
-                            PeakAgeEnd = 45,
-                            PeakAgeStart = 26,
-                            PerformanceRating = 89.0,
-                            PotentialRating = 92.0,
-                            ProgressionRate = 4.0,
-                            RegressionRate = 2.0,
-                            RetirementFactor = 0.0050000000000000001,
-                            RoadTrackRating = 86.0,
-                            ShortTrackRating = 78.0,
-                            SuperspeedwayTrackRating = 77.0,
-                            TeamId = 2
+                            Age = 24,
+                            DNFOdds = 4.1112229608485927E-05,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 5,
+                            Name = "Merlin Hilll",
+                            OverallRating = 51.536513819980705,
+                            PeakAgeEnd = 35,
+                            PeakAgeStart = 33,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 67.408905094326002,
+                            ProgressionRate = 0.095784242144265105,
+                            RegressionRate = 0.0066820667651790854,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 50.0,
+                            ShortTrackRating = 56.146055279922813,
+                            SuperspeedwayTrackRating = 50.0
                         },
                         new
                         {
                             Id = 3,
-                            Age = 26,
-                            DNFOdds = 0.025000000000000001,
-                            IntermediateTrackRating = 73.0,
-                            Marketability = 5,
-                            Name = "Agustin Cruz, Jr.",
-                            OverallRating = 70.0,
-                            PeakAgeEnd = 32,
+                            Age = 34,
+                            DNFOdds = 0.00464593169584928,
+                            IntermediateTrackRating = 66.438509285058188,
+                            Marketability = 8,
+                            Name = "Lynn Okuneva",
+                            OverallRating = 71.990375694432259,
+                            PeakAgeEnd = 30,
+                            PeakAgeStart = 29,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 77.15425182852232,
+                            ProgressionRate = 0.086646888207234318,
+                            RegressionRate = 0.07619027074442801,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 77.423532554990786,
+                            ShortTrackRating = 73.607288376080277,
+                            SuperspeedwayTrackRating = 70.492172561599801
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Age = 37,
+                            DNFOdds = 0.0025836305585242385,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 7,
+                            Name = "Garry Torp",
+                            OverallRating = 50.0,
+                            PeakAgeEnd = 39,
                             PeakAgeStart = 28,
-                            PerformanceRating = 69.0,
-                            PotentialRating = 72.0,
-                            ProgressionRate = 5.0,
-                            RegressionRate = 1.0,
-                            RetirementFactor = 0.0050000000000000001,
-                            RoadTrackRating = 65.0,
-                            ShortTrackRating = 69.0,
-                            SuperspeedwayTrackRating = 76.0,
-                            TeamId = 3
+                            PerformanceRating = 0.0,
+                            PotentialRating = 45.194740922468654,
+                            ProgressionRate = 0.0038794135179762382,
+                            RegressionRate = 0.0017752164172156184,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 50.0,
+                            ShortTrackRating = 50.0,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Age = 27,
+                            DNFOdds = 0.0037757457310612697,
+                            IntermediateTrackRating = 87.757524806583845,
+                            Marketability = 3,
+                            Name = "Theo King",
+                            OverallRating = 88.14030959045229,
+                            PeakAgeEnd = 34,
+                            PeakAgeStart = 28,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 85.422032695024868,
+                            ProgressionRate = 0.092846779794437465,
+                            RegressionRate = 0.051840200238852018,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 84.401884788692001,
+                            ShortTrackRating = 91.400175729487856,
+                            SuperspeedwayTrackRating = 89.001653037045443
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Age = 18,
+                            DNFOdds = 0.0031852665473018306,
+                            IntermediateTrackRating = 100.0,
+                            Marketability = 7,
+                            Name = "Immanuel Sawayn",
+                            OverallRating = 84.502288833431891,
+                            PeakAgeEnd = 37,
+                            PeakAgeStart = 37,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 98.849003051626681,
+                            ProgressionRate = 0.023049347069496275,
+                            RegressionRate = 0.0022359012850124362,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 100.0,
+                            ShortTrackRating = 77.927884503004435,
+                            SuperspeedwayTrackRating = 60.081270830723156
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Age = 39,
+                            DNFOdds = 0.00066681490616605555,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 3,
+                            Name = "Isaac Quitzon",
+                            OverallRating = 57.046451244386667,
+                            PeakAgeEnd = 40,
+                            PeakAgeStart = 37,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 79.870931181267196,
+                            ProgressionRate = 0.0017535185514637064,
+                            RegressionRate = 8.7932048415689261E-05,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 64.426047486833795,
+                            ShortTrackRating = 63.759757490712865,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Age = 39,
+                            DNFOdds = 0.00015478303803538208,
+                            IntermediateTrackRating = 95.096471548895522,
+                            Marketability = 6,
+                            Name = "Juwan Feest",
+                            OverallRating = 77.107420767491632,
+                            PeakAgeEnd = 30,
+                            PeakAgeStart = 27,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 115.90524960388429,
+                            ProgressionRate = 0.09661657644711398,
+                            RegressionRate = 0.04635308107326018,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 80.509090225611942,
+                            ShortTrackRating = 82.824121295459079,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Age = 24,
+                            DNFOdds = 0.00060948632469653768,
+                            IntermediateTrackRating = 84.43961049368805,
+                            Marketability = 9,
+                            Name = "Maritza Hintz",
+                            OverallRating = 76.631911657905377,
+                            PeakAgeEnd = 38,
+                            PeakAgeStart = 35,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 88.103753867744658,
+                            ProgressionRate = 0.081659229743110351,
+                            RegressionRate = 0.063041211065696823,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 82.470242375334408,
+                            ShortTrackRating = 64.800996544509616,
+                            SuperspeedwayTrackRating = 74.816797218089462
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Age = 41,
+                            DNFOdds = 0.0036606723020208942,
+                            IntermediateTrackRating = 74.413112318431999,
+                            Marketability = 3,
+                            Name = "Monroe White",
+                            OverallRating = 73.436126106381664,
+                            PeakAgeEnd = 34,
+                            PeakAgeStart = 29,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 72.472513825311154,
+                            ProgressionRate = 0.092848992615626569,
+                            RegressionRate = 0.041790005177844695,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 74.736857459150215,
+                            ShortTrackRating = 64.875867272004285,
+                            SuperspeedwayTrackRating = 79.718667375940157
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Age = 20,
+                            DNFOdds = 0.0041024509019933608,
+                            IntermediateTrackRating = 67.687516874108084,
+                            Marketability = 7,
+                            Name = "Edmond Ratke",
+                            OverallRating = 66.184068664163192,
+                            PeakAgeEnd = 31,
+                            PeakAgeStart = 30,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 76.377343830321138,
+                            ProgressionRate = 0.048930476354700027,
+                            RegressionRate = 0.004609994369049606,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 64.065511478780508,
+                            ShortTrackRating = 78.658435592288455,
+                            SuperspeedwayTrackRating = 54.324810711475685
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Age = 36,
+                            DNFOdds = 0.0023030123319793074,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 6,
+                            Name = "Zachary Yost",
+                            OverallRating = 51.012911292612131,
+                            PeakAgeEnd = 31,
+                            PeakAgeStart = 27,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 48.213764131425521,
+                            ProgressionRate = 0.059784635963350569,
+                            RegressionRate = 0.032387275469560474,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 54.051645170448516,
+                            ShortTrackRating = 50.0,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Age = 26,
+                            DNFOdds = 0.0038069173232697911,
+                            IntermediateTrackRating = 67.181358611577195,
+                            Marketability = 5,
+                            Name = "Erich Connelly",
+                            OverallRating = 72.739027095532066,
+                            PeakAgeEnd = 40,
+                            PeakAgeStart = 29,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 88.076652977010795,
+                            ProgressionRate = 0.0035774421323934271,
+                            RegressionRate = 0.0028020761276427251,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 66.370959503452355,
+                            ShortTrackRating = 90.276148171710645,
+                            SuperspeedwayTrackRating = 67.127642095388083
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Age = 28,
+                            DNFOdds = 0.0044295343536042697,
+                            IntermediateTrackRating = 83.536259929154241,
+                            Marketability = 7,
+                            Name = "Camylle Flatley",
+                            OverallRating = 82.197717622937262,
+                            PeakAgeEnd = 33,
+                            PeakAgeStart = 32,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 93.912800064938168,
+                            ProgressionRate = 0.037488777316389311,
+                            RegressionRate = 0.0095138378266399534,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 77.648402549181696,
+                            ShortTrackRating = 79.207841837635314,
+                            SuperspeedwayTrackRating = 88.398366175777809
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Age = 36,
+                            DNFOdds = 0.0020195770589466555,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 1,
+                            Name = "Evans Schamberger",
+                            OverallRating = 53.04656083662735,
+                            PeakAgeEnd = 38,
+                            PeakAgeStart = 28,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 64.125894696939952,
+                            ProgressionRate = 0.068189354775058525,
+                            RegressionRate = 0.0092174744772506572,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 60.236116144849753,
+                            ShortTrackRating = 51.95012720165964,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Age = 16,
+                            DNFOdds = 0.00088697667150995532,
+                            IntermediateTrackRating = 85.126286759978314,
+                            Marketability = 5,
+                            Name = "Marguerite Larkin",
+                            OverallRating = 73.546231914171273,
+                            PeakAgeEnd = 37,
+                            PeakAgeStart = 36,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 95.375300520241851,
+                            ProgressionRate = 0.06008480440345864,
+                            RegressionRate = 0.04493081791185264,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 74.503964894122745,
+                            ShortTrackRating = 74.768633803276714,
+                            SuperspeedwayTrackRating = 59.786042199307332
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Age = 22,
+                            DNFOdds = 0.0040348060552188834,
+                            IntermediateTrackRating = 77.480132533948606,
+                            Marketability = 6,
+                            Name = "Stewart Crona",
+                            OverallRating = 75.978842668837117,
+                            PeakAgeEnd = 36,
+                            PeakAgeStart = 30,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 83.544479947125069,
+                            ProgressionRate = 0.073307297281569248,
+                            RegressionRate = 0.053501619651038695,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 75.815670013664217,
+                            ShortTrackRating = 72.557659612734867,
+                            SuperspeedwayTrackRating = 78.061908515000795
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Age = 22,
+                            DNFOdds = 0.0017665498556693837,
+                            IntermediateTrackRating = 78.3110222255861,
+                            Marketability = 9,
+                            Name = "Cale Denesik",
+                            OverallRating = 69.090375039810397,
+                            PeakAgeEnd = 40,
+                            PeakAgeStart = 33,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 78.052273552723136,
+                            ProgressionRate = 0.094592737081215919,
+                            RegressionRate = 0.039669342914262197,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 56.892525775645815,
+                            ShortTrackRating = 72.190818671497937,
+                            SuperspeedwayTrackRating = 68.967133486511713
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Age = 35,
+                            DNFOdds = 0.0025020280166663587,
+                            IntermediateTrackRating = 81.400923095807912,
+                            Marketability = 1,
+                            Name = "Joanne Barton",
+                            OverallRating = 82.611742442544028,
+                            PeakAgeEnd = 38,
+                            PeakAgeStart = 36,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 118.60827328678297,
+                            ProgressionRate = 0.033084264958323152,
+                            RegressionRate = 0.0091809826293302033,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 81.017363030772131,
+                            ShortTrackRating = 85.974860798377705,
+                            SuperspeedwayTrackRating = 82.053822845218392
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Age = 51,
+                            DNFOdds = 0.0042805433024749326,
+                            IntermediateTrackRating = 55.77575570189768,
+                            Marketability = 3,
+                            Name = "Raina Rice",
+                            OverallRating = 64.894324004685117,
+                            PeakAgeEnd = 34,
+                            PeakAgeStart = 32,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 77.138882577601819,
+                            ProgressionRate = 0.051631816784863165,
+                            RegressionRate = 0.049965801612856263,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 86.980503215157924,
+                            ShortTrackRating = 63.730651557653985,
+                            SuperspeedwayTrackRating = 53.09038554403088
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Age = 29,
+                            DNFOdds = 0.00057320527817943166,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 8,
+                            Name = "Emelie Williamson",
+                            OverallRating = 50.0,
+                            PeakAgeEnd = 36,
+                            PeakAgeStart = 36,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 54.178081582482172,
+                            ProgressionRate = 0.037322313834455369,
+                            RegressionRate = 0.023533189793067608,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 50.0,
+                            ShortTrackRating = 50.0,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Age = 33,
+                            DNFOdds = 0.0036305543057162681,
+                            IntermediateTrackRating = 100.0,
+                            Marketability = 8,
+                            Name = "Austyn Rohan",
+                            OverallRating = 95.176148097408685,
+                            PeakAgeEnd = 36,
+                            PeakAgeStart = 35,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 133.37663632351419,
+                            ProgressionRate = 0.099635523012821928,
+                            RegressionRate = 0.091846224711152905,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 91.289447192547811,
+                            ShortTrackRating = 89.415145197086929,
+                            SuperspeedwayTrackRating = 100.0
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Age = 35,
+                            DNFOdds = 0.0037143704655824526,
+                            IntermediateTrackRating = 71.097547449544123,
+                            Marketability = 2,
+                            Name = "Johnathan Reichel",
+                            OverallRating = 69.229514243081383,
+                            PeakAgeEnd = 38,
+                            PeakAgeStart = 32,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 83.167642165511637,
+                            ProgressionRate = 0.039174354616459607,
+                            RegressionRate = 0.036151835427865278,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 61.986237657084629,
+                            ShortTrackRating = 74.705557661352444,
+                            SuperspeedwayTrackRating = 69.128714204344291
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Age = 32,
+                            DNFOdds = 0.0029075963662006359,
+                            IntermediateTrackRating = 99.182785827318028,
+                            Marketability = 1,
+                            Name = "Maxine Russel",
+                            OverallRating = 92.67001280406582,
+                            PeakAgeEnd = 36,
+                            PeakAgeStart = 34,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 89.24977935350141,
+                            ProgressionRate = 0.041879131922960749,
+                            RegressionRate = 0.0068375029515128499,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 100.0,
+                            ShortTrackRating = 81.429120562614699,
+                            SuperspeedwayTrackRating = 90.068144826330553
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Age = 32,
+                            DNFOdds = 0.0027254160828173836,
+                            IntermediateTrackRating = 61.082894819596419,
+                            Marketability = 9,
+                            Name = "Giovani Harber",
+                            OverallRating = 75.87477826121453,
+                            PeakAgeEnd = 31,
+                            PeakAgeStart = 29,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 93.343016832483215,
+                            ProgressionRate = 0.042552293595282842,
+                            RegressionRate = 0.017717361670307068,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 99.804195668096455,
+                            ShortTrackRating = 61.046856303095318,
+                            SuperspeedwayTrackRating = 81.56516625406995
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Age = 31,
+                            DNFOdds = 0.0036584176937288983,
+                            IntermediateTrackRating = 70.435429110879298,
+                            Marketability = 4,
+                            Name = "Curt Nolan",
+                            OverallRating = 63.279281720071552,
+                            PeakAgeEnd = 34,
+                            PeakAgeStart = 28,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 104.22189092742552,
+                            ProgressionRate = 0.056153241963391803,
+                            RegressionRate = 0.033445827414052512,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 66.970263516860413,
+                            ShortTrackRating = 60.468346510639655,
+                            SuperspeedwayTrackRating = 55.243087741906848
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Age = 29,
+                            DNFOdds = 0.0037143966013184894,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 5,
+                            Name = "Eryn Collins",
+                            OverallRating = 50.0,
+                            PeakAgeEnd = 34,
+                            PeakAgeStart = 29,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 48.337170685234511,
+                            ProgressionRate = 0.029004594152449849,
+                            RegressionRate = 0.0041674172557067159,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 50.0,
+                            ShortTrackRating = 50.0,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Age = 33,
+                            DNFOdds = 0.0012736883334101918,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 3,
+                            Name = "Tre Wyman",
+                            OverallRating = 57.589005578303251,
+                            PeakAgeEnd = 30,
+                            PeakAgeStart = 29,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 78.997661084487021,
+                            ProgressionRate = 0.015678584665560213,
+                            RegressionRate = 0.009509234567276514,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 54.262919568232228,
+                            ShortTrackRating = 59.518310025461155,
+                            SuperspeedwayTrackRating = 66.574792719519621
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Age = 23,
+                            DNFOdds = 0.00012060958326038096,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 9,
+                            Name = "Shana Huels",
+                            OverallRating = 51.305771150226136,
+                            PeakAgeEnd = 31,
+                            PeakAgeStart = 31,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 72.873646476658237,
+                            ProgressionRate = 0.074455629605573684,
+                            RegressionRate = 0.0099690083356574807,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 55.223084600904528,
+                            ShortTrackRating = 50.0,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Age = 43,
+                            DNFOdds = 2.9276335348972782E-05,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 2,
+                            Name = "Danny Hagenes",
+                            OverallRating = 50.0,
+                            PeakAgeEnd = 35,
+                            PeakAgeStart = 34,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 45.6074690634874,
+                            ProgressionRate = 0.042307907236801459,
+                            RegressionRate = 0.0099974839373217963,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 50.0,
+                            ShortTrackRating = 50.0,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Age = 26,
+                            DNFOdds = 0.0025126195970349811,
+                            IntermediateTrackRating = 65.541052152303891,
+                            Marketability = 9,
+                            Name = "Deshawn Bednar",
+                            OverallRating = 77.830231468090091,
+                            PeakAgeEnd = 37,
+                            PeakAgeStart = 32,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 87.049979228935712,
+                            ProgressionRate = 0.069780043217992124,
+                            RegressionRate = 0.046231300367540168,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 86.801166106296549,
+                            ShortTrackRating = 78.579416273183924,
+                            SuperspeedwayTrackRating = 80.399291340576028
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Age = 29,
+                            DNFOdds = 0.0039270301797049417,
+                            IntermediateTrackRating = 92.936345360066994,
+                            Marketability = 7,
+                            Name = "Cyril DuBuque",
+                            OverallRating = 92.372273533968155,
+                            PeakAgeEnd = 29,
+                            PeakAgeStart = 28,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 101.43103513299828,
+                            ProgressionRate = 0.044241323444948112,
+                            RegressionRate = 0.0039056864100985851,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 93.460126079635771,
+                            ShortTrackRating = 83.631802073362124,
+                            SuperspeedwayTrackRating = 99.460820622807745
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Age = 32,
+                            DNFOdds = 0.0024463202468081513,
+                            IntermediateTrackRating = 63.75558641066236,
+                            Marketability = 3,
+                            Name = "Ressie Jerde",
+                            OverallRating = 60.784399960653246,
+                            PeakAgeEnd = 40,
+                            PeakAgeStart = 37,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 84.313220214723856,
+                            ProgressionRate = 0.010832243315021407,
+                            RegressionRate = 0.0058642204003081892,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 50.0,
+                            ShortTrackRating = 54.577440782927823,
+                            SuperspeedwayTrackRating = 74.804572649022802
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Age = 20,
+                            DNFOdds = 0.0033519387031568032,
+                            IntermediateTrackRating = 100.0,
+                            Marketability = 1,
+                            Name = "Sarah Sauer",
+                            OverallRating = 99.222500285044575,
+                            PeakAgeEnd = 39,
+                            PeakAgeStart = 37,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 121.19741610469053,
+                            ProgressionRate = 0.04329238269314481,
+                            RegressionRate = 0.04279924755683414,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 99.179192435001482,
+                            ShortTrackRating = 99.855590548155334,
+                            SuperspeedwayTrackRating = 97.855218157021469
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Age = 42,
+                            DNFOdds = 0.00045412752902480478,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 3,
+                            Name = "Ezra Thompson",
+                            OverallRating = 50.0,
+                            PeakAgeEnd = 39,
+                            PeakAgeStart = 30,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 62.616580417626025,
+                            ProgressionRate = 0.089894917379781739,
+                            RegressionRate = 0.073266127691377386,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 50.0,
+                            ShortTrackRating = 50.0,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Age = 26,
+                            DNFOdds = 0.0018446342871982601,
+                            IntermediateTrackRating = 91.391835448867795,
+                            Marketability = 8,
+                            Name = "Georgiana Cummerata",
+                            OverallRating = 79.451911243065183,
+                            PeakAgeEnd = 34,
+                            PeakAgeStart = 33,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 109.46713282224347,
+                            ProgressionRate = 0.043719199261940171,
+                            RegressionRate = 0.017189917064086298,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 97.004624202975492,
+                            ShortTrackRating = 60.519303242789725,
+                            SuperspeedwayTrackRating = 68.891882077627741
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Age = 40,
+                            DNFOdds = 0.0032449041493221517,
+                            IntermediateTrackRating = 97.861196145053995,
+                            Marketability = 4,
+                            Name = "Adrien Green",
+                            OverallRating = 86.276219926897795,
+                            PeakAgeEnd = 37,
+                            PeakAgeStart = 37,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 94.725158938981679,
+                            ProgressionRate = 0.054568777948032492,
+                            RegressionRate = 0.032568383852611085,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 100.0,
+                            ShortTrackRating = 89.08003019827585,
+                            SuperspeedwayTrackRating = 58.163653364261307
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Age = 38,
+                            DNFOdds = 0.0039644031568764658,
+                            IntermediateTrackRating = 56.579985048072416,
+                            Marketability = 9,
+                            Name = "Stan Hessel",
+                            OverallRating = 53.88712221160975,
+                            PeakAgeEnd = 40,
+                            PeakAgeStart = 36,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 66.597901469175213,
+                            ProgressionRate = 0.014538216294916584,
+                            RegressionRate = 0.0022534398717661826,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 56.792147266199137,
+                            ShortTrackRating = 52.176356532167453,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Age = 22,
+                            DNFOdds = 0.001536526825639703,
+                            IntermediateTrackRating = 50.0,
+                            Marketability = 4,
+                            Name = "Meaghan Bruen",
+                            OverallRating = 58.688529521476354,
+                            PeakAgeEnd = 30,
+                            PeakAgeStart = 30,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 79.323664555574112,
+                            ProgressionRate = 0.077018953452276689,
+                            RegressionRate = 0.02890023063695973,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 75.508170593555349,
+                            ShortTrackRating = 59.245947492350069,
+                            SuperspeedwayTrackRating = 50.0
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Age = 43,
+                            DNFOdds = 0.0020364794885854875,
+                            IntermediateTrackRating = 90.120798372133194,
+                            Marketability = 2,
+                            Name = "Abner Turcotte",
+                            OverallRating = 91.594190549003997,
+                            PeakAgeEnd = 38,
+                            PeakAgeStart = 36,
+                            PerformanceRating = 0.0,
+                            PotentialRating = 103.30690675232884,
+                            ProgressionRate = 0.094990632611582179,
+                            RegressionRate = 0.052730259276443023,
+                            RetirementFactor = 0.0,
+                            RoadTrackRating = 100.0,
+                            ShortTrackRating = 87.79639613183754,
+                            SuperspeedwayTrackRating = 88.459567692045283
                         });
                 });
 
@@ -564,44 +1301,6 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("TeamManufacturers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ManufacturerId = 3,
-                            TeamId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ManufacturerId = 4,
-                            TeamId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ManufacturerId = 1,
-                            TeamId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ManufacturerId = 2,
-                            TeamId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ManufacturerId = 5,
-                            TeamId = 3
-                        },
-                        new
-                        {
-                            Id = 6,
-                            ManufacturerId = 6,
-                            TeamId = 3
-                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.Race", b =>
@@ -947,35 +1646,6 @@ namespace NASRAC.Persistence.Game.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Team");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EquipmentRating = 94.0,
-                            Name = "Endless Galaxy Motorsports",
-                            OverallRating = 83.0,
-                            PerformanceRating = 85.0,
-                            PersonnelRating = 70.0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EquipmentRating = 69.0,
-                            Name = "Ortega Racing",
-                            OverallRating = 78.0,
-                            PerformanceRating = 81.0,
-                            PersonnelRating = 83.0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            EquipmentRating = 87.0,
-                            Name = "AJ Cruz Motorsports",
-                            OverallRating = 78.0,
-                            PerformanceRating = 81.0,
-                            PersonnelRating = 65.0
-                        });
                 });
 
             modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.TeamFinancials", b =>
@@ -1124,9 +1794,7 @@ namespace NASRAC.Persistence.Game.Migrations
                 {
                     b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Team")
                         .WithMany("Drivers")
-                        .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("TeamId");
 
                     b.Navigation("Team");
                 });
