@@ -148,23 +148,19 @@ public class Driver
         var ratingMean = RNG.RollDoubleRange(driver.PotentialRating * .6, driver.PotentialRating);
         var ratingStdDev = RNG.RollDoubleRange(driver.PotentialRating * .05, driver.PotentialRating * .2);
         
-        driver.ShortTrackRating = Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100);
-        driver.IntermediateTrackRating = Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100);
-        driver.SuperspeedwayTrackRating = Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100);
-        driver.RoadTrackRating = Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100);
+        driver.ShortTrackRating = RNG.Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100, 3);
+        driver.IntermediateTrackRating = RNG.Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100, 3);
+        driver.SuperspeedwayTrackRating = RNG.Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100, 3);
+        driver.RoadTrackRating = RNG.Clamp(Gaussian.GenerateNormal(ratingMean, ratingStdDev), 50, 100, 3);
         
-        driver.OverallRating = (driver.ShortTrackRating + driver.IntermediateTrackRating + driver.SuperspeedwayTrackRating + driver.RoadTrackRating) / 4;
+        driver.OverallRating = RNG.Clamp((driver.ShortTrackRating + driver.IntermediateTrackRating + driver.SuperspeedwayTrackRating + driver.RoadTrackRating) / 4, 0, 100, 3);
         
-        driver.ProgressionRate = RNG.RollDoubleRange(0, .1);
-        driver.RegressionRate = RNG.RollDoubleRange(0, driver.ProgressionRate);
-        driver.DNFOdds = RNG.RollDoubleRange(0, .005);
+        driver.ProgressionRate = RNG.RollDoubleRange(0, .1, 3);
+        driver.RegressionRate = RNG.RollDoubleRange(0, driver.ProgressionRate, 3);
+        driver.RetirementFactor = RNG.RollDoubleRange(0, .005, 3);
+        driver.DNFOdds = RNG.RollDoubleRange(0, .005, 3);
         driver.Marketability = RNG.RollEnum<Marketability>();
 
         return driver;
-    }
-    
-    private static double Clamp(double value, double min, double max)
-    {
-        return Math.Min(Math.Max(value, min), max);
     }
 }

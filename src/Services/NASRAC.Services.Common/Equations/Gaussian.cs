@@ -1,10 +1,11 @@
 using MathNet.Numerics.Distributions;
+using NASRAC.Services.Common.Services;
 
 namespace NASRAC.Services.Common.Equations;
 
 public class Gaussian
 {
-    private static Random _rng = new Random();
+    private static readonly Random _rng = new Random();
     
     public static double GeneratePotentialRating(int age)
     {
@@ -18,7 +19,7 @@ public class Gaussian
         var potentialRatingModifier = _rng.NextDouble() * potentialRatingModifierRange;
         var potentialRating = ceiling - potentialRatingModifier;
 
-        return potentialRating;
+        return RNG.Clamp(potentialRating, 0, 100);
     }
 
     public static double GenerateNormal(double mean, double stdDev)
