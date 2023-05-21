@@ -30,6 +30,9 @@ public class Seed
 
     public void Initialize()
     {
+        for (var i = 1; i <= 40; i++)
+            _modelBuilder.Entity<Driver>().HasData(Driver.GenerateRandomDriver(i));
+        
         SeedData<Track>("Track.json");
         SeedData<Series>("Series.json");
         SeedData<Race>("Race.json");

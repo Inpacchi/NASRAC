@@ -132,9 +132,10 @@ public class Driver
         };
     }
     
-    public static Driver GenerateRandomDriver(int peakAgeStart, int peakAgeEnd)
+    public static Driver GenerateRandomDriver(int id)
     {
         var driver = new Faker<Driver>()
+            .RuleFor(d => d.Id, f => id)
             .RuleFor(d => d.Name, f => f.Name.FullName())
             .RuleFor(d => d.Age, f => f.Random.GaussianInt(30, 7))
             .Generate();
