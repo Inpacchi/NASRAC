@@ -3,10 +3,51 @@
 public static class RNG
 {
     private static readonly Random RandomNumberGenerator;
+    private static readonly Dictionary<string, int> ColorWeights = new();
+    private static readonly int TotalColorWeight;
+    
+    private static readonly List<string> Colors = new()
+    {
+        "Black",
+        "Blue",
+        "Green",
+        "Orange",
+        "Purple",
+        "Red",
+        "White",
+        "Yellow",
+        ""
+    };
 
     static RNG()
     {
         RandomNumberGenerator = new Random();
+
+        foreach (var color in Colors)
+        {
+            var weight = color switch
+            {
+                "" => 10,
+                "Black" => 5,
+                "White" => 3,
+                "Red" => 2,
+                "Blue" => 2,
+                _ => 1
+            };
+
+            TotalColorWeight += weight;
+            ColorWeights[color] = TotalColorWeight;
+        }
+    }
+
+    /// <summary>
+    /// Roll a random integer up to the given max value (range: 0 - maxValue)
+    /// </summary>
+    /// <param name="maxValue">Exclusive highest number to return</param>
+    /// <returns></returns>
+    public static int RollInt(int maxValue)
+    {
+        return RandomNumberGenerator.Next(maxValue);
     }
     
     /// <summary>
@@ -99,5 +140,19 @@ public static class RNG
     public static double Clamp(double value, double min, double max, int precision)
     {
         return Math.Min(Math.Max(Math.Round(value, precision), min), max);
+    }
+    
+    /// <summary>
+    /// Pick a random primary or secondary color, or no color
+    /// </summary>
+    /// <returns></returns>
+    public static string GetRandomColor()
+    {
+        var randomNumber = RNG.RollIntRange(0, TotalColorWeight);
+
+        foreach (var color in Colors.Where(color => randomNumber < ColorWeights[color]))
+            return color;
+
+        return "";
     }
 }

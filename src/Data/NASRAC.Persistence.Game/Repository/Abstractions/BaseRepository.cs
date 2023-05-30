@@ -2,44 +2,44 @@ using System.Data.Entity.Core;
 using Microsoft.EntityFrameworkCore;
 using NASRAC.Persistence.Game.DAL;
 
-namespace NASRAC.Persistence.Game.Repository;
+namespace NASRAC.Persistence.Game.Repository.Abstractions;
 
 public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 {
-    protected readonly DataContext DataContext;
+    private readonly DataContext _dataContext;
     protected readonly DbSet<T> Repository;
     
     protected BaseRepository(DataContext dataContext)
     {
-        DataContext = dataContext;
+        _dataContext = dataContext;
         Repository = dataContext.Set<T>();
     }
     
     public T GetById(int id)
     {
-        return DataContext.Set<T>().Find(id) ?? throw new ObjectNotFoundException();
+        return _dataContext.Set<T>().Find(id) ?? throw new ObjectNotFoundException();
     }
 
     public IEnumerable<T> GetAll()
     {
-        return DataContext.Set<T>();
+        return _dataContext.Set<T>();
     }
 
     public void Add(T entity)
     {
-        DataContext.Set<T>().Add(entity);
-        DataContext.SaveChanges();
+        _dataContext.Set<T>().Add(entity);
+        _dataContext.SaveChanges();
     }
 
     public void Update(T entity)
     {
-        DataContext.Set<T>().Update(entity);
-        DataContext.SaveChanges();
+        _dataContext.Set<T>().Update(entity);
+        _dataContext.SaveChanges();
     }
 
     public void Delete(T entity)
     {
-        DataContext.Set<T>().Remove(entity);
-        DataContext.SaveChanges();
+        _dataContext.Set<T>().Remove(entity);
+        _dataContext.SaveChanges();
     }
 }
