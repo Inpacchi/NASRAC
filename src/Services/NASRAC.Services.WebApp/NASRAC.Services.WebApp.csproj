@@ -1,18 +1,17 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.2" />
-      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+      <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Services\NASRAC.Services.Game\NASRAC.Services.Game.csproj" />
       <ProjectReference Include="..\..\Data\NASRAC.Models.WebApp\NASRAC.Models.WebApp.csproj" />
       <ProjectReference Include="..\..\Data\NASRAC.Persistence.Game\NASRAC.Persistence.Game.csproj" />
       <ProjectReference Include="..\NASRAC.Services.Game\NASRAC.Services.Game.csproj" />
