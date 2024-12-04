@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
 using NASRAC.Models.Game.RaceEntities;
@@ -10,30 +11,34 @@ using NASRAC.Models.WebApp.Entities;
 
 namespace NASRAC.Persistence.Game.DAL;
 
-public class DataContext : IdentityDbContext<AppUser, IdentityRole<int>, int>
+public class DataContext(DbContextOptions<DataContext> options, IConfiguration configuration)
+    : IdentityDbContext<AppUser, IdentityRole<int>, int>(options)
 {
-    private readonly string _seedPath;
-    
-    public DataContext(DbContextOptions options) : base(options)
-    {
-        _seedPath = Path.Combine("..", "..", "Data", "NASRAC.Persistence.Game", "Seed Data");
-    }
-    
-    public DataContext(DbContextOptions options, string seedPath) : base(options)
-    {
-        _seedPath = seedPath;
-    }
+    private readonly IConfiguration _configuration = configuration;
 
-    protected override void OnModelCreating(ModelBuilder builder)
-    {
-        base.OnModelCreating(builder);
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseNpgsql(_configuration.GetConnectionString("DefaultConnection"))
+        .EnableSensitiveDataLogging()
+        .UseSeeding((context, b) =>
+        {
+            InitializeSeedData(context);
+        })
+        .UseAsyncSeeding(async (context, b, arg3) =>
+        {
+            await InitializeSeedDataAsync(context);
+        });
 
-        #region Seed Data
-        
-        var seed = new Seed(builder, _seedPath);
+    private void InitializeSeedData(DbContext dbContext)
+    {
+        var seed = new Seed(dbContext, _configuration);
         seed.Initialize();
-        
-        #endregion
+    }
+    
+    private async Task InitializeSeedDataAsync(DbContext dbContext)
+    {
+        var seed = new Seed(dbContext, _configuration);
+        await seed.InitializeAsync();
     }
 
     #region Database Structure

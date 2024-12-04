@@ -1,6 +1,8 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NASRAC.Models.Game.DriverEntities;
 using NASRAC.Models.Game.Entities;
 using NASRAC.Models.Game.RaceEntities;
@@ -11,15 +13,14 @@ namespace NASRAC.Persistence.Game.DAL;
 
 public class Seed
 {
-    private readonly ModelBuilder _modelBuilder;
+    private readonly DbContext _dbContext;
     private readonly JsonSerializerOptions _options;
-
     private readonly string _seedPath;
 
-    public Seed(ModelBuilder modelBuilder, string seedPath)
+    public Seed(DbContext dbContext, IConfiguration configuration)
     {
-        _modelBuilder = modelBuilder;
-        _seedPath = seedPath;
+        _dbContext = dbContext;
+        _seedPath = configuration.GetSection("SeedDataPath").Value;
         
         _options = new JsonSerializerOptions
         {
@@ -31,27 +32,56 @@ public class Seed
 
     public void Initialize()
     {
-        List<Team> teams = new();
+        List<Team> teams = [];
         
         for (var i = 1; i <= 30; i++)
         {
             var team = Team.GenerateRandomTeam(i);
-            _modelBuilder.Entity<Team>().HasData(team);
+            _dbContext.Set<Team>().Add(team);
             teams.Add(team);
         }
+        _dbContext.SaveChanges();
         
         for (var i = 1; i <= 40; i++)
         {
             var driver = Driver.GenerateRandomDriver(i);
-            _modelBuilder.Entity<Driver>().HasData(driver);
+            _dbContext.Set<Driver>().Add(driver);
             AssignDriverToTeam(driver, teams);
         }
+        _dbContext.SaveChanges();
         
+        SeedData<Manufacturer>("Manufacturer.json");
         SeedData<Track>("Track.json");
         SeedData<Series>("Series.json");
         SeedData<Race>("Race.json");
         SeedData<Schedule>("Schedule.json");
-        SeedData<Manufacturer>("Manufacturer.json");
+    }
+
+    public async Task InitializeAsync()
+    {
+        List<Team> teams = [];
+        
+        for (var i = 1; i <= 30; i++)
+        {
+            var team = Team.GenerateRandomTeam(i);
+            _dbContext.Set<Team>().Add(team);
+            teams.Add(team);
+        }
+        await _dbContext.SaveChangesAsync();
+        
+        for (var i = 1; i <= 40; i++)
+        {
+            var driver = Driver.GenerateRandomDriver(i);
+            _dbContext.Set<Driver>().Add(driver);
+            AssignDriverToTeam(driver, teams);
+        }
+        await _dbContext.SaveChangesAsync();
+        
+        await SeedDataAsync<Manufacturer>("Manufacturer.json");
+        await SeedDataAsync<Track>("Track.json");
+        await SeedDataAsync<Series>("Series.json");
+        await SeedDataAsync<Race>("Race.json");
+        await SeedDataAsync<Schedule>("Schedule.json");
     }
 
     private void SeedData<T>(string filename) where T : class
@@ -64,8 +94,29 @@ public class Seed
         {
             foreach (var d in data)
             {
-                _modelBuilder.Entity<T>().HasData(d);
+                _dbContext.Set<T>().Add(d);
             }
+            _dbContext.SaveChanges();
+        }
+        else
+        {
+            throw new NullReferenceException($"Filename {filename} returned an error - please double check the filename, location and contents.");
+        }
+    }
+
+    private async Task SeedDataAsync<T>(string filename) where T : class
+    {
+        var json = await File.ReadAllTextAsync(Path.Combine(_seedPath, filename));
+
+        var data = JsonSerializer.Deserialize<List<T>>(json, _options);
+
+        if (data != null)
+        {
+            foreach (var d in data)
+            {
+                _dbContext.Set<T>().Add(d);
+            }
+            await _dbContext.SaveChangesAsync();
         }
         else
         {
