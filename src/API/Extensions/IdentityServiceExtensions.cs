@@ -18,6 +18,8 @@ public static class IdentityServiceExtensions
             {
                 options.Password.RequireNonAlphanumeric = false;
             })
+            .AddRoles<AppRole>()
+            .AddRoleManager<RoleManager<AppRole>>()
             .AddEntityFrameworkStores<DataContext>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

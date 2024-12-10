@@ -1,6 +1,6 @@
 name = ""
 migrate:
-	dotnet ef migrations add $(name) --project src/Data/NASRAC.Persistence.Game --startup-project src/API/NASRAC.API.Game
+	dotnet ef migrations add $(name) --project src/Data --startup-project src/API
 
 update:
-	dotnet ef database update --project src/Data/NASRAC.Persistence.Game --startup-project src/API/NASRAC.API.Game
+	dotnet ef database update --project src/Data --startup-project src/API

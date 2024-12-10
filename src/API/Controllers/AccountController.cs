@@ -1,26 +1,19 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NASRAC.API.Controllers.Base;
 using NASRAC.API.Game.DTOs;
 using NASRAC.Core.Entities.WebApp;
 using NASRAC.Core.Interfaces;
 
 namespace NASRAC.API.Controllers;
 
-public class AccountController : BaseApiController
+public class AccountController(
+    UserManager<AppUser> userManager,
+    SignInManager<AppUser> signInManager,
+    ITokenService tokenService)
+    : BaseApiController
 {
-    private readonly UserManager<AppUser> _userManager;
-    private readonly SignInManager<AppUser> _signInManager;
-    private readonly ITokenService _tokenService;
-
-    public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager,
-        ITokenService tokenService)
-    {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _tokenService = tokenService;
-    }
-
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
@@ -32,38 +25,38 @@ public class AccountController : BaseApiController
             Email = registerDto.Email
         };
 
-        var result = await _userManager.CreateAsync(user, registerDto.Password);
+        var result = await userManager.CreateAsync(user, registerDto.Password);
 
         if (!result.Succeeded) return BadRequest(result.Errors);
 
         return new UserDto
         {
             Username = user.UserName,
-            Token = _tokenService.CreateToken(user)
+            Token = tokenService.CreateToken(user)
         };
     }
 
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        var user = await _userManager.Users.SingleOrDefaultAsync(user =>
+        var user = await userManager.Users.SingleOrDefaultAsync(user =>
             user.UserName.ToLower() == loginDto.Username.ToLower());
 
         if (user == null) return Unauthorized("Invalid username");
 
-        var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+        var result = await signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
         if (!result.Succeeded) return Unauthorized();
 
         return new UserDto
         {
             Username = user.UserName,
-            Token = _tokenService.CreateToken(user)
+            Token = tokenService.CreateToken(user)
         };
     }
 
     private async Task<bool> UserExists(string username)
     {
-        return await _userManager.Users.AnyAsync(user => user.UserName == username.ToLower());
+        return await userManager.Users.AnyAsync(user => user.UserName == username.ToLower());
     }
 }

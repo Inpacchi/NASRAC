@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NASRAC.API.Controllers.Base;
 using NASRAC.Core.Entities.WebApp;
 using NASRAC.Data.DAL;
 
