@@ -1,4 +1,4 @@
-﻿namespace NASRAC.Services.Common.Enums;
+﻿namespace NASRAC.Core.Enums;
 
 public enum VehicleType
 {

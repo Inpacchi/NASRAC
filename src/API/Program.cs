@@ -1,7 +1,12 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Data.DAL;
-using Core.Extensions;
+using NASRAC.API.Extensions;
+using NASRAC.Core.Extensions;
+using NASRAC.Data.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +15,7 @@ builder.Services.AddCors();
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddWebAppServices(builder.Configuration);
 builder.Services.AddGameServices(builder.Configuration);
+builder.Services.AddDataServices(builder.Configuration);
 builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" }); });
 builder.Services.AddDbContext<DataContext>(options =>
 {

@@ -1,20 +1,14 @@
 using Microsoft.EntityFrameworkCore;
-using NASRAC.Models.Game.DriverEntities;
-using Data.DAL;
-using Data.Repository.Abstractions;
+using NASRAC.Core.Interfaces;
+using NASRAC.Core.Models.Game.DriverEntities;
+using NASRAC.Data.DAL;
 
-namespace Data.Repository;
+namespace NASRAC.Data.Repository;
 
-public class DriverRepository : BaseRepository<Driver>
+public class DriverRepository(DataContext dataContext) : IDriverRepository
 {
-    public DriverRepository(DataContext dataContext) : base(dataContext)
+    public DbSet<Driver> GetAllDrivers()
     {
-    }
-    
-    public ICollection<Driver> GetAllDrivers()
-    {
-        return Repository
-            .Include(d => d.Team)
-            .ToList();
+        return dataContext.Driver;
     }
 }

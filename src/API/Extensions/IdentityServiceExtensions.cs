@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using NASRAC.Core.Models.WebApp.Entities;
+using NASRAC.Core.Entities.WebApp;
+using NASRAC.Data.DAL;
 
 namespace NASRAC.Core.Extensions;
 
@@ -15,22 +16,37 @@ public static class IdentityServiceExtensions
     {
         services.AddIdentityCore<AppUser>(options =>
             {
-                options.Password.RequiredLength = 8;
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.SignIn.RequireConfirmedEmail = true;
+                options.Password.RequireNonAlphanumeric = false;
             })
-            .AddSignInManager<SignInManager<AppUser>>()
-            .AddEntityFrameworkStores<DbContext>();
+            .AddEntityFrameworkStores<DataContext>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
             {
+                var tokenKey = config["TokenKey"] ?? throw new Exception("TokenKey not found");
+                
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey)),
                     ValidateIssuer = false,
                     ValidateAudience = false
+                };
+                
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context => 
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+                        {
+                            context.Token = accessToken;
+                        }
+
+                        return Task.CompletedTask;
+                    }
                 };
             });
         

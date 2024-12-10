@@ -1,10 +1,7 @@
-using NASRAC.Models.Game.Stats;
+using NASRAC.Core.Models.Game.Stats;
 
-namespace Core.Interfaces;
+namespace NASRAC.Core.Interfaces;
 
 public interface IGameService
 {
-    public void RunRace();
-
-    public RaceLog GetRaceLog(int raceId);
 }

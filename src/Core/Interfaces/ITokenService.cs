@@ -1,6 +1,6 @@
-using NASRAC.Models.WebApp.Entities;
+using NASRAC.Core.Entities.WebApp;
 
-namespace Core.Interfaces;
+namespace NASRAC.Core.Interfaces;
 
 public interface ITokenService
 {

@@ -2,8 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using NASRAC.Core.Interfaces;
 using NASRAC.Core.Services;
+using NASRAC.Data.Repository;
 
-namespace NASRAC.Core.Extensions;
+namespace NASRAC.API.Extensions;
 
 public static class ServiceCollectionExtensions
 {
@@ -17,7 +18,7 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddGameServices(this IServiceCollection services, IConfiguration config)
     {
-        //services.AddTransient<IGameService, GameService>();
+        services.AddTransient<IGameService, GameService>();
 
         return services;
     }

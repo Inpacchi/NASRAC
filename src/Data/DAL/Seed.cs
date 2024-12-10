@@ -1,15 +1,14 @@
-﻿using System.Diagnostics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using NASRAC.Models.Game.DriverEntities;
-using NASRAC.Models.Game.Entities;
-using NASRAC.Models.Game.RaceEntities;
-using NASRAC.Models.Game.TeamEntities;
-using NASRAC.Services.Common.Services;
+using NASRAC.Core.Models.Game.DriverEntities;
+using NASRAC.Core.Models.Game.Entities;
+using NASRAC.Core.Models.Game.RaceEntities;
+using NASRAC.Core.Models.Game.TeamEntities;
+using NASRAC.Core.Services;
 
-namespace Data.DAL;
+namespace NASRAC.Data.DAL;
 
 public class Seed
 {
@@ -127,7 +126,7 @@ public class Seed
 
     private void AssignDriverToTeam(Driver driver, List<Team> teams)
     {
-        var team = teams[RNG.RollInt(teams.Select(t => t.Drivers.Count < 2).Count())];
+        var team = teams[RandomService.RollInt(teams.Select(t => t.Drivers.Count < 2).Count())];
         driver.TeamId = team.Id;
     }
 }

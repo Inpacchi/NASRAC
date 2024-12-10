@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using NASRAC.Core.Entities.WebApp;
 using NASRAC.Core.Services;
 using NASRAC.Core.Models.Game.DriverEntities;
 using NASRAC.Core.Models.Game.Entities;
 using NASRAC.Core.Models.Game.JoinEntities;
-using NASRAC.Core.Models.WebApp.Entities;
 
 namespace NASRAC.Core.Models.Game.TeamEntities;
 

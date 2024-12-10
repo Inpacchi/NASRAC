@@ -13,6 +13,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RaceLogComponent } from './pages/game/race-log/race-log/race-log.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { LoginComponent } from './pages/login/login.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    RaceLogComponent
   ],
   imports: [
     BrowserModule,

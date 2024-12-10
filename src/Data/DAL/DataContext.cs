@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using NASRAC.Models.Game.DriverEntities;
-using NASRAC.Models.Game.Entities;
-using NASRAC.Models.Game.RaceEntities;
-using NASRAC.Models.Game.Stats;
-using NASRAC.Models.Game.TeamEntities;
-using NASRAC.Models.WebApp.Entities;
+using NASRAC.Core.Entities.WebApp;
+using NASRAC.Core.Models.Game.DriverEntities;
+using NASRAC.Core.Models.Game.Entities;
+using NASRAC.Core.Models.Game.RaceEntities;
+using NASRAC.Core.Models.Game.Stats;
+using NASRAC.Core.Models.Game.TeamEntities;
 
-namespace Data.DAL;
+namespace NASRAC.Data.DAL;
 
 public class DataContext(DbContextOptions<DataContext> options, IConfiguration configuration)
     : IdentityDbContext<AppUser, IdentityRole<int>, int>(options)
@@ -43,20 +43,20 @@ public class DataContext(DbContextOptions<DataContext> options, IConfiguration c
 
     #region Database Structure
     
-    protected virtual DbSet<Car> Car { get; set; }
-    protected virtual DbSet<Driver> Driver { get; set; }
-    protected virtual DbSet<Loan> Loan { get; set; }
-    protected virtual DbSet<Manufacturer> Manufacturer { get; set; }
-    protected virtual DbSet<Race> Race { get; set; }
-    protected virtual DbSet<Schedule> Schedule { get; set; }
-    protected virtual DbSet<Series> Series { get; set; }
-    protected virtual DbSet<Sponsor> Sponsor { get; set; }
-    protected virtual DbSet<Team> Team { get; set; }
-    protected virtual DbSet<TeamFinancials> TeamFinancials { get; set; }
-    protected virtual DbSet<Track> Track { get; set; }
-    protected virtual DbSet<QualifyingStats> QualifyingStats { get; set; }
-    protected virtual DbSet<RaceLog> RaceLog { get; set; }
-    protected virtual DbSet<SessionResults> SessionResults { get; set; }
+    public virtual DbSet<Car> Car { get; set; }
+    public virtual DbSet<Driver> Driver { get; set; }
+    public virtual DbSet<Loan> Loan { get; set; }
+    public virtual DbSet<Manufacturer> Manufacturer { get; set; }
+    public virtual DbSet<Race> Race { get; set; }
+    public virtual DbSet<Schedule> Schedule { get; set; }
+    public virtual DbSet<Series> Series { get; set; }
+    public virtual DbSet<Sponsor> Sponsor { get; set; }
+    public virtual DbSet<Team> Team { get; set; }
+    public virtual DbSet<TeamFinancials> TeamFinancials { get; set; }
+    public virtual DbSet<Track> Track { get; set; }
+    public virtual DbSet<QualifyingStats> QualifyingStats { get; set; }
+    public virtual DbSet<RaceLog> RaceLog { get; set; }
+    public virtual DbSet<SessionResults> SessionResults { get; set; }
     
     #endregion
 

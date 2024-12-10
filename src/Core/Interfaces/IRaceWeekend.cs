@@ -1,4 +1,4 @@
-﻿namespace Core.Interfaces;
+﻿namespace NASRAC.Core.Interfaces;
 
 public interface IRaceWeekend
 {

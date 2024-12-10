@@ -1,0 +1,17 @@
+<h1>Race Log</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Lap Speed</th>
+    <th>Current Position</th>
+    <th>Current Lap</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let log of raceLogs">
+    <td>{{ log.lapSpeed }}</td>
+    <td>{{ log.currentPosition }}</td>
+    <td>{{ log.currentLap }}</td>
+  </tr>
+  </tbody>
+</table>

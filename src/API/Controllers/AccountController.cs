@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NASRAC.API.Game.DTOs;
-using NASRAC.Models.WebApp.Entities;
-using Core.Interfaces;
+using NASRAC.Core.Entities.WebApp;
+using NASRAC.Core.Interfaces;
 
-namespace NASRAC.API.Game.Controllers;
+namespace NASRAC.API.Controllers;
 
 public class AccountController : BaseApiController
 {
