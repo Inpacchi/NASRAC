@@ -1,7 +1,9 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using NASRAC.Core.Entities.WebApp;
 using NASRAC.Core.Models.Game.DriverEntities;
 using NASRAC.Core.Models.Game.Entities;
 using NASRAC.Core.Models.Game.RaceEntities;
@@ -122,11 +124,35 @@ public class Seed
             throw new NullReferenceException($"Filename {filename} returned an error - please double check the filename, location and contents.");
         }
     }
-
-
+    
     private void AssignDriverToTeam(Driver driver, List<Team> teams)
     {
         var team = teams[RandomService.RollInt(teams.Select(t => t.Drivers.Count < 2).Count())];
         driver.TeamId = team.Id;
+    }
+
+    public static async Task InitializeUsersAsync(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+    {
+        if (await userManager.Users.AnyAsync()) return;
+
+        var roles = new List<AppRole>
+        {
+            new() {Name = "Player"},
+            new() {Name = "Moderator"},
+            new() {Name = "Admin"},
+        };
+
+        foreach (var role in roles)
+        {
+            await roleManager.CreateAsync(role);
+        }
+
+        var admin = new AppUser
+        {
+            UserName = "admin",
+        };
+        
+        await userManager.CreateAsync(admin, "Password123");
+        await userManager.AddToRolesAsync(admin, ["Admin", "Moderator"]);
     }
 }

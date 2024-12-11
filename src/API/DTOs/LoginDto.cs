@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace NASRAC.API.Game.DTOs;
+namespace NASRAC.API.DTOs;
 
 public class LoginDto
 {

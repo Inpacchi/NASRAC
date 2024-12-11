@@ -1,14 +1,13 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using NASRAC.Core.Entities.WebApp;
 using NASRAC.Data.DAL;
 
-namespace NASRAC.Core.Extensions;
+namespace NASRAC.API.Extensions;
 
 public static class IdentityServiceExtensions
 {

@@ -9,10 +9,10 @@ internal static class ConsoleProgram
 {
     private static async Task Main(string[] args)
     {
-        var builder = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true);
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
+            .Build();
     
-        var configuration = builder.Build();
         var serviceProvider = ConfigureServices(configuration);
 
         using var scope = serviceProvider.CreateScope();

@@ -48,7 +48,7 @@ public class Team
     /// <summary>
     /// Owner of the team
     /// </summary>
-    public AppUser Owner { get; set; }
+    public AppUser? Owner { get; set; }
     
     /// <summary>
     /// Team manufacturers

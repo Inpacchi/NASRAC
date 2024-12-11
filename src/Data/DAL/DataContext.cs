@@ -39,10 +39,14 @@ public class DataContext(DbContextOptions<DataContext> options, IConfiguration c
         .EnableSensitiveDataLogging()
         .UseSeeding((context, b) =>
         {
+            if (context.Set<Race>().FirstOrDefault() != null) return;
+            
             InitializeSeedData(context);
         })
         .UseAsyncSeeding(async (context, b, arg3) =>
         {
+            if (await context.Set<Race>().FirstOrDefaultAsync(cancellationToken: arg3) != null) return;
+            
             await InitializeSeedDataAsync(context);
         });
 

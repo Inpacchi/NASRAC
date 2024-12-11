@@ -2,17 +2,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NASRAC.API.Controllers.Base;
-using NASRAC.API.Game.DTOs;
+using NASRAC.API.DTOs;
+using NASRAC.API.Services.Interfaces;
 using NASRAC.Core.Entities.WebApp;
 using NASRAC.Core.Interfaces;
 
 namespace NASRAC.API.Controllers;
 
-public class AccountController(
-    UserManager<AppUser> userManager,
-    SignInManager<AppUser> signInManager,
-    ITokenService tokenService)
-    : BaseApiController
+public class AccountController(UserManager<AppUser> userManager, ITokenService tokenService) : BaseApiController
 {
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
@@ -32,7 +29,7 @@ public class AccountController(
         return new UserDto
         {
             Username = user.UserName,
-            Token = tokenService.CreateToken(user)
+            Token = await tokenService.CreateToken(user)
         };
     }
 
@@ -44,14 +41,14 @@ public class AccountController(
 
         if (user == null) return Unauthorized("Invalid username");
 
-        var result = await signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+        var result = await userManager.CheckPasswordAsync(user, loginDto.Password);
 
-        if (!result.Succeeded) return Unauthorized();
+        if (!result) return Unauthorized();
 
         return new UserDto
         {
             Username = user.UserName,
-            Token = tokenService.CreateToken(user)
+            Token = await tokenService.CreateToken(user)
         };
     }
 

@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Data.Migrations
+namespace NASRAC.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
     partial class DataContextModelSnapshot : ModelSnapshot
@@ -21,35 +21,6 @@ namespace Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
@@ -120,21 +91,6 @@ namespace Data.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
                     b.Property<int>("UserId")
@@ -154,7 +110,118 @@ namespace Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.DriverEntities.Driver", b =>
+            modelBuilder.Entity("NASRAC.Core.Entities.WebApp.AppRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("NASRAC.Core.Entities.WebApp.AppUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("NASRAC.Core.Entities.WebApp.AppUserRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("NASRAC.Core.Models.Game.DriverEntities.Driver", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -221,7 +288,7 @@ namespace Data.Migrations
                     b.ToTable("Driver");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Car", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Car", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -247,7 +314,7 @@ namespace Data.Migrations
                     b.ToTable("Car");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Loan", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Loan", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -282,7 +349,7 @@ namespace Data.Migrations
                     b.ToTable("Loan");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Manufacturer", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Manufacturer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -302,7 +369,7 @@ namespace Data.Migrations
                     b.ToTable("Manufacturer");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Schedule", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Schedule", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -329,7 +396,7 @@ namespace Data.Migrations
                     b.ToTable("Schedule");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Series", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Series", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -352,7 +419,7 @@ namespace Data.Migrations
                     b.ToTable("Series");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Sponsor", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Sponsor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -375,7 +442,7 @@ namespace Data.Migrations
                     b.ToTable("Sponsor");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.JoinEntities.TeamManufacturers", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.JoinEntities.TeamManufacturers", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -398,7 +465,7 @@ namespace Data.Migrations
                     b.ToTable("TeamManufacturers");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.Race", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.RaceEntities.Race", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -429,7 +496,7 @@ namespace Data.Migrations
                     b.ToTable("Race");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.Track", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.RaceEntities.Track", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -456,7 +523,7 @@ namespace Data.Migrations
                     b.ToTable("Track");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Stats.QualifyingStats", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Stats.QualifyingStats", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -488,7 +555,7 @@ namespace Data.Migrations
                     b.ToTable("QualifyingStats");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Stats.RaceLog", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Stats.RaceLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -559,7 +626,7 @@ namespace Data.Migrations
                     b.ToTable("RaceLog");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Stats.SessionResults", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Stats.SessionResults", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -636,7 +703,7 @@ namespace Data.Migrations
                     b.ToTable("SessionResults");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.TeamEntities.Team", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -670,7 +737,7 @@ namespace Data.Migrations
                     b.ToTable("Team");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.TeamFinancials", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.TeamEntities.TeamFinancials", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -694,76 +761,9 @@ namespace Data.Migrations
                     b.ToTable("TeamFinancials");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.WebApp.Entities.AppUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("NASRAC.Core.Entities.WebApp.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -772,7 +772,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("NASRAC.Models.WebApp.Entities.AppUser", null)
+                    b.HasOne("NASRAC.Core.Entities.WebApp.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -781,22 +781,7 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("NASRAC.Models.WebApp.Entities.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NASRAC.Models.WebApp.Entities.AppUser", null)
+                    b.HasOne("NASRAC.Core.Entities.WebApp.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -805,31 +790,50 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("NASRAC.Models.WebApp.Entities.AppUser", null)
+                    b.HasOne("NASRAC.Core.Entities.WebApp.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.DriverEntities.Driver", b =>
+            modelBuilder.Entity("NASRAC.Core.Entities.WebApp.AppUserRole", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Team")
+                    b.HasOne("NASRAC.Core.Entities.WebApp.AppRole", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NASRAC.Core.Entities.WebApp.AppUser", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NASRAC.Core.Models.Game.DriverEntities.Driver", b =>
+                {
+                    b.HasOne("NASRAC.Core.Models.Game.TeamEntities.Team", "Team")
                         .WithMany("Drivers")
                         .HasForeignKey("TeamId");
 
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Car", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Car", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.Entities.Manufacturer", "Manufacturer")
+                    b.HasOne("NASRAC.Core.Models.Game.Entities.Manufacturer", "Manufacturer")
                         .WithMany()
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Team")
+                    b.HasOne("NASRAC.Core.Models.Game.TeamEntities.Team", "Team")
                         .WithMany("Cars")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -840,15 +844,15 @@ namespace Data.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Loan", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Loan", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Borrower")
+                    b.HasOne("NASRAC.Core.Models.Game.TeamEntities.Team", "Borrower")
                         .WithMany()
                         .HasForeignKey("BorrowerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Lender")
+                    b.HasOne("NASRAC.Core.Models.Game.TeamEntities.Team", "Lender")
                         .WithMany()
                         .HasForeignKey("LenderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -859,9 +863,9 @@ namespace Data.Migrations
                     b.Navigation("Lender");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Schedule", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Schedule", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
+                    b.HasOne("NASRAC.Core.Models.Game.RaceEntities.Race", "Race")
                         .WithMany()
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -870,15 +874,15 @@ namespace Data.Migrations
                     b.Navigation("Race");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.JoinEntities.TeamManufacturers", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.JoinEntities.TeamManufacturers", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.Entities.Manufacturer", "Manufacturer")
+                    b.HasOne("NASRAC.Core.Models.Game.Entities.Manufacturer", "Manufacturer")
                         .WithMany("TeamManufacturers")
                         .HasForeignKey("ManufacturerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Team")
+                    b.HasOne("NASRAC.Core.Models.Game.TeamEntities.Team", "Team")
                         .WithMany("TeamManufacturers")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -889,9 +893,9 @@ namespace Data.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.RaceEntities.Race", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.RaceEntities.Race", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.RaceEntities.Track", "Track")
+                    b.HasOne("NASRAC.Core.Models.Game.RaceEntities.Track", "Track")
                         .WithMany()
                         .HasForeignKey("TrackId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -900,15 +904,15 @@ namespace Data.Migrations
                     b.Navigation("Track");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Stats.QualifyingStats", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Stats.QualifyingStats", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
+                    b.HasOne("NASRAC.Core.Models.Game.DriverEntities.Driver", "Driver")
                         .WithMany()
                         .HasForeignKey("DriverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
+                    b.HasOne("NASRAC.Core.Models.Game.RaceEntities.Race", "Race")
                         .WithMany()
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -919,15 +923,34 @@ namespace Data.Migrations
                     b.Navigation("Race");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Stats.RaceLog", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Stats.RaceLog", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
+                    b.HasOne("NASRAC.Core.Models.Game.DriverEntities.Driver", "Driver")
                         .WithMany()
                         .HasForeignKey("DriverId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
+                    b.HasOne("NASRAC.Core.Models.Game.RaceEntities.Race", "Race")
+                        .WithMany("RaceLogs")
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Driver");
+
+                    b.Navigation("Race");
+                });
+
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Stats.SessionResults", b =>
+                {
+                    b.HasOne("NASRAC.Core.Models.Game.DriverEntities.Driver", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NASRAC.Core.Models.Game.RaceEntities.Race", "Race")
                         .WithMany()
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -938,37 +961,18 @@ namespace Data.Migrations
                     b.Navigation("Race");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Stats.SessionResults", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.TeamEntities.Team", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.DriverEntities.Driver", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NASRAC.Models.Game.RaceEntities.Race", "Race")
-                        .WithMany()
-                        .HasForeignKey("RaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Driver");
-
-                    b.Navigation("Race");
-                });
-
-            modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
-                {
-                    b.HasOne("NASRAC.Models.WebApp.Entities.AppUser", "Owner")
+                    b.HasOne("NASRAC.Core.Entities.WebApp.AppUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
 
                     b.Navigation("Owner");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.TeamFinancials", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.TeamEntities.TeamFinancials", b =>
                 {
-                    b.HasOne("NASRAC.Models.Game.TeamEntities.Team", "Team")
+                    b.HasOne("NASRAC.Core.Models.Game.TeamEntities.Team", "Team")
                         .WithMany()
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -977,12 +981,27 @@ namespace Data.Migrations
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.Entities.Manufacturer", b =>
+            modelBuilder.Entity("NASRAC.Core.Entities.WebApp.AppRole", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("NASRAC.Core.Entities.WebApp.AppUser", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("NASRAC.Core.Models.Game.Entities.Manufacturer", b =>
                 {
                     b.Navigation("TeamManufacturers");
                 });
 
-            modelBuilder.Entity("NASRAC.Models.Game.TeamEntities.Team", b =>
+            modelBuilder.Entity("NASRAC.Core.Models.Game.RaceEntities.Race", b =>
+                {
+                    b.Navigation("RaceLogs");
+                });
+
+            modelBuilder.Entity("NASRAC.Core.Models.Game.TeamEntities.Team", b =>
                 {
                     b.Navigation("Cars");
 

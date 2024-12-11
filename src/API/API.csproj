@@ -35,4 +35,13 @@
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="7.1.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="appsettings.Development.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="appsettings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
