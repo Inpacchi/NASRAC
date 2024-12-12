@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using NASRAC.Core.Models.Game.DriverEntities;
+using NASRAC.Core.Entities.Game;
 
 namespace NASRAC.Core.Interfaces;
 
 public interface IDriverRepository
 {
-    public DbSet<Driver> GetAllDrivers();
+    public List<Driver> GetAllDrivers();
 }

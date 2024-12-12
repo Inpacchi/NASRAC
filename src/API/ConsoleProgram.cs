@@ -33,7 +33,9 @@ internal static class ConsoleProgram
         
         services.AddDbContext<DataContext>(options =>
         {
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
+            options
+                .UseLazyLoadingProxies()
+                .UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
         });
         services.AddScoped<DataContext>();
 

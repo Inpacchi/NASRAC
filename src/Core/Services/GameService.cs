@@ -1,8 +1,18 @@
+using NASRAC.Core.Entities.Game;
 using NASRAC.Core.Interfaces;
-using NASRAC.Core.Models.Game.Stats;
+using NASRAC.Core.Services.Interfaces;
 
 namespace NASRAC.Core.Services;
 
-public class GameService(IDriverRepository driverRepository) : IGameService
+public class GameService(IRaceWeekend raceWeekend, IRaceRepository raceRepository) : IGameService
 {
+    public void RunRace()
+    {
+        raceWeekend.Initialize();
+    }
+
+    public List<RaceLog> GetRaceLogs(int raceId)
+    {
+        return raceRepository.GetRaceLogsByRaceId(raceId);
+    }
 }

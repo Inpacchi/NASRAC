@@ -3,11 +3,8 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using NASRAC.Core.Entities.Game;
 using NASRAC.Core.Entities.WebApp;
-using NASRAC.Core.Models.Game.DriverEntities;
-using NASRAC.Core.Models.Game.Entities;
-using NASRAC.Core.Models.Game.RaceEntities;
-using NASRAC.Core.Models.Game.TeamEntities;
 using NASRAC.Core.Services;
 
 namespace NASRAC.Data.DAL;

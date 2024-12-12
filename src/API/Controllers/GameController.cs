@@ -1,23 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
 using NASRAC.API.Controllers.Base;
 using NASRAC.Core.Interfaces;
-using NASRAC.Core.Models.Game.Stats;
+using NASRAC.Core.Services.Interfaces;
+using Newtonsoft.Json;
 
 namespace NASRAC.API.Controllers;
 
 public class GameController(IGameService gameService) : BaseApiController
 {
-    [HttpPost("Run")]
-    public async Task<ActionResult> Run()
+    [HttpPost("RunRace")]
+    public Task<ActionResult> RunRace()
     {
-        //gameService.RunRace();
+        gameService.RunRace();
 
-        return Ok();
+        return Task.FromResult<ActionResult>(Ok());
     }
     [HttpGet("GetRaceLog")] 
-    public async Task<ActionResult<RaceLog>> GetRaceLog(int raceId)
+    public string GetRaceLog(int raceId)
     {
-        //return gameService.GetRaceLog(raceId);
-        return Ok();
+        var raceLogs = gameService.GetRaceLogs(raceId);
+        var raceLogsSerialized = JsonConvert.SerializeObject(raceLogs,
+            Formatting.Indented,
+            new JsonSerializerSettings()
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            }
+        );
+        return raceLogsSerialized;
     }
 }

@@ -2,12 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using NASRAC.Core.Entities.Game;
 using NASRAC.Core.Entities.WebApp;
-using NASRAC.Core.Models.Game.DriverEntities;
-using NASRAC.Core.Models.Game.Entities;
-using NASRAC.Core.Models.Game.RaceEntities;
-using NASRAC.Core.Models.Game.Stats;
-using NASRAC.Core.Models.Game.TeamEntities;
 
 namespace NASRAC.Data.DAL;
 
@@ -37,6 +33,7 @@ public class DataContext(DbContextOptions<DataContext> options, IConfiguration c
     => optionsBuilder
         .UseNpgsql(_configuration.GetConnectionString("DefaultConnection"))
         .EnableSensitiveDataLogging()
+        .UseLazyLoadingProxies()
         .UseSeeding((context, b) =>
         {
             if (context.Set<Race>().FirstOrDefault() != null) return;

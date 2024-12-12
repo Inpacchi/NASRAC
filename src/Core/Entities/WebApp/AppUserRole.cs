@@ -4,6 +4,6 @@ namespace NASRAC.Core.Entities.WebApp;
 
 public class AppUserRole : IdentityUserRole<int>
 {
-    public AppUser User { get; set; } = null!;
-    public AppRole Role { get; set; } = null!;
+    public virtual AppUser? User { get; set; }
+    public virtual AppRole? Role { get; set; }
 }

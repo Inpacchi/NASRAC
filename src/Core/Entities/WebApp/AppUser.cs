@@ -4,5 +4,5 @@ namespace NASRAC.Core.Entities.WebApp;
 
 public class AppUser : IdentityUser<int>
 {
-    public List<AppUserRole> UserRoles { get; set; } = [];
+    public virtual List<AppUserRole>? UserRoles { get; set; } = [];
 }
