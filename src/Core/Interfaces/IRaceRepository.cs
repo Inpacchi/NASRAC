@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using NASRAC.Core.DTOs;
 using NASRAC.Core.Entities.Game;
 
 namespace NASRAC.Core.Interfaces;
 
 public interface IRaceRepository
 {
-    public List<RaceLog> GetRaceLogsByRaceId(int raceId);
+    public List<RaceLogDto> GetRaceLogsByRaceId(int raceId);
     public Race GetRaceById(int raceId);
     public Race GetRaceByName(string name);
     public EntityEntry<QualifyingStats> AddQualifyingStats(QualifyingStats qualifyingStats);

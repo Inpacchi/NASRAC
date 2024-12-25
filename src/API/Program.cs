@@ -6,7 +6,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using NASRAC.API.DTOs;
 using NASRAC.API.Extensions;
+using NASRAC.Core.DTOs;
+using NASRAC.Core.Entities.Game;
 using NASRAC.Core.Entities.WebApp;
 using NASRAC.Data.DAL;
 
@@ -60,13 +63,11 @@ app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
-
 var dataContext = services.GetRequiredService<DataContext>();
 var userManager = services.GetRequiredService<UserManager<AppUser>>();
 var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     
 await dataContext.Database.MigrateAsync();
 await Seed.InitializeUsersAsync(userManager, roleManager);
-
 
 app.Run();

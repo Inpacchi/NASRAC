@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using NASRAC.Core.DTOs;
 using NASRAC.Core.Entities.Game;
 using NASRAC.Core.Interfaces;
 using NASRAC.Data.DAL;
+using NASRAC.Data.Extensions;
 
 namespace NASRAC.Data.Repository;
 
@@ -22,12 +24,15 @@ public class RaceRepository(DataContext dataContext) : IRaceRepository
             .First(r => r.Name.Equals(name));
     }
 
-    public List<RaceLog> GetRaceLogsByRaceId(int raceId)
+    public List<RaceLogDto> GetRaceLogsByRaceId(int raceId)
     {
         return dataContext.RaceLog
             .Include(rl => rl.Race)
-            .ThenInclude(r => r.Track)
-            .Where(rl => rl.RaceId == raceId)
+                .ThenInclude(r => r.Track)
+            .Include(rl => rl.Driver)
+                .ThenInclude(d => d.Team)
+            .Where(rl => rl.Race.Id == raceId)
+            .MapProperties<RaceLog, RaceLogDto>()
             .ToList();
     }
 

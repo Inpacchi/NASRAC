@@ -23,12 +23,12 @@ public abstract class StatsBase
     [Required]
     public int RaceId { get; set; }
     
-    public virtual Race? Race { get; set; }
+    public virtual Race Race { get; set; }
     
     [Required]
     public int DriverId { get; set; }
     
-    public virtual Driver? Driver { get; set; }
+    public virtual Driver Driver { get; set; }
     
     [Required]
     public double FastestTime { get; set; }

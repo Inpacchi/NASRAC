@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NASRAC.API.Controllers.Base;
+using NASRAC.Core.DTOs;
 using NASRAC.Core.Interfaces;
 using NASRAC.Core.Services.Interfaces;
 using Newtonsoft.Json;
@@ -16,16 +17,9 @@ public class GameController(IGameService gameService) : BaseApiController
         return Task.FromResult<ActionResult>(Ok());
     }
     [HttpGet("GetRaceLog")] 
-    public string GetRaceLog(int raceId)
+    public List<RaceLogDto> GetRaceLog(int raceId)
     {
         var raceLogs = gameService.GetRaceLogs(raceId);
-        var raceLogsSerialized = JsonConvert.SerializeObject(raceLogs,
-            Formatting.Indented,
-            new JsonSerializerSettings()
-            {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            }
-        );
-        return raceLogsSerialized;
+        return raceLogs;
     }
 }

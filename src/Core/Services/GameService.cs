@@ -1,3 +1,4 @@
+using NASRAC.Core.DTOs;
 using NASRAC.Core.Entities.Game;
 using NASRAC.Core.Interfaces;
 using NASRAC.Core.Services.Interfaces;
@@ -11,7 +12,7 @@ public class GameService(IRaceWeekend raceWeekend, IRaceRepository raceRepositor
         raceWeekend.Initialize();
     }
 
-    public List<RaceLog> GetRaceLogs(int raceId)
+    public List<RaceLogDto> GetRaceLogs(int raceId)
     {
         return raceRepository.GetRaceLogsByRaceId(raceId);
     }
